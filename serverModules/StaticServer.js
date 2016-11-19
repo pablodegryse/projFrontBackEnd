@@ -1,6 +1,7 @@
 let StaticServer=(function () {
     let port,app,server;
-    let express = require("express"),path=require("path"),SocketHandler=require("./SocketHandler"),errorLogger;
+    let express = require("express"),path=require("path"),SocketHandler=require("./SocketHandler")
+        ,errorLogger,ApiHandler=require("./ApiHandler");
 
     let init=function (myPort,errlogger) {
         errorLogger=errlogger;
@@ -12,9 +13,9 @@ let StaticServer=(function () {
     };
 
     let setupExpress =function () {
-        //TODO: router middelware hier gebruiken om de requests goed af te handelen ipv hier ze allemaal te stacken
         app.use(express.static(path.join(__dirname,'..','client')));
         app.get('/index.html',function (req,res) {
+            console.log(req.url);
             res.sendFile(path.join(__dirname,'..','client','views','index.html'),function (err) {
                 if(err){
                     errorLogger.log(err);
@@ -36,10 +37,22 @@ let StaticServer=(function () {
             console.log(req.url);
             res.sendFile(path.join(__dirname,'..','client','css',req.url));
         });
+
+        app.get('/getApiData',function (req,res) {
+            ApiHandler.getData(function (err,data) {
+                if(!err){
+                    res.setHeader('Content-Type', 'application/json');
+                    res.send(JSON.stringify(data));
+                }else {
+                    errorLogger.log(err);
+                }
+            })
+        });
         //als een request niet voldoet aan een van de bovenste , toon dan een 404 pagina
         app.get('*',function (req,res) {
             res.sendFile(path.join(__dirname,'..','client','views','error.html'))
         });
+
     };
     let setupHttpServer=function () {
         server=require("http").Server(app);
