@@ -1,0 +1,4 @@
+SERVER ERROR LOG :
+--------------------------------------
+2016-11-19 11:25:20  |  Error: ENOENT: no such file or directory, stat 'C:\Users\pablo\Documents\GitHub\projFrontBackEnd\cldedient\views\index.html'
+2016-11-19 11:27:36  |  Error: ENOENT: no such file or directory, stat 'C:\Users\pablo\Documents\GitHub\projFrontBackEnd\cliherpdepdent\views\index.html'
