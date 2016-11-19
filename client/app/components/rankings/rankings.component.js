@@ -8,18 +8,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var AppComponent = (function () {
-    function AppComponent() {
+var core_1 = require("@angular/core");
+var RankingsComponent = (function () {
+    function RankingsComponent() {
     }
-    AppComponent = __decorate([
+    RankingsComponent = __decorate([
         core_1.Component({
-            selector: 'pe-app',
-            templateUrl: './views/componentViews/app.component.html'
+            selector: 'pe-rankings',
+            templateUrl: './views/componentViews/rankings.component.html'
         }), 
         __metadata('design:paramtypes', [])
-    ], AppComponent);
-    return AppComponent;
+    ], RankingsComponent);
+    return RankingsComponent;
 }());
-exports.AppComponent = AppComponent;
-//# sourceMappingURL=app.component.js.map
+exports.RankingsComponent = RankingsComponent;
+//# sourceMappingURL=rankings.component.js.map

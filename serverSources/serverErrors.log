@@ -3,3 +3,6 @@ SERVER ERROR LOG :
 2016-11-19 11:25:20  |  Error: ENOENT: no such file or directory, stat 'C:\Users\pablo\Documents\GitHub\projFrontBackEnd\cldedient\views\index.html'
 2016-11-19 15:09:04  |  SyntaxError: Unexpected token , in JSON at position 28
 2016-11-19 15:10:18  |  TypeError: callback is not a function
+2016-11-19 17:07:57  |  TypeError: Cannot read property 'leave' of undefined
+2016-11-19 17:11:03  |  TypeError: Cannot read property 'leave' of undefined
+2016-11-19 17:24:30  |  TypeError: Cannot read property 'leave' of undefined

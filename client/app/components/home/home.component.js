@@ -8,18 +8,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var AppComponent = (function () {
-    function AppComponent() {
+var core_1 = require("@angular/core");
+var HomeComponent = (function () {
+    function HomeComponent() {
     }
-    AppComponent = __decorate([
+    HomeComponent = __decorate([
         core_1.Component({
-            selector: 'pe-app',
-            templateUrl: './views/componentViews/app.component.html'
+            selector: 'pe-home',
+            templateUrl: './views/componentViews/home.component.html'
         }), 
         __metadata('design:paramtypes', [])
-    ], AppComponent);
-    return AppComponent;
+    ], HomeComponent);
+    return HomeComponent;
 }());
-exports.AppComponent = AppComponent;
-//# sourceMappingURL=app.component.js.map
+exports.HomeComponent = HomeComponent;
+//# sourceMappingURL=home.component.js.map

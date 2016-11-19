@@ -12,13 +12,35 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var platform_browser_1 = require('@angular/platform-browser');
 var app_component_1 = require('./components/app.component');
+var canvas_component_1 = require("./components/canvas/canvas.component");
+var app_routing_1 = require("./components/app.routing");
+var home_component_1 = require("./components/home/home.component");
+var dropdown_directives_1 = require("./components/dropdown.directives");
+var header_component_1 = require("./components/header.component");
+var authentication_component_1 = require("./components/auth/authentication.component");
+var register_component_1 = require("./components/auth/register.component");
+var signin_component_1 = require("./components/auth/signin.component");
+var logout_component_1 = require("./components/auth/logout.component");
+var forms_1 = require("@angular/forms");
+var rankings_component_1 = require("./components/rankings/rankings.component");
 var AppModule = (function () {
     function AppModule() {
     }
     AppModule = __decorate([
         core_1.NgModule({
-            imports: [platform_browser_1.BrowserModule],
-            declarations: [app_component_1.AppComponent],
+            imports: [platform_browser_1.BrowserModule, app_routing_1.routing, forms_1.FormsModule, forms_1.ReactiveFormsModule],
+            declarations: [
+                app_component_1.AppComponent,
+                canvas_component_1.CanvasComponent,
+                home_component_1.HomeComponent,
+                dropdown_directives_1.DropdownDirective,
+                header_component_1.HeaderComponent,
+                authentication_component_1.AuthenticationComponent,
+                register_component_1.RegisterComponent,
+                signin_component_1.SigninComponent,
+                logout_component_1.LogoutComponent,
+                rankings_component_1.RankingsComponent
+            ],
             bootstrap: [app_component_1.AppComponent]
         }), 
         __metadata('design:paramtypes', [])
