@@ -9,14 +9,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var socket_service_1 = require("../../services/socket.service");
 var CanvasComponent = (function () {
-    function CanvasComponent() {
+    function CanvasComponent(socketService) {
+        this.socketService = socketService;
+        this.localsocketService = socketService;
+        this.globalSocket = this.localsocketService.getSocket();
+        this.localsocketService.requestQueueMove();
     }
     CanvasComponent.prototype.ngAfterViewInit = function () {
-        this.socket = io("/canvasDrawing");
         this.drawer = CanvasDrawer;
-        this.drawer.init(this.drawCanvas.nativeElement, this.buttonList.nativeElement, this.socket);
-        this.setSocketEvents(this.socket, this.drawer, this.serverMessages);
+        this.drawer.init(this.drawCanvas.nativeElement, this.buttonList.nativeElement, this.globalSocket);
+        //this.setSocketEvents(this.globalSocket,this.drawer,this.serverMessages);
     };
     CanvasComponent.prototype.setSocketEvents = function (socket, drawer, serverMessages) {
         //TODO: fix this in de socket.on functies , want this slaat op de functie daarin
@@ -70,7 +74,7 @@ var CanvasComponent = (function () {
             selector: "pe-canvas",
             templateUrl: "./views/componentViews/canvas.component.html"
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [socket_service_1.SocketService])
     ], CanvasComponent);
     return CanvasComponent;
 }());

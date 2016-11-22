@@ -13,6 +13,7 @@ import {SigninComponent} from "./components/auth/signin.component";
 import {LogoutComponent} from "./components/auth/logout.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {RankingsComponent} from "./components/rankings/rankings.component";
+import {SocketService} from "./services/socket.service";
 
 @NgModule({
     imports:[BrowserModule,routing, FormsModule,ReactiveFormsModule],

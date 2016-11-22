@@ -1,6 +1,6 @@
 import {Component, ViewChild, Input, AfterViewInit} from '@angular/core';
+import {SocketService} from "../../services/socket.service";
 declare var CanvasDrawer:any;
-declare var io:any;
 @Component({
     selector:"pe-canvas",
     templateUrl:"./views/componentViews/canvas.component.html"
@@ -11,14 +11,17 @@ export class CanvasComponent implements AfterViewInit{
     @ViewChild('buttonList') buttonList;
     @ViewChild('serverMessages') serverMessages;
     drawer:any;
-    socket:any;
-    constructor(){
+    globalSocket:any;
+    localsocketService:SocketService;
+    constructor(private socketService:SocketService){
+        this.localsocketService=socketService;
+        this.globalSocket=this.localsocketService.getSocket();
+        this.localsocketService.requestQueueMove();
     }
     ngAfterViewInit(){
-        this.socket=io("/canvasDrawing");
         this.drawer=CanvasDrawer;
-        this.drawer.init(this.drawCanvas.nativeElement,this.buttonList.nativeElement,this.socket);
-        this.setSocketEvents(this.socket,this.drawer,this.serverMessages);
+        this.drawer.init(this.drawCanvas.nativeElement,this.buttonList.nativeElement,this.globalSocket);
+        //this.setSocketEvents(this.globalSocket,this.drawer,this.serverMessages);
     }
 
 

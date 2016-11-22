@@ -9,15 +9,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("@angular/core");
+var socket_service_1 = require("../../services/socket.service");
 var HomeComponent = (function () {
-    function HomeComponent() {
+    function HomeComponent(socketService) {
+        this.socketService = socketService;
+        this.localsocketService = socketService;
+        this.localsocketService.requestLobbyMove();
     }
     HomeComponent = __decorate([
         core_1.Component({
             selector: 'pe-home',
             templateUrl: './views/componentViews/home.component.html'
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [socket_service_1.SocketService])
     ], HomeComponent);
     return HomeComponent;
 }());

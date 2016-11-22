@@ -1,14 +1,24 @@
 let SocketHandler=(function () {
-    let server,io,nsp;
+    let server,io,nsp,globalNameSpace;
     let usersToMigrate=[];
+
+    let names={
+        "namespaces":{
+            "global":"/global"
+        },
+        "rooms":{
+            "lobby":"mainLobby",
+            "q":"queue"
+        }
+    };
 
     let init=function (server) {
         io=require("socket.io")(server);
-        setupNameSpace();
+        setupGlobalNamespace();
     };
 
-    let setupNameSpace=function(){
-//TODO: maaak lobby namespace die users in groepen van 4 verdeelt en in een nieuwe namespace steekn , waar ze dan het spel kunnen spelen
+    /*let setupNameSpace=function(){
+        //TODO: maaak lobby namespace die users in groepen van 4 verdeelt en in een nieuwe namespace steekn , waar ze dan het spel kunnen spelen
         nsp =io.of('/canvasDrawing');
         nsp.on('connection',function (socket) {
             console.log("new connection made");
@@ -71,6 +81,98 @@ let SocketHandler=(function () {
             });
 
         });
+    };*/
+
+    //iedereen zit altijd in de globale namespace
+    let setupGlobalNamespace=function () {
+        globalNameSpace=io.of(names.namespaces.global);
+        globalNameSpace.on('connection',function (socket) {
+            //als er iemand joint in de namespace : zeg welkom !
+            console.log("Someone joined the global namespace!");
+            socket.emit('welcome',{
+                'content':'Welcome to the global namespace!'
+            });
+            //als er iemand de namespace verlaat: alles groups van de socket worden autmatisch geleaved
+            //+ verwijder de socket uit de queue
+            socket.on('disconnect',function () {
+                console.log(socket.id+" left the global namespace");
+                removeUserFromQueue(socket.id);
+            });
+
+            //als er vanuit de client naar de lobby genavigeerd werd: migreer de socket
+            socket.on('requestMoveToLobby',function () {
+                if(socket.rooms[names.rooms.q]!=null){
+                    socket.leave(names.rooms.q);
+                    globalNameSpace.emit("info","You left the queue room");
+                    let index=usersToMigrate.indexOf(usersToMigrate[socket.id]);
+                    usersToMigrate.splice(index);
+                }
+                socket.join(names.rooms.lobby);
+                globalNameSpace.to("mainLobby").emit("welcome",{"content":"Someone joined the lobby group"})
+            });
+
+            //als er vanuit de client naar de queue genavigeerd werd: migreer de socket
+            // en steek hem in de usersToMigrate array !!!
+            socket.on('requestMoveToQueue',function () {
+                if(socket.rooms[names.rooms.lobby]!=null){
+                    socket.leave(names.rooms.lobby);
+                    globalNameSpace.emit("info","You left the lobby room");
+                }
+                socket.join(names.rooms.q);
+                globalNameSpace.to("queue").emit("welcome",{"content":"Someone joined the queue group"})
+                usersToMigrate.push(socket);
+                checkQueue(migrateCallback);
+            });
+
+        });
+    };
+
+    //als er iemand disconnect : kijk of ze in de q zaten en verwijder ze eventueel
+    let removeUserFromQueue=function (id) {
+        for(let i=0,len=usersToMigrate.length;i<len;i++){
+            if(usersToMigrate[i].id==id){
+                usersToMigrate.splice(i);
+            }
+        }
+    };
+
+    //telkens er iemand de q room joined : kijk of we genoeg spelers in de queue hebben om een game te maken
+    let checkQueue=function(cb){
+        console.log("queue length: "+usersToMigrate.length);
+        if(usersToMigrate.length===4){
+            cb(true,migrateResultCallback);
+        }else {
+            cb(false,migrateResultCallback);
+        }
+    };
+
+    //als er genoeg spelers zijn : migreer ze naar een room onder naam van de oudste socket in de queue
+    let migrateCallback=function (check,cb) {
+        if(check){
+            let roomName;
+            for(let i=0;i<4;i++){
+                let currentSocket=usersToMigrate[i];
+                //eerste user moet kamer niet joinen: zit er default al in
+                if(i===0){
+                    roomName=currentSocket.id;
+                }else {
+                    currentSocket.join(roomName);
+                    currentSocket.leave(names.rooms.q);
+                }
+            }
+            cb("Game ready! ",roomName);
+        }else {
+            cb("Not enough users to make game yet...",null);
+        }
+    };
+
+    //als de sockets gemigreerd zijn: stuur een notificatie naar de clients dat ze in een game zijn
+    // --> de game kan nu beginnen...
+    let migrateResultCallback=function (msg,roomName) {
+        if(roomName!=null){
+            globalNameSpace.to(roomName).emit("info",msg+"Welcome to room: "+roomName);
+            usersToMigrate=[];
+        }
     };
 
     //public

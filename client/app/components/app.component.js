@@ -9,15 +9,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var socket_service_1 = require("../services/socket.service");
 var AppComponent = (function () {
-    function AppComponent() {
+    function AppComponent(socketService) {
+        this.socketService = socketService;
+        this.globalSocketService = socketService;
     }
     AppComponent = __decorate([
         core_1.Component({
             selector: 'pe-app',
-            templateUrl: './views/componentViews/app.component.html'
+            templateUrl: './views/componentViews/app.component.html',
+            providers: [socket_service_1.SocketService]
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [socket_service_1.SocketService])
     ], AppComponent);
     return AppComponent;
 }());
