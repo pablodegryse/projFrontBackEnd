@@ -14,6 +14,10 @@ import {LogoutComponent} from "./components/auth/logout.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {RankingsComponent} from "./components/rankings/rankings.component";
 import {SocketService} from "./services/socket.service";
+import {LobbyoverviewComponent} from "./components/lobby/lobbyoverview.component";
+import {RoomComponent} from "./components/room/room.component";
+import {CreateRoomComponent} from "./components/room/create-room.component";
+import {RoomItemComponent} from "./components/room/room-item.component";
 
 @NgModule({
     imports:[BrowserModule,routing, FormsModule,ReactiveFormsModule],
@@ -27,8 +31,13 @@ import {SocketService} from "./services/socket.service";
         RegisterComponent,
         SigninComponent,
         LogoutComponent,
-        RankingsComponent
+        RankingsComponent,
+        LobbyoverviewComponent,
+        RoomComponent,
+        CreateRoomComponent,
+        RoomItemComponent
     ],
+    providers:[],
     bootstrap:[AppComponent]
 })
 

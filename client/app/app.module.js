@@ -23,6 +23,10 @@ var signin_component_1 = require("./components/auth/signin.component");
 var logout_component_1 = require("./components/auth/logout.component");
 var forms_1 = require("@angular/forms");
 var rankings_component_1 = require("./components/rankings/rankings.component");
+var lobbyoverview_component_1 = require("./components/lobby/lobbyoverview.component");
+var room_component_1 = require("./components/room/room.component");
+var create_room_component_1 = require("./components/room/create-room.component");
+var room_item_component_1 = require("./components/room/room-item.component");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -39,8 +43,13 @@ var AppModule = (function () {
                 register_component_1.RegisterComponent,
                 signin_component_1.SigninComponent,
                 logout_component_1.LogoutComponent,
-                rankings_component_1.RankingsComponent
+                rankings_component_1.RankingsComponent,
+                lobbyoverview_component_1.LobbyoverviewComponent,
+                room_component_1.RoomComponent,
+                create_room_component_1.CreateRoomComponent,
+                room_item_component_1.RoomItemComponent
             ],
+            providers: [],
             bootstrap: [app_component_1.AppComponent]
         }), 
         __metadata('design:paramtypes', [])

@@ -8,3 +8,5 @@ SERVER ERROR LOG :
 2016-11-22 16:06:09  |  TypeError: Cannot read property 'join' of undefined
 2016-11-22 16:08:33  |  TypeError: Cannot read property 'id' of undefined
 2016-11-22 16:11:49  |  TypeError: Cannot read property 'id' of undefined
+2016-11-23 05:28:09  |  MongoError: failed to connect to server [localhost:27017] on first connect
+2016-11-23 06:16:47  |  TypeError: Cannot read property 'id' of undefined

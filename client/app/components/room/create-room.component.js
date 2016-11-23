@@ -9,17 +9,29 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("@angular/core");
-var AuthenticationComponent = (function () {
-    function AuthenticationComponent() {
+var forms_1 = require("@angular/forms");
+var room_model_1 = require("./room.model");
+var CreateRoomComponent = (function () {
+    function CreateRoomComponent() {
     }
-    AuthenticationComponent = __decorate([
+    CreateRoomComponent.prototype.onSubmit = function () {
+        var room = new room_model_1.Room(this.myForm.value.name);
+        console.log(room);
+        this.myForm.reset();
+    };
+    CreateRoomComponent.prototype.ngOnInit = function () {
+        this.myForm = new forms_1.FormGroup({
+            name: new forms_1.FormControl(null, forms_1.Validators.required),
+        });
+    };
+    CreateRoomComponent = __decorate([
         core_1.Component({
-            selector: 'pe-authentication',
-            template: "\n    <div class=\"col-md-6\">\n        <h2>Register</h2>\n        <pe-register></pe-register>    \n    </div><div class=\"col-md-6\">\n        <h2>Sign in</h2>\n        <pe-signin></pe-signin>    \n    </div>\n"
+            selector: 'pe-create-room',
+            templateUrl: './views/componentViews/create-room.component.html'
         }), 
         __metadata('design:paramtypes', [])
-    ], AuthenticationComponent);
-    return AuthenticationComponent;
+    ], CreateRoomComponent);
+    return CreateRoomComponent;
 }());
-exports.AuthenticationComponent = AuthenticationComponent;
-//# sourceMappingURL=authentication.component.js.map
+exports.CreateRoomComponent = CreateRoomComponent;
+//# sourceMappingURL=create-room.component.js.map

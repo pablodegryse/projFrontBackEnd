@@ -9,17 +9,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("@angular/core");
-var AuthenticationComponent = (function () {
-    function AuthenticationComponent() {
+var RoomComponent = (function () {
+    function RoomComponent() {
     }
-    AuthenticationComponent = __decorate([
+    RoomComponent = __decorate([
         core_1.Component({
-            selector: 'pe-authentication',
-            template: "\n    <div class=\"col-md-6\">\n        <h2>Register</h2>\n        <pe-register></pe-register>    \n    </div><div class=\"col-md-6\">\n        <h2>Sign in</h2>\n        <pe-signin></pe-signin>    \n    </div>\n"
+            selector: 'pe-room',
+            templateUrl: './views/componentViews/room.component.html'
         }), 
         __metadata('design:paramtypes', [])
-    ], AuthenticationComponent);
-    return AuthenticationComponent;
+    ], RoomComponent);
+    return RoomComponent;
 }());
-exports.AuthenticationComponent = AuthenticationComponent;
-//# sourceMappingURL=authentication.component.js.map
+exports.RoomComponent = RoomComponent;
+//# sourceMappingURL=room.component.js.map

@@ -1,7 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 
-
 import { User } from "./user.model";
 
 @Component({
@@ -21,7 +20,7 @@ export class RegisterComponent implements OnInit {
             this.myForm.value.firstName,
             this.myForm.value.lastName
         );
-        console.log(user);
+
         this.myForm.reset();
     }
 
