@@ -1,12 +1,17 @@
 let StaticServer=(function () {
     let port,app,server;
     let express = require("express"),path=require("path"),SocketHandler=require("./SocketHandler")
-        ,errorLogger,ApiHandler=require("./ApiHandler");
+        ,errorLogger,ApiHandler=require("./ApiHandler"),
+        mongoose = require('mongoose');
+
+    let appRoutes = require('../routes/app'),
+        userRoutes = require('../routes/user');
 
     let init=function (myPort,errlogger) {
         errorLogger=errlogger;
         port=myPort;
         app=express();
+        mongoose.connect('localhost:27017/pictionar-e');
         setupHttpServer();
         setupExpress();
         SocketHandler.init(server);
@@ -29,6 +34,10 @@ let StaticServer=(function () {
                 }
             });
         });
+
+        app.use('/user', userRoutes);
+        app.use('/', appRoutes);
+
         app.get('/client/js/*',function (req,res) {
             console.log(req.url);
             res.sendFile(path.join(__dirname,'..','client','js',req.url));

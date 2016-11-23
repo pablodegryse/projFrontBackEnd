@@ -16,7 +16,6 @@ var RegisterComponent = (function () {
     }
     RegisterComponent.prototype.onSubmit = function () {
         var user = new user_model_1.User(this.myForm.value.email, this.myForm.value.password, this.myForm.value.nickName, this.myForm.value.firstName, this.myForm.value.lastName);
-        console.log(user);
         this.myForm.reset();
     };
     RegisterComponent.prototype.ngOnInit = function () {

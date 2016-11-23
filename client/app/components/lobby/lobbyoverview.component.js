@@ -8,18 +8,27 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require("@angular/core");
-var AuthenticationComponent = (function () {
-    function AuthenticationComponent() {
+var core_1 = require('@angular/core');
+var LobbyoverviewComponent = (function () {
+    function LobbyoverviewComponent() {
     }
-    AuthenticationComponent = __decorate([
+    LobbyoverviewComponent.prototype.ngOnInit = function () {
+        // this._roomService.getRooms()
+        //     .subscribe(
+        //         (rooms:Room[])=>{
+        //             this.rooms = rooms;
+        //             console.log(this.rooms);
+        //         }
+        //     );
+    };
+    LobbyoverviewComponent = __decorate([
         core_1.Component({
-            selector: 'pe-authentication',
-            template: "\n    <div class=\"col-md-6\">\n        <h2>Register</h2>\n        <pe-register></pe-register>    \n    </div><div class=\"col-md-6\">\n        <h2>Sign in</h2>\n        <pe-signin></pe-signin>    \n    </div>\n"
+            selector: 'pe-lobbyoverview',
+            templateUrl: './views/componentViews/lobbyoverview.component.html'
         }), 
         __metadata('design:paramtypes', [])
-    ], AuthenticationComponent);
-    return AuthenticationComponent;
+    ], LobbyoverviewComponent);
+    return LobbyoverviewComponent;
 }());
-exports.AuthenticationComponent = AuthenticationComponent;
-//# sourceMappingURL=authentication.component.js.map
+exports.LobbyoverviewComponent = LobbyoverviewComponent;
+//# sourceMappingURL=lobbyoverview.component.js.map

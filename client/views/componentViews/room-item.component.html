@@ -1,0 +1,7 @@
+<div class="row">
+    <div>{{room?.name}}</div>
+    <ul *ngFor="let user of room?.users">
+        <li>{{user.nickName}}</li>
+    </ul>
+    <button class="btn btn-primary" (click)="onJoinRoom(room)" [disabled]="isFull(room)">Join</button>
+</div>
