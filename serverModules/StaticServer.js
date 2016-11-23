@@ -1,8 +1,7 @@
 let StaticServer=(function () {
     let port,app,server;
     let express = require("express"),path=require("path"),SocketHandler=require("./SocketHandler")
-        ,errorLogger,ApiHandler=require("./ApiHandler"),
-        mongoose = require('mongoose');
+        ,errorLogger,ApiHandler=require("./ApiHandler"),mongoose = require('mongoose');
 
     let appRoutes = require('../routes/app'),
         userRoutes = require('../routes/user');
@@ -11,7 +10,7 @@ let StaticServer=(function () {
         errorLogger=errlogger;
         port=myPort;
         app=express();
-        mongoose.connect('localhost:27017/pictionar-e');
+        //mongoose.connect('localhost:27017/pictionar-e');
         setupHttpServer();
         setupExpress();
         SocketHandler.init(server);

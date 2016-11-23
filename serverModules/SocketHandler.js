@@ -1,7 +1,8 @@
 let SocketHandler=(function () {
     let server,io,nsp,globalNameSpace;
-    let usersToMigrate=[];
-
+    let usersToMigrate=[];  //queue om sockets te matchen in een game van 4
+    let activeRooms=[];     //alle rooms die actief aan het spelen zijn (zolang er ng 2 users zijn in de room en spel niet ten einde is)
+    let pendingRooms=[];    //alle rooms die nog niet beginnen spelen zijn en waar er nog plaats is
     let names={
         "namespaces":{
             "global":"/global"
@@ -107,6 +108,7 @@ let SocketHandler=(function () {
                     let index=usersToMigrate.indexOf(usersToMigrate[socket.id]);
                     usersToMigrate.splice(index);
                 }
+                removeUserFromGameRoom(socket);
                 socket.join(names.rooms.lobby);
                 globalNameSpace.to("mainLobby").emit("welcome",{"content":"Someone joined the lobby group"})
             });
@@ -116,6 +118,7 @@ let SocketHandler=(function () {
             socket.on('requestMoveToQueue',function () {
                 if(socket.rooms[names.rooms.lobby]!=null){
                     socket.leave(names.rooms.lobby);
+                    globalNameSpace.to("mainLobby").emit("info","why are you still seeing this when you left the lobby ? dafuq");
                     globalNameSpace.emit("info","You left the lobby room");
                 }
                 socket.join(names.rooms.q);
@@ -170,10 +173,34 @@ let SocketHandler=(function () {
     // --> de game kan nu beginnen...
     let migrateResultCallback=function (msg,roomName) {
         if(roomName!=null){
+            globalNameSpace.to(roomName).emit("GameReady",{"content":"guesser"});
             globalNameSpace.to(roomName).emit("info",msg+"Welcome to room: "+roomName);
-            usersToMigrate=[];
+            usersToMigrate.splice(0,4);
+            activeRooms.push(roomName);
+            console.log("queue length after splice: "+usersToMigrate.length);
         }
     };
+
+    //a socket is max in 2 rooms at same time : own room and queue or own room and game room (under someone else's socket id)
+    let removeUserFromGameRoom=function(socket){
+        let numberOfRooms=Object.keys(socket.rooms).length;
+        if(numberOfRooms>=2){
+            console.log("The socket was in this many other rooms:"+numberOfRooms);
+            for(let i=0,len=activeRooms.length;i<len;i++){
+                let currentId=activeRooms[i];
+                if(socket.rooms[currentId]!=null && socket.id!==currentId){
+                    socket.leave(currentId);
+                    console.log("this socket:"+socket.id+" left the room: "+currentId);
+                    if(io.nsps[names.namespaces.global].adapter.rooms[currentId].length==1){
+                        globalNameSpace.to(currentId).emit("GameEnd",{"content":"tooFewUsers"});
+                        console.log("game abandoned");
+                    }
+                    break;
+                }
+            }
+        }
+    };
+
 
     //public
     return{
