@@ -21,6 +21,8 @@ router.get('/:id',function(req,res,next){
 });
 
 router.post('/', function (req, res, next) {
+    console.log("inside user js");
+    console.log(req.body);
     var user = new User({
         nickName: req.body.nickName,
         firstName: req.body.firstName,
@@ -30,6 +32,7 @@ router.post('/', function (req, res, next) {
     });
     user.save(function(err, result) {
         if (err) {
+            console.log("inside save error");
             return res.status(500).json({
                 title: 'An error occurred',
                 error: err

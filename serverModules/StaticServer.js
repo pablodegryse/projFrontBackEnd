@@ -2,22 +2,27 @@ let StaticServer=(function () {
     let port,app,server;
     let express = require("express"),path=require("path"),SocketHandler=require("./SocketHandler")
         ,errorLogger,ApiHandler=require("./ApiHandler"),
-        mongoose = require('mongoose');
+        mongoose = require('mongoose'),
+        bodyParser = require('body-parser');
 
     let appRoutes = require('../routes/app'),
-        userRoutes = require('../routes/user');
+        userRoutes = require('../routes/user'),
+        roomRoutes = require('../routes/room');
 
     let init=function (myPort,errlogger) {
         errorLogger=errlogger;
         port=myPort;
         app=express();
-        mongoose.connect('localhost:27017/pictionar-e');
+        //mongoose.connect('localhost:27017/pictionar-e');
+        mongoose.connect('mongodb://testUser:testuser@ds159387.mlab.com:59387/pictionar-e');
         setupHttpServer();
         setupExpress();
         SocketHandler.init(server);
     };
 
     let setupExpress =function () {
+        app.use(bodyParser.json());
+        app.use(bodyParser.urlencoded({extended:false}));
         app.use(express.static(path.join(__dirname,'..','client')));
         app.get('/index.html',function (req,res) {
             console.log(req.url);
@@ -36,6 +41,7 @@ let StaticServer=(function () {
         });
 
         app.use('/user', userRoutes);
+        app.use('/room',roomRoutes);
         app.use('/', appRoutes);
 
         app.get('/client/js/*',function (req,res) {

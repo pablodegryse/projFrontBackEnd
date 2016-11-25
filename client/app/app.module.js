@@ -27,12 +27,21 @@ var lobbyoverview_component_1 = require("./components/lobby/lobbyoverview.compon
 var room_component_1 = require("./components/room/room.component");
 var create_room_component_1 = require("./components/room/create-room.component");
 var room_item_component_1 = require("./components/room/room-item.component");
+var auth_service_1 = require("./services/auth.service");
+var http_1 = require("@angular/http");
+var room_service_1 = require("./services/room.service");
 var AppModule = (function () {
     function AppModule() {
     }
     AppModule = __decorate([
         core_1.NgModule({
-            imports: [platform_browser_1.BrowserModule, app_routing_1.routing, forms_1.FormsModule, forms_1.ReactiveFormsModule],
+            imports: [
+                platform_browser_1.BrowserModule,
+                app_routing_1.routing,
+                forms_1.FormsModule,
+                forms_1.ReactiveFormsModule,
+                http_1.HttpModule
+            ],
             declarations: [
                 app_component_1.AppComponent,
                 canvas_component_1.CanvasComponent,
@@ -49,7 +58,7 @@ var AppModule = (function () {
                 create_room_component_1.CreateRoomComponent,
                 room_item_component_1.RoomItemComponent
             ],
-            providers: [],
+            providers: [auth_service_1.AuthService, room_service_1.RoomService],
             bootstrap: [app_component_1.AppComponent]
         }), 
         __metadata('design:paramtypes', [])

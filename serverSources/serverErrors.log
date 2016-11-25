@@ -10,3 +10,10 @@ SERVER ERROR LOG :
 2016-11-22 16:11:49  |  TypeError: Cannot read property 'id' of undefined
 2016-11-23 05:28:09  |  MongoError: failed to connect to server [localhost:27017] on first connect
 2016-11-23 06:16:47  |  TypeError: Cannot read property 'id' of undefined
+2016-11-23 16:33:45  |  MongoError: failed to connect to server [localhost:27017] on first connect
+2016-11-24 21:34:37  |  MongoError: failed to connect to server [localhost:27017] on first connect
+2016-11-25 09:58:41  |  Error: Cannot find module '../models/user'
+2016-11-25 10:57:15  |  MongoError: Authentication failed.
+2016-11-25 10:59:37  |  MongoError: Authentication failed.
+2016-11-25 12:25:11  |  TypeError: Cannot read property 'save' of null
+2016-11-25 13:28:36  |  MongoError: failed to connect to server [localhost:27017] on first connect

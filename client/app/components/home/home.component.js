@@ -10,18 +10,22 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require("@angular/core");
 var socket_service_1 = require("../../services/socket.service");
+var auth_service_1 = require("../../services/auth.service");
 var HomeComponent = (function () {
-    function HomeComponent(socketService) {
-        this.socketService = socketService;
-        this.localsocketService = socketService;
-        this.localsocketService.requestLobbyMove();
+    function HomeComponent(_socketService, _authService) {
+        this._socketService = _socketService;
+        this._authService = _authService;
+        this._socketService.requestLobbyMove();
     }
+    HomeComponent.prototype.isLoggedIn = function () {
+        return this._authService.isLoggedIn();
+    };
     HomeComponent = __decorate([
         core_1.Component({
             selector: 'pe-home',
             templateUrl: './views/componentViews/home.component.html'
         }), 
-        __metadata('design:paramtypes', [socket_service_1.SocketService])
+        __metadata('design:paramtypes', [socket_service_1.SocketService, auth_service_1.AuthService])
     ], HomeComponent);
     return HomeComponent;
 }());

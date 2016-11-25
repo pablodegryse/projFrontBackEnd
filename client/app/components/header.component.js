@@ -9,17 +9,25 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("@angular/core");
+var auth_service_1 = require("../services/auth.service");
+var router_1 = require("@angular/router");
 var HeaderComponent = (function () {
-    function HeaderComponent() {
+    function HeaderComponent(_authService, _router) {
+        this._authService = _authService;
+        this._router = _router;
     }
     HeaderComponent.prototype.ngOnInit = function () {
+    };
+    HeaderComponent.prototype.onLogOut = function () {
+        this._authService.logout();
+        this._router.navigateByUrl('/');
     };
     HeaderComponent = __decorate([
         core_1.Component({
             selector: 'pe-header',
             templateUrl: './views/componentViews/header.component.html'
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [auth_service_1.AuthService, router_1.Router])
     ], HeaderComponent);
     return HeaderComponent;
 }());

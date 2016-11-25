@@ -11,12 +11,22 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("@angular/core");
 var forms_1 = require("@angular/forms");
 var user_model_1 = require("./user.model");
+var auth_service_1 = require("../../services/auth.service");
+var router_1 = require("@angular/router");
 var SigninComponent = (function () {
-    function SigninComponent() {
+    function SigninComponent(_authService, _router) {
+        this._authService = _authService;
+        this._router = _router;
     }
     SigninComponent.prototype.onSubmit = function () {
+        var _this = this;
         var user = new user_model_1.User(this.myForm.value.email, this.myForm.value.password);
-        console.log(user);
+        this._authService.signin(user)
+            .subscribe(function (data) {
+            localStorage.setItem('token', data.token);
+            localStorage.setItem('userId', data.userId);
+            _this._router.navigateByUrl('/');
+        }, function (error) { return console.error(error); });
         this.myForm.reset();
     };
     SigninComponent.prototype.ngOnInit = function () {
@@ -33,7 +43,7 @@ var SigninComponent = (function () {
             selector: 'pe-signin',
             templateUrl: './views/componentViews/signin.component.html'
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [auth_service_1.AuthService, router_1.Router])
     ], SigninComponent);
     return SigninComponent;
 }());

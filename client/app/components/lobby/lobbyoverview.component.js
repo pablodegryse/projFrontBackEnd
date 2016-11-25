@@ -9,24 +9,25 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var room_service_1 = require("../../services/room.service");
 var LobbyoverviewComponent = (function () {
-    function LobbyoverviewComponent() {
+    function LobbyoverviewComponent(_roomService) {
+        this._roomService = _roomService;
     }
     LobbyoverviewComponent.prototype.ngOnInit = function () {
-        // this._roomService.getRooms()
-        //     .subscribe(
-        //         (rooms:Room[])=>{
-        //             this.rooms = rooms;
-        //             console.log(this.rooms);
-        //         }
-        //     );
+        var _this = this;
+        this._roomService.getRooms()
+            .subscribe(function (rooms) {
+            _this.rooms = rooms;
+            console.log(_this.rooms);
+        });
     };
     LobbyoverviewComponent = __decorate([
         core_1.Component({
             selector: 'pe-lobbyoverview',
             templateUrl: './views/componentViews/lobbyoverview.component.html'
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [room_service_1.RoomService])
     ], LobbyoverviewComponent);
     return LobbyoverviewComponent;
 }());

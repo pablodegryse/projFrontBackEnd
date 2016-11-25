@@ -2,6 +2,8 @@ import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 
 import { User } from "./user.model";
+import {AuthService} from "../../services/auth.service";
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'pe-register',
@@ -10,7 +12,7 @@ import { User } from "./user.model";
 export class RegisterComponent implements OnInit {
     myForm: FormGroup;
 
-    constructor() {}
+    constructor(private _authService: AuthService, private _router:Router) {}
 
     onSubmit() {
         const user = new User(
@@ -20,8 +22,24 @@ export class RegisterComponent implements OnInit {
             this.myForm.value.firstName,
             this.myForm.value.lastName
         );
+        console.log("register comp:" + user);
+
+        this._authService.register(user).subscribe(
+            data => this.signIn(user)
+        );
 
         this.myForm.reset();
+    }
+
+    signIn(user){
+        this._authService.signin(user)
+            .subscribe(
+                data=>{
+                    localStorage.setItem('token', data.token);
+                    localStorage.setItem('userId', data.userId);
+                    this._router.navigateByUrl('/')
+                }
+            )
     }
 
     ngOnInit() {

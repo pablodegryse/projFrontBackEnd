@@ -1,6 +1,7 @@
 import {Component} from "@angular/core";
 import {FormGroup, Validators, FormControl} from "@angular/forms";
 import {Room} from "./room.model";
+import {RoomService} from "../../services/room.service";
 
 @Component({
     selector: 'pe-create-room',
@@ -9,13 +10,17 @@ import {Room} from "./room.model";
 export class CreateRoomComponent {
     myForm: FormGroup;
 
-    constructor(){}
+    constructor(private _roomService:RoomService){}
 
     onSubmit(){
         const room = new Room(
             this.myForm.value.name
         );
-        console.log(room);
+        this._roomService.createRoom(room)
+            .subscribe(
+                data => console.log(data),
+                error => console.log(error)
+            );
 
         this.myForm.reset();
     }

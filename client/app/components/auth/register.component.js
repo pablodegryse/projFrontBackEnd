@@ -11,12 +11,28 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("@angular/core");
 var forms_1 = require("@angular/forms");
 var user_model_1 = require("./user.model");
+var auth_service_1 = require("../../services/auth.service");
+var router_1 = require("@angular/router");
 var RegisterComponent = (function () {
-    function RegisterComponent() {
+    function RegisterComponent(_authService, _router) {
+        this._authService = _authService;
+        this._router = _router;
     }
     RegisterComponent.prototype.onSubmit = function () {
+        var _this = this;
         var user = new user_model_1.User(this.myForm.value.email, this.myForm.value.password, this.myForm.value.nickName, this.myForm.value.firstName, this.myForm.value.lastName);
+        console.log("register comp:" + user);
+        this._authService.register(user).subscribe(function (data) { return _this.signIn(user); });
         this.myForm.reset();
+    };
+    RegisterComponent.prototype.signIn = function (user) {
+        var _this = this;
+        this._authService.signin(user)
+            .subscribe(function (data) {
+            localStorage.setItem('token', data.token);
+            localStorage.setItem('userId', data.userId);
+            _this._router.navigateByUrl('/');
+        });
     };
     RegisterComponent.prototype.ngOnInit = function () {
         this.myForm = new forms_1.FormGroup({
@@ -35,7 +51,7 @@ var RegisterComponent = (function () {
             selector: 'pe-register',
             templateUrl: './views/componentViews/register.component.html'
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [auth_service_1.AuthService, router_1.Router])
     ], RegisterComponent);
     return RegisterComponent;
 }());

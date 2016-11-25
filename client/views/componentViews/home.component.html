@@ -3,8 +3,8 @@
         <i class="fa fa-pencil fa-6" aria-hidden="true"></i><p class="logo" style="size: 20px">PICTIONAR-E</p> <i class="fa fa-pencil fa-5" aria-hidden="true"></i>
     </div>
     <div class="row">
-        <button class="btn btn-primary" [routerLink]="['/auth']" >Sign In</button>
+        <button class="btn btn-primary" [routerLink]="['/auth']" *ngIf="!isLoggedIn()" >Sign In</button>
         <hr>
-        <button class="btn btn-primary" [routerLink]="['/canvas']">Play Now</button>
+        <button class="btn btn-primary" [routerLink]="['/quickjoin']">Play Now</button>
     </div>
 </div>

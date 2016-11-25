@@ -11,9 +11,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var socket_service_1 = require("../services/socket.service");
 var AppComponent = (function () {
-    function AppComponent(socketService) {
-        this.socketService = socketService;
-        this.globalSocketService = socketService;
+    function AppComponent(_socketService) {
+        this._socketService = _socketService;
     }
     AppComponent = __decorate([
         core_1.Component({

@@ -10,8 +10,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require("@angular/core");
 var room_model_1 = require("./room.model");
+var room_service_1 = require("../../services/room.service");
+var router_1 = require("@angular/router");
 var RoomItemComponent = (function () {
-    function RoomItemComponent() {
+    function RoomItemComponent(_roomService, _router) {
+        this._roomService = _roomService;
+        this._router = _router;
     }
     RoomItemComponent.prototype.ngOnInit = function () {
         console.log('room-item created');
@@ -23,7 +27,10 @@ var RoomItemComponent = (function () {
         console.log("room edited");
     };
     RoomItemComponent.prototype.onJoinRoom = function (room) {
-        console.log("joining room");
+        this.user = localStorage.getItem('userId');
+        room.users.push(this.user);
+        this._roomService.updateRoom(room)
+            .subscribe(function (data) { return console.log(data); }, function (error) { return console.error(error); }, this._router.navigateByUrl('/quickjoin'));
     };
     RoomItemComponent.prototype.ngOnDestroy = function () {
         //this._roomService.roomIsUpdated.unsubscribe();
@@ -37,7 +44,7 @@ var RoomItemComponent = (function () {
             selector: 'pe-room-item',
             templateUrl: './views/componentViews/room-item.component.html'
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [room_service_1.RoomService, router_1.Router])
     ], RoomItemComponent);
     return RoomItemComponent;
 }());

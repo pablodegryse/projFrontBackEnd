@@ -11,12 +11,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("@angular/core");
 var forms_1 = require("@angular/forms");
 var room_model_1 = require("./room.model");
+var room_service_1 = require("../../services/room.service");
 var CreateRoomComponent = (function () {
-    function CreateRoomComponent() {
+    function CreateRoomComponent(_roomService) {
+        this._roomService = _roomService;
     }
     CreateRoomComponent.prototype.onSubmit = function () {
         var room = new room_model_1.Room(this.myForm.value.name);
-        console.log(room);
+        this._roomService.createRoom(room)
+            .subscribe(function (data) { return console.log(data); }, function (error) { return console.log(error); });
         this.myForm.reset();
     };
     CreateRoomComponent.prototype.ngOnInit = function () {
@@ -29,7 +32,7 @@ var CreateRoomComponent = (function () {
             selector: 'pe-create-room',
             templateUrl: './views/componentViews/create-room.component.html'
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [room_service_1.RoomService])
     ], CreateRoomComponent);
     return CreateRoomComponent;
 }());

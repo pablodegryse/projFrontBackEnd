@@ -7,8 +7,7 @@ import {SocketService} from "../services/socket.service";
     providers:[SocketService]
 })
 export class AppComponent {
-    globalSocketService:SocketService;
-    constructor(public socketService:SocketService){
-        this.globalSocketService=socketService;
+
+    constructor(public _socketService:SocketService){
     }
 }

@@ -18,9 +18,18 @@ import {LobbyoverviewComponent} from "./components/lobby/lobbyoverview.component
 import {RoomComponent} from "./components/room/room.component";
 import {CreateRoomComponent} from "./components/room/create-room.component";
 import {RoomItemComponent} from "./components/room/room-item.component";
+import {AuthService} from "./services/auth.service";
+import {HttpModule} from "@angular/http";
+import {RoomService} from "./services/room.service";
 
 @NgModule({
-    imports:[BrowserModule,routing, FormsModule,ReactiveFormsModule],
+    imports:[
+        BrowserModule,
+        routing,
+        FormsModule,
+        ReactiveFormsModule,
+        HttpModule
+    ],
     declarations:[
         AppComponent,
         CanvasComponent,
@@ -37,7 +46,7 @@ import {RoomItemComponent} from "./components/room/room-item.component";
         CreateRoomComponent,
         RoomItemComponent
     ],
-    providers:[],
+    providers:[AuthService, RoomService],
     bootstrap:[AppComponent]
 })
 
