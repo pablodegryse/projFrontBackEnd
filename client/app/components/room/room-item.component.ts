@@ -31,14 +31,14 @@ export class RoomItemComponent implements OnInit, OnDestroy{
     }
 
     onJoinRoom(room:Room){
-        this.user = localStorage.getItem('userId');
-        room.users.push(this.user);
-        this._roomService.updateRoom(room)
-            .subscribe(
-                data => console.log(data),
-                error => console.error(error),
-                this._router.navigateByUrl('/quickjoin')
-            );
+        // this.user = localStorage.getItem('userId');
+        // room.users.push(this.user);
+        // this._roomService.updateRoom(room)
+        //     .subscribe(
+        //         data => console.log(data),
+        //         error => console.error(error),
+        //         this._router.navigateByUrl('/quickjoin')
+        //     );
     }
 
     ngOnDestroy(){

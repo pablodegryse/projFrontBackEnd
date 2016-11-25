@@ -12,7 +12,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var platform_browser_1 = require('@angular/platform-browser');
 var app_component_1 = require('./components/app.component');
-var canvas_component_1 = require("./components/canvas/canvas.component");
 var app_routing_1 = require("./components/app.routing");
 var home_component_1 = require("./components/home/home.component");
 var dropdown_directives_1 = require("./components/dropdown.directives");
@@ -24,12 +23,14 @@ var logout_component_1 = require("./components/auth/logout.component");
 var forms_1 = require("@angular/forms");
 var rankings_component_1 = require("./components/rankings/rankings.component");
 var lobbyoverview_component_1 = require("./components/lobby/lobbyoverview.component");
-var room_component_1 = require("./components/room/room.component");
 var create_room_component_1 = require("./components/room/create-room.component");
 var room_item_component_1 = require("./components/room/room-item.component");
 var auth_service_1 = require("./services/auth.service");
 var http_1 = require("@angular/http");
 var room_service_1 = require("./services/room.service");
+var canvas_component_1 = require("./components/game/canvas.component");
+var queue_component_1 = require("./components/game/queue.component");
+var game_component_1 = require("./components/game/game.component");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -45,6 +46,8 @@ var AppModule = (function () {
             declarations: [
                 app_component_1.AppComponent,
                 canvas_component_1.CanvasComponent,
+                queue_component_1.QueueComponent,
+                game_component_1.GameComponent,
                 home_component_1.HomeComponent,
                 dropdown_directives_1.DropdownDirective,
                 header_component_1.HeaderComponent,
@@ -54,7 +57,6 @@ var AppModule = (function () {
                 logout_component_1.LogoutComponent,
                 rankings_component_1.RankingsComponent,
                 lobbyoverview_component_1.LobbyoverviewComponent,
-                room_component_1.RoomComponent,
                 create_room_component_1.CreateRoomComponent,
                 room_item_component_1.RoomItemComponent
             ],

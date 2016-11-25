@@ -19,3 +19,5 @@ SERVER ERROR LOG :
 2016-11-25 13:28:36  |  MongoError: failed to connect to server [localhost:27017] on first connect
 2016-11-19 11:25:20  |  Error: ENOENT: no such file or directory, stat 'C:\Users\pablo\Documents\GitHub\projFrontBackEnd\cldedient\views\index.html'
 
+
+2016-11-25 13:50:23  |  MongoError: failed to connect to server [ds159387.mlab.com:59387] on first connect
