@@ -17,3 +17,5 @@ SERVER ERROR LOG :
 2016-11-25 10:59:37  |  MongoError: Authentication failed.
 2016-11-25 12:25:11  |  TypeError: Cannot read property 'save' of null
 2016-11-25 13:28:36  |  MongoError: failed to connect to server [localhost:27017] on first connect
+2016-11-19 11:25:20  |  Error: ENOENT: no such file or directory, stat 'C:\Users\pablo\Documents\GitHub\projFrontBackEnd\cldedient\views\index.html'
+
