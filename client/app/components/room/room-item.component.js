@@ -27,14 +27,10 @@ var RoomItemComponent = (function () {
         console.log("room edited");
     };
     RoomItemComponent.prototype.onJoinRoom = function (room) {
-        // this.user = localStorage.getItem('userId');
-        // room.users.push(this.user);
-        // this._roomService.updateRoom(room)
-        //     .subscribe(
-        //         data => console.log(data),
-        //         error => console.error(error),
-        //         this._router.navigateByUrl('/quickjoin')
-        //     );
+        this.user = JSON.parse(localStorage.getItem('user'));
+        room.users.push(this.user);
+        this._roomService.updateRoom(room)
+            .subscribe(function (data) { return console.log(data); }, function (error) { return console.error(error); });
     };
     RoomItemComponent.prototype.ngOnDestroy = function () {
         //this._roomService.roomIsUpdated.unsubscribe();

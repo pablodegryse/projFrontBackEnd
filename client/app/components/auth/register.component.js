@@ -30,7 +30,7 @@ var RegisterComponent = (function () {
         this._authService.signin(user)
             .subscribe(function (data) {
             localStorage.setItem('token', data.token);
-            localStorage.setItem('userId', data.userId);
+            localStorage.setItem('user', data.user);
             _this._router.navigateByUrl('/');
         });
     };

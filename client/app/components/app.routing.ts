@@ -1,9 +1,6 @@
 import { Routes, RouterModule } from "@angular/router";
 
 import {HomeComponent} from "./home/home.component";
-
-import {AUTH_ROUTES} from "./auth/auth.routes";
-
 import {AuthenticationComponent} from "./auth/authentication.component";
 import {RankingsComponent} from "./rankings/rankings.component";
 import {LobbyoverviewComponent} from "./lobby/lobbyoverview.component";
@@ -16,7 +13,7 @@ const APP_ROUTES: Routes = [
     {path:'roomlist', component:LobbyoverviewComponent},
     {path:'createroom', component:CreateRoomComponent},
     {path:'quickjoin', component:GameComponent},
-    {path: 'auth', component: AuthenticationComponent, children: AUTH_ROUTES },
+    {path: 'auth', component: AuthenticationComponent },
     {path:'rankings', component:RankingsComponent}
 ];
 

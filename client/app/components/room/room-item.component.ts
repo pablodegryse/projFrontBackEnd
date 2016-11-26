@@ -5,7 +5,6 @@ import {User} from "../auth/user.model";
 import {RoomService} from "../../services/room.service";
 import {Router} from "@angular/router";
 
-
 @Component({
     selector: 'pe-room-item',
     templateUrl: './views/componentViews/room-item.component.html'
@@ -31,14 +30,13 @@ export class RoomItemComponent implements OnInit, OnDestroy{
     }
 
     onJoinRoom(room:Room){
-        // this.user = localStorage.getItem('userId');
-        // room.users.push(this.user);
-        // this._roomService.updateRoom(room)
-        //     .subscribe(
-        //         data => console.log(data),
-        //         error => console.error(error),
-        //         this._router.navigateByUrl('/quickjoin')
-        //     );
+        this.user = JSON.parse(localStorage.getItem('user'));
+        room.users.push(this.user);
+        this._roomService.updateRoom(room)
+            .subscribe(
+                data => console.log(data),
+                error => console.error(error)
+            );
     }
 
     ngOnDestroy(){

@@ -23,8 +23,9 @@ var SigninComponent = (function () {
         var user = new user_model_1.User(this.myForm.value.email, this.myForm.value.password);
         this._authService.signin(user)
             .subscribe(function (data) {
+            console.log(data);
             localStorage.setItem('token', data.token);
-            localStorage.setItem('userId', data.userId);
+            localStorage.setItem('user', JSON.stringify(data.user));
             _this._router.navigateByUrl('/');
         }, function (error) { return console.error(error); });
         this.myForm.reset();
