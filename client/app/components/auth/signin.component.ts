@@ -19,8 +19,9 @@ export class SigninComponent {
         this._authService.signin(user)
             .subscribe(
                 data => {
+                    console.log(data);
                     localStorage.setItem('token', data.token);
-                    localStorage.setItem('userId', data.userId);
+                    localStorage.setItem('user', JSON.stringify(data.user));
                     this._router.navigateByUrl('/');
                 },
                 error => console.error(error)
