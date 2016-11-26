@@ -30,8 +30,4 @@ export class SocketService{
     requestQueueMove(){
         this.socket.emit("requestMoveToQueue");
     }
-
-    setCanvasEvents(){
-
-    }
 }

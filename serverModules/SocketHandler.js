@@ -18,72 +18,6 @@ let SocketHandler=(function () {
         setupGlobalNamespace();
     };
 
-    /*let setupNameSpace=function(){
-        //TODO: maaak lobby namespace die users in groepen van 4 verdeelt en in een nieuwe namespace steekn , waar ze dan het spel kunnen spelen
-        nsp =io.of('/canvasDrawing');
-        nsp.on('connection',function (socket) {
-            console.log("new connection made");
-            //algemene boodschap voor iedereen in de namespace
-            var d = new Date();
-            nsp.emit('serverWelcome',{
-                'time':d.getHours()+':'+d.getMinutes(),
-                'msg': socket.id+' joined the room!'
-            });
-
-            //als de client de eerste in de namespace is --> maak hem drawer en steek hem in de drawer room
-            //zo niet : maak hem observer
-            usersToMigrate.push(socket);
-            if(usersToMigrate.length>1){
-                console.log("derp");
-                socket.join("observer");
-                nsp.to("observer").emit("observerRoomMessage","You are an observer now");
-                nsp.to("observer").emit("serverAllowDraw","false");
-            }else {
-                console.log("herp");
-                socket.join("drawer");
-                nsp.to("drawer").emit("drawerRoomMessage","You are the drawer now");
-                nsp.to("drawer").emit("serverAllowDraw","true");
-            }
-
-            //events die de drawer kan sturen naar server
-            //server stuurt dit dan door naar observers
-            socket.on('drawBegin',function () {
-                nsp.to("observer").emit("drawBegin");
-            });
-
-            socket.on('drawEnd',function () {
-                nsp.to("observer").emit("drawEnd");
-            });
-
-            socket.on('drawUpdate',function (msgObj) {
-                nsp.to("observer").emit("drawUpdate",msgObj);
-            });
-
-            socket.on('changedColor',function (newColor) {
-                nsp.to("observer").emit("changedColor",newColor);
-            });
-
-            //als er iemand de namespace verlaat , maak de eerst volgende persoon de drawer
-            //TODO: Fix wanneer iemand de room verlaat ==> observer word nu ook "drawer"
-            socket.on('disconnect',function () {
-                console.log(socket.id+" left :(");
-                for(var i=0,len=usersToMigrate.length;i<len;i++){
-                    if(usersToMigrate[i].id=socket.id){
-                        usersToMigrate.slice(i);
-                        if(usersToMigrate.length>0){
-                            usersToMigrate[1].leave("observer");
-                            usersToMigrate[1].join("drawer");
-                            nsp.to("drawer").emit("drawerRoomMessage","You are the drawer now");
-                            nsp.to("drawer").emit("serverAllowDraw","true");
-                        }
-                        break;
-                    }
-                }
-            });
-
-        });
-    };*/
-
     //iedereen zit altijd in de globale namespace
     let setupGlobalNamespace=function () {
         globalNameSpace=io.of(names.namespaces.global);
@@ -98,6 +32,7 @@ let SocketHandler=(function () {
             socket.on('disconnect',function () {
                 console.log(socket.id+" left the global namespace");
                 removeUserFromQueue(socket.id);
+                removeHostRoom(socket);
             });
 
             //als er vanuit de client naar de lobby genavigeerd werd: migreer de socket
@@ -127,6 +62,24 @@ let SocketHandler=(function () {
                 checkQueue(migrateCallback);
             });
 
+            //game events hier opvangen -> serversde controle doen + doorsturen naar de juiste room en sockets
+            socket.on('drawBegin',function () {
+                resolveGameAction(socket,canvasActionCallBack,"drawBegin",null);
+            });
+
+            socket.on('drawEnd',function () {
+                resolveGameAction(socket,canvasActionCallBack,"drawEnd",null);
+            });
+
+            socket.on('drawUpdate',function (msgObj) {
+                resolveGameAction(socket,canvasActionCallBack,"drawUpdate",msgObj);
+            });
+
+            socket.on('changedColor',function (newColor) {
+                resolveGameAction(socket,canvasActionCallBack,"changedColor",newColor);
+            });
+
+
         });
     };
 
@@ -152,52 +105,104 @@ let SocketHandler=(function () {
     //als er genoeg spelers zijn : migreer ze naar een room onder naam van de oudste socket in de queue
     let migrateCallback=function (check,cb) {
         if(check){
-            let roomName;
+            let roomName,drawer;
+            let guessers=[];
             for(let i=0;i<4;i++){
                 let currentSocket=usersToMigrate[i];
                 //eerste user moet kamer niet joinen: zit er default al in
                 if(i===0){
                     roomName=currentSocket.id;
+                    drawer={
+                        "socket":currentSocket,
+                        "points":0
+                    }
                 }else {
                     currentSocket.join(roomName);
                     currentSocket.leave(names.rooms.q);
+                    guessers.push({"socket":currentSocket,"points":0})
                 }
             }
-            cb("Game ready! ",roomName);
+            cb("Game ready! ",roomName,drawer,guessers);
         }else {
-            cb("Not enough users to make game yet...",null);
+            cb("Not enough users to make game yet...",null,null);
         }
     };
 
     //als de sockets gemigreerd zijn: stuur een notificatie naar de clients dat ze in een game zijn
     // --> de game kan nu beginnen...
-    let migrateResultCallback=function (msg,roomName) {
+    //---> sla de nieuwe room op in een lijst (met id , de id van de drawer en alle sockets in de room)
+    let migrateResultCallback=function (msg,roomName,drawer,guessers) {
         if(roomName!=null){
             globalNameSpace.to(roomName).emit("GameReady",{"content":"guesser"});
             globalNameSpace.to(roomName).emit("info",msg+"Welcome to room: "+roomName);
             usersToMigrate.splice(0,4);
-            activeRooms.push(roomName);
+            let newGameRoom={
+                "id":roomName,
+                "drawer":drawer,
+                "guessers":guessers
+            };
+            activeRooms.push(newGameRoom);
+            drawer.socket.emit("RoleInit","drawer");
+            for(let i=0;i<3;i++){
+                guessers[i].socket.emit("RoleInit","guesser");
+            }
             console.log("queue length after splice: "+usersToMigrate.length);
         }
     };
 
     //a socket is max in 2 rooms at same time : own room and queue or own room and game room (under someone else's socket id)
     let removeUserFromGameRoom=function(socket){
-        let numberOfRooms=Object.keys(socket.rooms).length;
-        if(numberOfRooms>=2){
-            console.log("The socket was in this many other rooms:"+numberOfRooms);
-            for(let i=0,len=activeRooms.length;i<len;i++){
-                let currentId=activeRooms[i];
-                if(socket.rooms[currentId]!=null && socket.id!==currentId){
+        //let numberOfRooms=Object.keys(socket.rooms).length;
+        for(let i=0,len=activeRooms.length;i<len;i++){
+            let currentId=activeRooms[i].id;
+            if(socket.rooms[currentId]!=null){
+                if(socket.id!==currentId){
                     socket.leave(currentId);
                     console.log("this socket:"+socket.id+" left the room: "+currentId);
-                    if(io.nsps[names.namespaces.global].adapter.rooms[currentId].length==1){
-                        globalNameSpace.to(currentId).emit("GameEnd",{"content":"tooFewUsers"});
-                        console.log("game abandoned");
-                    }
-                    break;
                 }
+                checkRoomState(currentId,i);
+                break;
             }
+        }
+    };
+
+    //on disconnect : if the socket was a host of an active game room :
+    // disbandon the game in that room and remove it from the active list
+    let removeHostRoom=function (socket) {
+        for(let i=0,len=activeRooms.length;i<len;i++){
+            let currentId=activeRooms[i].id;
+            if(socket.id==currentId){
+                globalNameSpace.to(currentId).emit("GameEnd",{"content":"tooFewUsers"});
+                activeRooms.splice(i);
+                console.log("Host left; game abandoned and removed from active list");
+                break;
+            }
+        }
+    };
+
+    //de gameroom van een socket vinden die een event afvuurt
+    let resolveGameAction=function (socket,callback,action,content) {
+        for(let i=0,len=activeRooms.length;i<len;i++){
+            let currentId=activeRooms[i].id;
+            if(socket.rooms[currentId]!=null){
+                if(activeRooms[i].drawer.socket.id===socket.id){
+                    callback(activeRooms[i],action,content);
+                }
+                break;
+            }
+        }
+    };
+
+    let canvasActionCallBack=function (room,action,actionContent) {
+        room.drawer.socket.broadcast.to(room.id).emit(action,actionContent);
+    };
+
+    //kijken of er nog genoeg spelers zijn om de room in de 'active' lijst te houden
+    let checkRoomState=function (roomId,activeRoomListIndex){
+        if(io.nsps[names.namespaces.global].adapter.rooms[roomId].length==1){
+            globalNameSpace.to(roomId).emit("GameEnd",{"content":"tooFewUsers"});
+            activeRooms.splice(activeRoomListIndex);
+            console.log("game abandoned and removed from active list");
         }
     };
 

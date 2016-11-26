@@ -33,8 +33,6 @@ var SocketService = (function () {
     SocketService.prototype.requestQueueMove = function () {
         this.socket.emit("requestMoveToQueue");
     };
-    SocketService.prototype.setCanvasEvents = function () {
-    };
     SocketService = __decorate([
         core_1.Injectable(), 
         __metadata('design:paramtypes', [])
