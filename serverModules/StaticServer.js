@@ -1,13 +1,7 @@
 let StaticServer=(function () {
     let port,app,server;
-    let express = require("express"),path=require("path"),SocketHandler=require("./SocketHandler")
-        ,errorLogger,ApiHandler=require("./ApiHandler"),
-        mongoose = require('mongoose'),
-        bodyParser = require('body-parser');
-
-    let appRoutes = require('../routes/app'),
-        userRoutes = require('../routes/user'),
-        roomRoutes = require('../routes/room');
+    let express = require("express"),path=require("path"),SocketHandler=require("./SocketHandler"),
+        errorLogger,mongoose = require('mongoose'),bodyParser = require('body-parser'),rootRouter=require("./routers/RootRouter");
 
     let init=function (myPort,errlogger) {
         errorLogger=errlogger;
@@ -15,7 +9,6 @@ let StaticServer=(function () {
         app=express();
         //mongoose.connect('localhost:27017/pictionar-e');
         mongoose.connect('mongodb://testUser:testuser@ds159387.mlab.com:59387/pictionar-e');
-
         setupHttpServer();
         setupExpress();
         SocketHandler.init(server);
@@ -25,50 +18,7 @@ let StaticServer=(function () {
         app.use(bodyParser.json());
         app.use(bodyParser.urlencoded({extended:false}));
         app.use(express.static(path.join(__dirname,'..','client')));
-        app.get('/index.html',function (req,res) {
-            console.log(req.url);
-            res.sendFile(path.join(__dirname,'..','client','views','index.html'),function (err) {
-                if(err){
-                    errorLogger.log(err);
-                }
-            });
-        });
-        app.get('/',function (req,res) {
-            res.sendFile(path.join(__dirname,'..','client','views','index.html'),function (err) {
-                if(err){
-                    errorLogger.log(err);
-                }
-            });
-        });
-
-        app.use('/user', userRoutes);
-        app.use('/room',roomRoutes);
-        app.use('/', appRoutes);
-
-        app.get('/client/js/*',function (req,res) {
-            console.log(req.url);
-            res.sendFile(path.join(__dirname,'..','client','js',req.url));
-        });
-        app.get('/client/css/*',function (req,res) {
-            console.log(req.url);
-            res.sendFile(path.join(__dirname,'..','client','css',req.url));
-        });
-
-        app.get('/getApiData',function (req,res) {
-            ApiHandler.getData(function (err,data) {
-                if(!err){
-                    res.setHeader('Content-Type', 'application/json');
-                    res.send(JSON.stringify(data));
-                }else {
-                    errorLogger.log(err);
-                }
-            })
-        });
-        //als een request niet voldoet aan een van de bovenste , toon dan een 404 pagina
-        app.get('*',function (req,res) {
-            res.sendFile(path.join(__dirname,'..','client','views','error.html'))
-        });
-
+        app.use(rootRouter);
     };
     let setupHttpServer=function () {
         server=require("http").Server(app);
