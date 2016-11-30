@@ -98,13 +98,31 @@ let RoomManager=(function () {
         }
     };
 
+    let getRoomList=function(socket){
+        let list=[]
+        for(let i=0,len=active.length;i<len;i++){
+            let roomOjb={
+                "id":active[i].id,
+                "status":"active",
+                "players":active[i].guessers.length+1
+            };
+            list.push(roomOjb);
+        }
+        roomListCallback(socket,list)
+    };
+
+    let roomListCallback=function (socket,list) {
+        socket.emit("roomListResult",list);
+    };
+
     //public
     return{
         init:init,
         addActiveRoom:addActiveRoom,
         removeFromGameRoom:removeUserFromGameRoom,
         removeHostRoom:removeHostRoom,
-        activeRooms:active
+        activeRooms:active,
+        getRoomList:getRoomList,
     };
 })();
 module.exports=RoomManager;

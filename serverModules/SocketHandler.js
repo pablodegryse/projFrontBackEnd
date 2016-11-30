@@ -31,20 +31,20 @@ let SocketHandler=(function () {
             socket.on('disconnect',function () {
                 console.log(socket.id+" left the global namespace");
                 rManager.removeFromGameRoom(names.removeTypes.forced,socket);
-                qManager.removeFromQueue(socket.id );
+                qManager.removeFromQueue(socket);
             });
 
             //als er vanuit de client naar de lobby genavigeerd werd: migreer de socket
             socket.on('requestMoveToLobby',function () {
                 if(socket.rooms[names.rooms.q]!=null){
                     socket.leave(names.rooms.q);
-                    globalNameSpace.emit("info","You left the queue room");
-                    qManager.removeFromQueue(socket.id);
+                    qManager.removeFromQueue(socket);
                 }
-                rManager.removeFromGameRoom(names.removeTypes.nav,socket);
-                qManager.removeFromQueue(socket);
-                socket.join(names.rooms.lobby);
-                globalNameSpace.to("mainLobby").emit("welcome",{"content":"Someone joined the lobby group"});
+                //only do all of this when the socket wasnt already in the lobby
+                if(socket.rooms[names.rooms.lobby]==null){
+                    rManager.removeFromGameRoom(names.removeTypes.nav,socket);
+                    socket.join(names.rooms.lobby);
+                }
             });
 
             //als er vanuit de client naar de queue genavigeerd werd: migreer de socket
@@ -70,6 +70,9 @@ let SocketHandler=(function () {
             socket.on('changedColor',function (newColor) {
                 gameManager.resolveGameAction(socket,gameManager.canvasActionCallBack,"changedColor",newColor);
             });
+
+            socket.on('getRoomList',function () { rManager.getRoomList(socket) });
+
         });
     };
 

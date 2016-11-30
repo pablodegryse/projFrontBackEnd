@@ -22,6 +22,9 @@ let GameManager=(function () {
         room.drawer.socket.broadcast.to(room.id).emit(action,actionContent);
     };
 
+
+
+
     //public
     return{
         init:init,

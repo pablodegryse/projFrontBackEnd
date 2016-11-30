@@ -15,23 +15,26 @@ var CanvasComponent = (function () {
         this.socketService = socketService;
         this.localsocketService = socketService;
         this.globalSocket = socketService.getSocket();
+        console.log("canvas ctor called");
     }
     CanvasComponent.prototype.ngAfterViewInit = function () {
         console.log("after init fired");
         this.drawer = CanvasDrawer;
         this.drawer.init(this.drawCanvas.nativeElement, this.buttonList.nativeElement, this.globalSocket);
-        this.setCanvasEvents(this);
+        //de drawer initieliseren met deze rol
+        console.log("game role is :" + this.gameRole);
+        if (this.gameRole === "drawer") {
+            this.drawer.changeDrawPermission(true);
+        }
+        else if (this.gameRole === "guesser") {
+            this.drawer.changeDrawPermission(false);
+        }
+        if (!this.socketService.canvasEventsSet) {
+            this.setCanvasEvents(this);
+            this.socketService.canvasEventsSet = true;
+        }
     };
     CanvasComponent.prototype.setCanvasEvents = function (component) {
-        //de drawer initieliseren met deze rol
-        this.globalSocket.on("RoleInit", function (msg) {
-            if (msg === "drawer") {
-                component.drawer.changeDrawPermission(true);
-            }
-            else if (msg === "guesser") {
-                component.drawer.changeDrawPermission(false);
-            }
-        });
         this.globalSocket.on("drawBegin", function () {
             component.drawer.setmouseDown();
             console.log("clicked mouse down");
@@ -47,6 +50,10 @@ var CanvasComponent = (function () {
             component.drawer.changeColor(color);
         });
     };
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', String)
+    ], CanvasComponent.prototype, "gameRole", void 0);
     __decorate([
         core_1.ViewChild('drawCanvas'), 
         __metadata('design:type', Object)

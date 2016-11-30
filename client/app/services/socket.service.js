@@ -11,6 +11,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var SocketService = (function () {
     function SocketService() {
+        this.roomListEventsSet = false;
+        this.canvasEventsSet = false;
+        this.gameEventsSet = false;
         this.socket = io("/global");
         this.setMainEvents();
     }

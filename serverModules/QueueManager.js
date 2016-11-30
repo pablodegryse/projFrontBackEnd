@@ -15,7 +15,6 @@ let QueueManager=(function () {
             socket.leave(names.rooms.lobby);
             globalNameSpace.emit("info","You left the lobby room");
         }
-
         socket.join(names.rooms.q);
         globalNameSpace.to("queue").emit("welcome",{"content":"Someone joined the queue group"});
         queue.push(socket);
@@ -23,10 +22,13 @@ let QueueManager=(function () {
 
     //als er iemand disconnect : kijk of ze in de q zaten en verwijder ze eventueel
     let removeUserFromQueue=function (socket) {
-        let socketId=socket.id;
-        for(let i=0,len=queue.length;i<len;i++){
-            if(queue[i].id==socketId){
-                queue.splice(i);
+        if(queue.length>0){
+            for(let i=0,len=queue.length;i<len;i++){
+                let qSocket=queue[i];
+                if(qSocket.id==socket.id){
+                    queue.splice(i);
+                    break;
+                }
             }
         }
     };
@@ -72,7 +74,6 @@ let QueueManager=(function () {
     //---> sla de nieuwe room op in een lijst (met id , de id van de drawer en alle sockets in de room)
     let migrateResultCallback=function (msg,roomName,drawer,guessers) {
         if(roomName!=null){
-            globalNameSpace.to(roomName).emit("GameReady",{"content":"guesser"});
             globalNameSpace.to(roomName).emit("info",msg+"Welcome to room: "+roomName);
             queue.splice(0,4);
             let newGameRoom={
@@ -81,9 +82,9 @@ let QueueManager=(function () {
                 "guessers":guessers
             };
             roomManager.addActiveRoom(newGameRoom);
-            drawer.socket.emit("RoleInit","drawer");
+            drawer.socket.emit("GameReady",{"content":"drawer"});
             for(let i=0;i<3;i++){
-                guessers[i].socket.emit("RoleInit","guesser");
+                guessers[i].socket.emit("GameReady",{"content":"guesser"});
             }
             console.log("queue length after splice: "+queue.length);
         }
@@ -95,7 +96,7 @@ let QueueManager=(function () {
         removeFromQueue:removeUserFromQueue,
         addToQueue:addUserToQueue,
         checkQueue:checkQueue,
-        migrateCallback,migrateCallback
+        migrateCallback:migrateCallback
     };
 })();
 module.exports=QueueManager;

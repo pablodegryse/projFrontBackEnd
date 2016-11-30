@@ -6,11 +6,12 @@ import {Router} from "@angular/router";
     selector:"pe-game",
     template:`<div>
                 <pe-queue *ngIf="isGameReady===false"></pe-queue>
-                <pe-canvas *ngIf="isGameReady===true" ></pe-canvas>
+                <pe-canvas *ngIf="isGameReady===true" [gameRole]="gameParentRole" ></pe-canvas>
               </div>`
 })
 
-export class GameComponent {
+export class GameComponent{
+    gameParentRole:string;
     isGameReady:any=false;
     globalSocket:any;
     localsocketService:SocketService;
@@ -24,13 +25,20 @@ export class GameComponent {
     }
 
     setGameEvents(component){
+        if(component.socketService.gameEventsSet){
+            this.globalSocket.off("GameReady");
+            this.globalSocket.off("GameEnd");
+        }else {
+            this.socketService.gameEventsSet=true;
+        }
         this.globalSocket.on("GameReady",function (msg) {
-            component.isGameReady=true;
+            console.log("yoloo sweeeeeeeeeeeeeeg");
             if(msg.content==="drawer"){
-                console.log("I'm drawer");
+                component.gameParentRole="drawer";
             }else if(msg.content==="guesser"){
-                console.log("I'm guesser");
+                component.gameParentRole="guesser";
             }
+            component.isGameReady=true;
         });
         this.globalSocket.on("GameEnd",function (msg) {
             component.isGameReady=true;

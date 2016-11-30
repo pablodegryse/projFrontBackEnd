@@ -23,14 +23,22 @@ var GameComponent = (function () {
         this.setGameEvents(this);
     }
     GameComponent.prototype.setGameEvents = function (component) {
+        if (component.socketService.gameEventsSet) {
+            this.globalSocket.off("GameReady");
+            this.globalSocket.off("GameEnd");
+        }
+        else {
+            this.socketService.gameEventsSet = true;
+        }
         this.globalSocket.on("GameReady", function (msg) {
-            component.isGameReady = true;
+            console.log("yoloo sweeeeeeeeeeeeeeg");
             if (msg.content === "drawer") {
-                console.log("I'm drawer");
+                component.gameParentRole = "drawer";
             }
             else if (msg.content === "guesser") {
-                console.log("I'm guesser");
+                component.gameParentRole = "guesser";
             }
+            component.isGameReady = true;
         });
         this.globalSocket.on("GameEnd", function (msg) {
             component.isGameReady = true;
@@ -42,7 +50,7 @@ var GameComponent = (function () {
     GameComponent = __decorate([
         core_1.Component({
             selector: "pe-game",
-            template: "<div>\n                <pe-queue *ngIf=\"isGameReady===false\"></pe-queue>\n                <pe-canvas *ngIf=\"isGameReady===true\" ></pe-canvas>\n              </div>"
+            template: "<div>\n                <pe-queue *ngIf=\"isGameReady===false\"></pe-queue>\n                <pe-canvas *ngIf=\"isGameReady===true\" [gameRole]=\"gameParentRole\" ></pe-canvas>\n              </div>"
         }), 
         __metadata('design:paramtypes', [socket_service_1.SocketService, router_1.Router])
     ], GameComponent);

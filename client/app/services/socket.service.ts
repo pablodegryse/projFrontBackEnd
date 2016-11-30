@@ -3,6 +3,9 @@ declare var io:any;
 
 @Injectable()
 export class SocketService{
+    roomListEventsSet:boolean=false;
+    canvasEventsSet:boolean=false;
+    gameEventsSet:boolean=false;
     socket:any;
     constructor(){
         this.socket=io("/global");
