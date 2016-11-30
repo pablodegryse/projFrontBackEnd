@@ -34,17 +34,21 @@ let SocketHandler=(function () {
                 qManager.removeFromQueue(socket);
             });
 
+
+            socket.on('lobbyJoin',function () {
+               socket.join(names.rooms.lobby);
+            });
+
             //als er vanuit de client naar de lobby genavigeerd werd: migreer de socket
             socket.on('requestMoveToLobby',function () {
-                if(socket.rooms[names.rooms.q]!=null){
+                //only do this when the socket wasnt already in the lobby
+                if(socket.rooms[names.rooms.lobby]==null){
+                    rManager.removeFromGameRoom(names.removeTypes.nav,socket);
+                }else if(socket.rooms[names.rooms.q]!=null){
                     socket.leave(names.rooms.q);
                     qManager.removeFromQueue(socket);
                 }
-                //only do all of this when the socket wasnt already in the lobby
-                if(socket.rooms[names.rooms.lobby]==null){
-                    rManager.removeFromGameRoom(names.removeTypes.nav,socket);
-                    socket.join(names.rooms.lobby);
-                }
+                socket.join(names.rooms.lobby);
             });
 
             //als er vanuit de client naar de queue genavigeerd werd: migreer de socket

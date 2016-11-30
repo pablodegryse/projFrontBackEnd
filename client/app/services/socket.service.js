@@ -14,6 +14,7 @@ var SocketService = (function () {
         this.roomListEventsSet = false;
         this.canvasEventsSet = false;
         this.gameEventsSet = false;
+        this.initialLobbyJoin = true;
         this.socket = io("/global");
         this.setMainEvents();
     }
@@ -32,6 +33,9 @@ var SocketService = (function () {
     //vraag aan de server om deze socket naar de lobby group te migreren
     SocketService.prototype.requestLobbyMove = function () {
         this.socket.emit("requestMoveToLobby");
+    };
+    SocketService.prototype.lobbyJoin = function () {
+        this.socket.emit("initJoinLobby");
     };
     SocketService.prototype.requestQueueMove = function () {
         this.socket.emit("requestMoveToQueue");

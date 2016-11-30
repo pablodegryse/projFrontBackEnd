@@ -9,7 +9,12 @@ import {AuthService} from "../../services/auth.service";
 export class HomeComponent {
 
     constructor(private _socketService:SocketService, private _authService:AuthService){
-        this._socketService.requestLobbyMove();
+        if(_socketService.initialLobbyJoin){
+            this._socketService.lobbyJoin();
+            _socketService.initialLobbyJoin=false;
+        }else {
+            this._socketService.requestLobbyMove();
+        }
     }
 
     isLoggedIn(){

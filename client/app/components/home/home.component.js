@@ -15,7 +15,13 @@ var HomeComponent = (function () {
     function HomeComponent(_socketService, _authService) {
         this._socketService = _socketService;
         this._authService = _authService;
-        this._socketService.requestLobbyMove();
+        if (_socketService.initialLobbyJoin) {
+            this._socketService.lobbyJoin();
+            _socketService.initialLobbyJoin = false;
+        }
+        else {
+            this._socketService.requestLobbyMove();
+        }
     }
     HomeComponent.prototype.isLoggedIn = function () {
         return this._authService.isLoggedIn();
