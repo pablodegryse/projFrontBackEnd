@@ -16,9 +16,9 @@ let SocketHandler=(function () {
     let init=function (server) {
         io=require("socket.io")(server);
         setupGlobalNamespace();
-        rManager.init(globalNameSpace,names);
+        rManager.init(globalNameSpace,names,3);
         gameManager.init(rManager.activeRooms);
-        qManager.init(globalNameSpace,4,rManager,names);
+        qManager.init(globalNameSpace,3,rManager,names);
     };
 
     //iedereen zit altijd in de globale namespace

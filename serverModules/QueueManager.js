@@ -48,7 +48,7 @@ let QueueManager=(function () {
         if(check){
             let roomName,drawer;
             let guessers=[];
-            for(let i=0;i<4;i++){
+            for(let i=0;i<migrationBatchSize;i++){
                 let currentSocket=queue[i];
                 //eerste user moet kamer niet joinen: zit er default al in
                 if(i===0){
@@ -75,7 +75,7 @@ let QueueManager=(function () {
     let migrateResultCallback=function (msg,roomName,drawer,guessers) {
         if(roomName!=null){
             globalNameSpace.to(roomName).emit("info",msg+"Welcome to room: "+roomName);
-            queue.splice(0,4);
+            queue.splice(0,migrationBatchSize);
             let newGameRoom={
                 "id":roomName,
                 "drawer":drawer,
@@ -83,7 +83,7 @@ let QueueManager=(function () {
             };
             roomManager.addActiveRoom(newGameRoom);
             drawer.socket.emit("GameReady",{"content":"drawer"});
-            for(let i=0;i<3;i++){
+            for(let i=0;i<migrationBatchSize-1;i++){
                 guessers[i].socket.emit("GameReady",{"content":"guesser"});
             }
             console.log("queue length after splice: "+queue.length);

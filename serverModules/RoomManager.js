@@ -1,12 +1,13 @@
 //manages the room collections : active and pending rooms
 // adding, removing , migrating users
 let RoomManager=(function () {
-    let active=[],pending=[],names;
+    let active=[],pending=[],names,maxRoomSize;
     let globalNameSpace;
 
-    let init=function (globalNS,nameObj) {
+    let init=function (globalNS,nameObj,roomSize) {
       globalNameSpace=globalNS;
       names=nameObj;
+      maxRoomSize=roomSize;
     };
 
     let addActiveRoom=function (room) {
@@ -104,7 +105,8 @@ let RoomManager=(function () {
             let roomOjb={
                 "id":active[i].id,
                 "status":"active",
-                "players":active[i].guessers.length+1
+                "players":active[i].guessers.length+1,
+                "maxPlayers":maxRoomSize
             };
             list.push(roomOjb);
         }
