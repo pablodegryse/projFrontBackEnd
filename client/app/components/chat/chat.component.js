@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("@angular/core");
 var chat_service_1 = require("../../services/chat.service");
 var socket_service_1 = require("../../services/socket.service");
+var message_model_1 = require("./message.model");
 var ChatComponent = (function () {
     function ChatComponent(_chatService, _socketService) {
         this._chatService = _chatService;
@@ -18,6 +19,7 @@ var ChatComponent = (function () {
         this.messages = [];
     }
     ChatComponent.prototype.ngOnInit = function () {
+        this.user = JSON.parse(localStorage.getItem('user'));
         var self = this;
         this.messages = [];
         this.chatSocket = this._socketService.getSocket();
@@ -31,9 +33,10 @@ var ChatComponent = (function () {
     ChatComponent.prototype.ngOnDestroy = function () {
     };
     ChatComponent.prototype.sendMessage = function () {
-        this.messages.push(this.message);
-        this._chatService.addMessage(this.message);
-        this.chatSocket.emit("sendChatMessage", this.message);
+        var messageToSend = new message_model_1.Message(this.message, this.user.nickName);
+        this.messages.push(messageToSend);
+        this._chatService.addMessage(messageToSend);
+        this.chatSocket.emit("sendChatMessage", messageToSend);
         this.message = '';
     };
     ChatComponent = __decorate([

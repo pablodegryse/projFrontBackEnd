@@ -21,7 +21,7 @@ export class WordComponent{
     setWordSocketEvent(component){
         this.globalSocket.off("deliverWordBatch");
         this.globalSocket.on("deliverWordBatch",function (data) {
-           console.log(data);
+           console.log('words:' + data);
            component.canRefresh=data.rollStatus;
            component.words=[];
            for(let word of data.words){

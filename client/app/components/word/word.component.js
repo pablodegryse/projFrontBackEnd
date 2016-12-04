@@ -23,7 +23,7 @@ var WordComponent = (function () {
     WordComponent.prototype.setWordSocketEvent = function (component) {
         this.globalSocket.off("deliverWordBatch");
         this.globalSocket.on("deliverWordBatch", function (data) {
-            console.log(data);
+            console.log('words:' + data);
             component.canRefresh = data.rollStatus;
             component.words = [];
             for (var _i = 0, _a = data.words; _i < _a.length; _i++) {

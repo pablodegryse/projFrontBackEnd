@@ -3,6 +3,7 @@ import {ChatService} from "../../services/chat.service";
 import {User} from "../auth/user.model";
 import {Room} from "../room/room.model";
 import {SocketService} from "../../services/socket.service";
+import {Message} from "./message.model";
 
 @Component({
     selector: 'pe-chat',
@@ -22,6 +23,7 @@ export class ChatComponent implements OnInit, OnDestroy{
     {}
 
     ngOnInit(){
+        this.user = JSON.parse(localStorage.getItem('user'));
         var self = this;
         this.messages =[];
         this.chatSocket = this._socketService.getSocket();
@@ -38,9 +40,10 @@ export class ChatComponent implements OnInit, OnDestroy{
     }
 
     sendMessage(){
-        this.messages.push(this.message);
-        this._chatService.addMessage(this.message);
-        this.chatSocket.emit("sendChatMessage", this.message);
+        let messageToSend = new Message(this.message,this.user.nickName);
+        this.messages.push(messageToSend);
+        this._chatService.addMessage(messageToSend);
+        this.chatSocket.emit("sendChatMessage", messageToSend);
         this.message = '';
     }
 }
