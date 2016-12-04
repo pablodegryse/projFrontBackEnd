@@ -13,7 +13,6 @@ var socket_service_1 = require("../../services/socket.service");
 var CanvasComponent = (function () {
     function CanvasComponent(socketService) {
         this.socketService = socketService;
-        this.localsocketService = socketService;
         this.globalSocket = socketService.getSocket();
     }
     CanvasComponent.prototype.ngAfterViewInit = function () {

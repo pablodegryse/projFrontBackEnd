@@ -1,14 +1,15 @@
 let StaticServer=(function () {
     let port,app,server;
     let express = require("express"),path=require("path"),SocketHandler=require("./SocketHandler"),
-        errorLogger,mongoose = require('mongoose'),bodyParser = require('body-parser'),rootRouter=require("./routers/RootRouter");
+        errorLogger,mongoose = require('mongoose'),bodyParser = require('body-parser'),rootRouter=require("../routes/RootRouter"),
+        userRoutes = require('../routes/user'), roomRoutes = require('../routes/room'), appRoutes=require('../routes/app');
 
     let init=function (myPort,errlogger) {
         errorLogger=errlogger;
         port=myPort;
         app=express();
-        //mongoose.connect('localhost:27017/pictionar-e');
-        mongoose.connect('mongodb://testUser:testuser@ds159387.mlab.com:59387/pictionar-e');
+        mongoose.connect('localhost:27017/pictionar-e');
+        //mongoose.connect('mongodb://testUser:testuser@ds159387.mlab.com:59387/pictionar-e');
         setupHttpServer();
         setupExpress();
         SocketHandler.init(server);
@@ -19,6 +20,10 @@ let StaticServer=(function () {
         app.use(bodyParser.urlencoded({extended:false}));
         app.use(express.static(path.join(__dirname,'..','client')));
         app.use(rootRouter);
+        app.use('/user', userRoutes);
+        app.use('/room',roomRoutes);
+        app.use('/', appRoutes);
+
     };
     let setupHttpServer=function () {
         server=require("http").Server(app);

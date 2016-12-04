@@ -9,6 +9,7 @@ import {User} from "../components/auth/user.model";
 @Injectable()
 export class RoomService {
     private rooms : Room[] =[];
+    private room :Room;
     roomIsUpdated = new EventEmitter<Room>();
 
     constructor(private http: Http) {}
@@ -43,7 +44,19 @@ export class RoomService {
                     ));
                 }
                 return this.rooms;
+            });
+    }
 
+    getRoomById(id: string){
+        return this.http.get('http://locatlhost:8080/room' +id)
+            .map((response:Response) =>{
+                const result = response.json();
+                const room = new Room(
+                    result.obj.name,
+                    result.obj.users,
+                    result.obj.roomId
+                );
+                return room
             });
     }
 

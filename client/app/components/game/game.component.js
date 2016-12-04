@@ -42,7 +42,7 @@ var GameComponent = (function () {
     GameComponent = __decorate([
         core_1.Component({
             selector: "pe-game",
-            template: "<div>\n                <pe-queue *ngIf=\"isGameReady===false\"></pe-queue>\n                <pe-canvas *ngIf=\"isGameReady===true\" ></pe-canvas>\n              </div>"
+            template: "<div>\n                <pe-queue *ngIf=\"isGameReady===false\"></pe-queue>\n                <pe-room *ngIf=\"isGameReady===true\" ></pe-room>\n              </div>"
         }), 
         __metadata('design:paramtypes', [socket_service_1.SocketService, router_1.Router])
     ], GameComponent);

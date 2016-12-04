@@ -6,7 +6,7 @@ import {Router} from "@angular/router";
     selector:"pe-game",
     template:`<div>
                 <pe-queue *ngIf="isGameReady===false"></pe-queue>
-                <pe-canvas *ngIf="isGameReady===true" ></pe-canvas>
+                <pe-room *ngIf="isGameReady===true" ></pe-room>
               </div>`
 })
 

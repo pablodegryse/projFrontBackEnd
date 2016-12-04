@@ -1,15 +1,16 @@
 let express = require('express');
 let router = express.Router();
 let path=require("path");
-let ApiHandler=require("../ApiHandler")
+let ApiHandler=require("../serverModules/ApiHandler");
+let errorLogger = require('../serverModules/ErrorLogger');
 
 router.get('/client/js/*', function(req, res) {
-    res.sendFile(path.join(__dirname,'..','..','client','js',req.url));
+    res.sendFile(path.join(__dirname,'.','client','js',req.url));
 });
 
 router.get('/client/css/*',function (req,res) {
     console.log(req.url);
-    res.sendFile(path.join(__dirname,'..','..','client','css',req.url));
+    res.sendFile(path.join(__dirname,'..','client','css',req.url));
 });
 
 router.get('/getApiData',function (req,res) {
@@ -23,16 +24,16 @@ router.get('/getApiData',function (req,res) {
     })
 });
 
-router.get('/index.html',function (req,res) {
+router.get('/index',function (req,res) {
     console.log(req.url);
-    res.sendFile(path.join(__dirname,'..','..','client','views','index.html'),function (err) {
+    res.sendFile(path.join(__dirname,'..','client','views','index.html'),function (err) {
         if(err){
             errorLogger.log(err);
         }
     });
 });
 router.get('/',function (req,res) {
-    res.sendFile(path.join(__dirname,'..','..','client','views','index.html'),function (err) {
+    res.sendFile(path.join(__dirname,'..','client','views','index.html'),function (err) {
         if(err){
             errorLogger.log(err);
         }
@@ -40,7 +41,7 @@ router.get('/',function (req,res) {
 });
 
 router.get('*',function (req,res) {
-    res.sendFile(path.join(__dirname,'..','..','client','views','error.html'))
+    res.sendFile(path.join(__dirname,'..','client','views','error.html'))
 });
 
 module.exports = router;

@@ -18,6 +18,9 @@ var HeaderComponent = (function () {
     }
     HeaderComponent.prototype.ngOnInit = function () {
     };
+    HeaderComponent.prototype.isLoggedIn = function () {
+        return this._authService.isLoggedIn();
+    };
     HeaderComponent.prototype.onLogOut = function () {
         this._authService.logout();
         this._router.navigateByUrl('/');

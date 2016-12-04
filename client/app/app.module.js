@@ -31,6 +31,11 @@ var room_service_1 = require("./services/room.service");
 var canvas_component_1 = require("./components/game/canvas.component");
 var queue_component_1 = require("./components/game/queue.component");
 var game_component_1 = require("./components/game/game.component");
+var room_component_1 = require("./components/room/room.component");
+var chat_component_1 = require("./components/chat/chat.component");
+var word_component_1 = require("./components/word/word.component");
+var room_lobby_component_1 = require("./components/room/room-lobby.component");
+var chat_service_1 = require("./services/chat.service");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -58,9 +63,13 @@ var AppModule = (function () {
                 rankings_component_1.RankingsComponent,
                 lobbyoverview_component_1.LobbyoverviewComponent,
                 create_room_component_1.CreateRoomComponent,
-                room_item_component_1.RoomItemComponent
+                room_item_component_1.RoomItemComponent,
+                chat_component_1.ChatComponent,
+                room_component_1.RoomComponent,
+                word_component_1.WordComponent,
+                room_lobby_component_1.RoomLobbyComponent
             ],
-            providers: [auth_service_1.AuthService, room_service_1.RoomService],
+            providers: [auth_service_1.AuthService, room_service_1.RoomService, chat_service_1.ChatService],
             bootstrap: [app_component_1.AppComponent]
         }), 
         __metadata('design:paramtypes', [])

@@ -44,6 +44,14 @@ var RoomService = (function () {
             return _this.rooms;
         });
     };
+    RoomService.prototype.getRoomById = function (id) {
+        return this.http.get('http://locatlhost:8080/room' + id)
+            .map(function (response) {
+            var result = response.json();
+            var room = new room_model_1.Room(result.obj.name, result.obj.users, result.obj.roomId);
+            return room;
+        });
+    };
     RoomService.prototype.editRoom = function (room) {
         console.log("emmit room edit");
         this.roomIsUpdated.emit(room);

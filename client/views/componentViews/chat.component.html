@@ -1,0 +1,14 @@
+<div class="row">
+    <div *ngFor="let message of messages">
+        {{user.nickName}} : {{message}}
+    </div>
+    <hr>
+    <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+        <input type="text"
+               placeholder="Enter Message..."
+               [(ngModel)]="message"
+               name="message"
+               (keyup.enter)="sendMessage()" >
+
+    </form>
+</div>

@@ -70,6 +70,11 @@ let SocketHandler=(function () {
             socket.on('changedColor',function (newColor) {
                 gameManager.resolveGameAction(socket,gameManager.canvasActionCallBack,"changedColor",newColor);
             });
+
+            socket.on('sendChatMessage', function (message) {
+                gameManager.resolveGameAction(socket,gameManager.messageCallBack,"sendChatMessageToRoom",message);
+            })
+
         });
     };
 

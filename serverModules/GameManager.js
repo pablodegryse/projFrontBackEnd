@@ -22,11 +22,17 @@ let GameManager=(function () {
         room.drawer.socket.broadcast.to(room.id).emit(action,actionContent);
     };
 
+    let messageCallBack=function (room, action, actionContent) {
+        room.guessers[0].socket.broadcast.to(room.id).emit(action, actionContent);
+    };
+
+
     //public
     return{
         init:init,
         resolveGameAction:resolveGameAction,
-        canvasActionCallBack:canvasActionCallBack
+        canvasActionCallBack:canvasActionCallBack,
+        messageCallBack:messageCallBack
     };
 })();
 

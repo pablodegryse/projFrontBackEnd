@@ -23,6 +23,11 @@ import {RoomService} from "./services/room.service";
 import {CanvasComponent} from "./components/game/canvas.component";
 import {QueueComponent} from "./components/game/queue.component";
 import {GameComponent} from "./components/game/game.component";
+import {RoomComponent} from "./components/room/room.component";
+import {ChatComponent} from "./components/chat/chat.component";
+import {WordComponent} from "./components/word/word.component";
+import {RoomLobbyComponent} from "./components/room/room-lobby.component";
+import {ChatService} from "./services/chat.service";
 
 
 @NgModule({
@@ -48,9 +53,13 @@ import {GameComponent} from "./components/game/game.component";
         RankingsComponent,
         LobbyoverviewComponent,
         CreateRoomComponent,
-        RoomItemComponent
+        RoomItemComponent,
+        ChatComponent,
+        RoomComponent,
+        WordComponent,
+        RoomLobbyComponent
     ],
-    providers:[AuthService, RoomService],
+    providers:[AuthService, RoomService, ChatService],
     bootstrap:[AppComponent]
 })
 

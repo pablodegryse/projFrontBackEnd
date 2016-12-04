@@ -9,12 +9,10 @@ declare var CanvasDrawer:any;
 export class CanvasComponent implements AfterViewInit{
     drawer:any;
     globalSocket:any;
-    localsocketService:SocketService;
     @ViewChild('drawCanvas') drawCanvas;
     @ViewChild('buttonList') buttonList;
     @ViewChild('serverMessages') serverMessages;
     constructor(private socketService:SocketService){
-        this.localsocketService=socketService;
         this.globalSocket=socketService.getSocket();
     }
     ngAfterViewInit(){

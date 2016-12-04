@@ -11,14 +11,19 @@ li{
     border: 1px solid black;
     border-radius: 3px;
 }
+
+#drawCanvas{
+    border:1px solid black;
+}
+
 .black{
     background: black;
 }.red{
-    background: red;
-}.blue{
-    background: blue;
-}.green{
-    background: green;
-}.white{
-    background: white;
-}
+     background: red;
+ }.blue{
+      background: blue;
+  }.green{
+       background: green;
+   }.white{
+        background: white;
+    }
