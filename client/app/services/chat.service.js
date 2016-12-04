@@ -8,46 +8,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var message_model_1 = require("../components/chat/message.model");
 var core_1 = require("@angular/core");
-var http_1 = require("@angular/http");
-require('rxjs/Rx');
 var ChatService = (function () {
-    function ChatService(_http) {
-        this._http = _http;
+    function ChatService() {
         this.messages = [];
-        this.messageIsEdit = new core_1.EventEmitter();
     }
     ChatService.prototype.addMessage = function (message) {
-        var _this = this;
-        var body = JSON.stringify(message);
-        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
-        var token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
-        return this._http.post('http://localhost:8080/message/' + token, body, { headers: headers })
-            .map(function (response) {
-            var result = response.json();
-            var message = new message_model_1.Message(result.obj.content, result.obj.user.firstName, result.obj._id, result.obj.user._id);
-            _this.messages.push(message);
-            return message;
-        });
+        console.log("chatservice msg received: " + message);
+        this.messages.push(message);
+        console.log("array in service : " + this.messages);
     };
     ChatService.prototype.getMessages = function () {
-        var _this = this;
-        return this._http.get('http://localhost:8080/message/')
-            .map(function (response) {
-            var messages = response.json().obj;
-            var transformedMessages = [];
-            for (var _i = 0, messages_1 = messages; _i < messages_1.length; _i++) {
-                var message = messages_1[_i];
-                transformedMessages.push(new message_model_1.Message(message.content, message.user.firstName, message._id, message.user._id));
-            }
-            _this.messages = transformedMessages;
-            return transformedMessages;
-        });
+        return this.messages;
     };
     ChatService = __decorate([
         core_1.Injectable(), 
-        __metadata('design:paramtypes', [http_1.Http])
+        __metadata('design:paramtypes', [])
     ], ChatService);
     return ChatService;
 }());

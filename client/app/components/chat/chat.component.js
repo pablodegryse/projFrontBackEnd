@@ -10,68 +10,38 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require("@angular/core");
 var chat_service_1 = require("../../services/chat.service");
-var room_service_1 = require("../../services/room.service");
 var socket_service_1 = require("../../services/socket.service");
 var ChatComponent = (function () {
-    function ChatComponent(_chatService, _roomService, _socketService) {
+    function ChatComponent(_chatService, _socketService) {
         this._chatService = _chatService;
-        this._roomService = _roomService;
         this._socketService = _socketService;
-        this.messageSend = new core_1.EventEmitter();
+        this.messages = [];
     }
     ChatComponent.prototype.ngOnInit = function () {
+        var self = this;
         this.messages = [];
         this.chatSocket = this._socketService.getSocket();
         this.chatSocket.on("sendChatMessage", function (msg) {
             console.log("message received :" + msg);
             //this.messages.push(msg);
+            console.log("msg array in service: " + self._chatService.getMessages());
+            self.messages.push(msg);
         });
-        // this.user = localStorage.getItem('user')? JSON.parse(localStorage.getItem('user')): new User('','','Free User','','','');
-        // this._roomService.getRoomById(this.user.roomId)
-        //     .subscribe(data => {
-        //         this.room = data;
-        //         console.log('room id = ' + this.room.roomId);
-        //     });
-        // this._chatService.getMessages()
-        //     .subscribe(
-        //         (messages:Message[]) =>{
-        //             this.messages = messages;
-        //             }
-        //     );
     };
     ChatComponent.prototype.ngOnDestroy = function () {
     };
-    ChatComponent.prototype.onSubmit = function (form) {
-        this._socketService.getSocket();
-        // const message = new Message(form.value.content, 'Max');
-        // this._chatService.addMessage(message)
-        //     .subscribe(
-        //         data => console.log(data),
-        //         error => console.error(error)
-        //     );
-        // console.log(this.message);
-        // //this.messages.push(this.message);
-        // this._chatService.addMessage(this.message);
-        // this.messageSend.emit(this.message);
-        // this.message = '';
-        // this.messages = this._chatService.getMessages();
-        // console.log("messages : " + this.messages);
-    };
     ChatComponent.prototype.sendMessage = function () {
-        console.log("message : " + this.message);
         this.messages.push(this.message);
+        this._chatService.addMessage(this.message);
         this.chatSocket.emit("sendChatMessage", this.message);
+        this.message = '';
     };
-    __decorate([
-        core_1.Output(), 
-        __metadata('design:type', Object)
-    ], ChatComponent.prototype, "messageSend", void 0);
     ChatComponent = __decorate([
         core_1.Component({
             selector: 'pe-chat',
             templateUrl: './views/componentViews/chat.component.html'
         }), 
-        __metadata('design:paramtypes', [chat_service_1.ChatService, room_service_1.RoomService, socket_service_1.SocketService])
+        __metadata('design:paramtypes', [chat_service_1.ChatService, socket_service_1.SocketService])
     ], ChatComponent);
     return ChatComponent;
 }());

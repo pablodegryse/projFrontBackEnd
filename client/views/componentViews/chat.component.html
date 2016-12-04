@@ -3,12 +3,10 @@
         {{message}}
     </div>
     <hr>
-    <form (ngSubmit)="onSubmit(f)" #f="ngForm">
         <input type="text"
                placeholder="Enter Message..."
                [(ngModel)]="message"
                name="message"
                (keyup.enter)="sendMessage()" >
 
-    </form>
 </div>
