@@ -9,18 +9,53 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("@angular/core");
+var socket_service_1 = require("../../services/socket.service");
 var WordComponent = (function () {
-    function WordComponent() {
-        this.refreshCounter = true;
+    function WordComponent(socketService) {
+        this.socketService = socketService;
+        this.selectedIndex = 0;
+        this.canRefresh = true;
+        this.hideListForSelected = false;
+        this.globalSocket = socketService.getSocket();
+        this.setWordSocketEvent(this);
+        this.requestWordBatch();
     }
-    WordComponent.prototype.ngOnInit = function () {
+    WordComponent.prototype.setWordSocketEvent = function (component) {
+        this.globalSocket.off("deliverWordBatch");
+        this.globalSocket.on("deliverWordBatch", function (data) {
+            console.log(data);
+            component.canRefresh = data.rollStatus;
+            component.words = [];
+            for (var _i = 0, _a = data.words; _i < _a.length; _i++) {
+                var word = _a[_i];
+                component.words.push(word.word);
+            }
+        });
+        this.globalSocket.off("wordChoiceConfirmed");
+        this.globalSocket.on("wordChoiceConfirmed", function (word) {
+            component.selectedWord = word;
+            component.hideListForSelected = true;
+        });
+    };
+    WordComponent.prototype.updateSelectedIndex = function (event) {
+        this.selectedIndex = event.target.value;
+    };
+    WordComponent.prototype.requestWordBatch = function () {
+        console.log("requested words");
+        if (this.canRefresh) {
+            this.globalSocket.emit("requestWordBatch");
+        }
+    };
+    WordComponent.prototype.confirmWordChoice = function () {
+        console.log("confirmed word");
+        this.globalSocket.emit("confirmWordChoice", this.words[this.selectedIndex]);
     };
     WordComponent = __decorate([
         core_1.Component({
             selector: 'pe-word',
             templateUrl: './views/componentViews/word.component.html'
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [socket_service_1.SocketService])
     ], WordComponent);
     return WordComponent;
 }());

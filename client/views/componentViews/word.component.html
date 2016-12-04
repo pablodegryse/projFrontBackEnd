@@ -1,3 +1,12 @@
 <div class="row">
-    This is the random Word component
+    <h4>Pick a word:</h4>
+    <ul *ngIf="hideListForSelected===false">
+        <li *ngFor="let word of words;let i=index" >
+            <input type="radio" name="wordChoice" (click)="updateSelectedIndex($event)" value="{{i}}"/>
+            <p>{{i+1}}. {{word}}</p>
+        </li>
+    </ul>
+    <p *ngIf="hideListForSelected===true">Word to Draw: {{selectedWord}}</p>
+    <button *ngIf="canRefresh===true && hideListForSelected===false" type="button" (click)="requestWordBatch()">Reroll words</button>
+    <button *ngIf="hideListForSelected===false" type="button" (click)="confirmWordChoice()">Select word</button>
 </div>

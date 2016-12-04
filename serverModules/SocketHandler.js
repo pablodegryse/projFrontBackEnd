@@ -2,6 +2,7 @@ let SocketHandler=(function () {
     let qManager=require("./QueueManager");
     let rManager=require("./RoomManager");
     let gameManager=require("./GameManager");
+    let apiHandler=require("./ApiHandler");
     let io,globalNameSpace;
     let names={
         "namespaces":{
@@ -17,7 +18,7 @@ let SocketHandler=(function () {
         io=require("socket.io")(server);
         setupGlobalNamespace();
         rManager.init(globalNameSpace,names,3);
-        gameManager.init(rManager.activeRooms);
+        gameManager.init(rManager.activeRooms,apiHandler);
         qManager.init(globalNameSpace,3,rManager,names);
     };
 
@@ -76,11 +77,17 @@ let SocketHandler=(function () {
                 gameManager.resolveGameAction(socket,gameManager.canvasActionCallBack,"changedColor",newColor);
             });
 
+            socket.on('requestWordBatch',function () {
+               gameManager.serveWordBatch(socket);
+            });
+
+            socket.on('confirmWordChoice',function (word) { gameManager.confirmWord(socket,word); });
+
             socket.on('sendChatMessage', function (message) {
                 gameManager.resolveGameAction(socket,gameManager.messageCallBack,"sendChatMessage",message);
             });
 
-            socket.on('getRoomList',function () { rManager.getRoomList(socket) });
+            socket.on('getRoomList',function () { rManager.getRoomList(socket); });
 
         });
     };

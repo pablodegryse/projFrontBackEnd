@@ -2,7 +2,7 @@
     <pe-canvas [gameRole]="gameRole" ></pe-canvas>
 </div>
 
-<div class="col-md-2">
+<div class="col-md-2" *ngIf="gameRole==='drawer'">
     <pe-word></pe-word>
 </div>
 
