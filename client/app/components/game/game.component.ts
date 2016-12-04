@@ -32,11 +32,11 @@ export class GameComponent{
             this.socketService.gameEventsSet=true;
         }
         this.globalSocket.on("GameReady",function (msg) {
-            console.log("yoloo sweeeeeeeeeeeeeeg");
+            console.log("gameready called in game component");
             if(msg.content==="drawer"){
-                component.gameParentRole="drawer";
+                component.gameParentRole=msg.content;
             }else if(msg.content==="guesser"){
-                component.gameParentRole="guesser";
+                component.gameParentRole=msg.content;
             }
             component.isGameReady=true;
         });

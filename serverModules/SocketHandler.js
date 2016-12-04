@@ -77,7 +77,7 @@ let SocketHandler=(function () {
 
             socket.on('sendChatMessage', function (message) {
                 gameManager.resolveGameAction(socket,gameManager.messageCallBack,"sendChatMessageToRoom",message);
-            })
+            });
 
             socket.on('getRoomList',function () { rManager.getRoomList(socket) });
 

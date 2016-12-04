@@ -10,10 +10,12 @@ export class CanvasComponent implements AfterViewInit{
     @Input() gameRole:string;
     drawer:any;
     globalSocket:any;
+    localsocketService:SocketService;
     @ViewChild('drawCanvas') drawCanvas;
     @ViewChild('buttonList') buttonList;
     @ViewChild('serverMessages') serverMessages;
     constructor(private socketService:SocketService){
+        this.localsocketService=socketService;
         this.globalSocket=socketService.getSocket();
         console.log("canvas ctor called");
     }

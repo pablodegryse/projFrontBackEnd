@@ -1,7 +1,7 @@
 //manages the room collections : active and pending rooms
 // adding, removing , migrating users
 let RoomManager=(function () {
-    let active=[],pending=[],names,maxRoomSize;
+    let active=[],names,maxRoomSize;
     let globalNameSpace;
 
     let init=function (globalNS,nameObj,roomSize) {
@@ -105,7 +105,7 @@ let RoomManager=(function () {
     };
 
     let getRoomList=function(socket){
-        let list=[]
+        let list=[];
         for(let i=0,len=active.length;i<len;i++){
             let roomOjb={
                 "id":active[i].id,
