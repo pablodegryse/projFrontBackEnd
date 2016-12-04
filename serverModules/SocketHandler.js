@@ -44,7 +44,8 @@ let SocketHandler=(function () {
                 //only do this when the socket wasnt already in the lobby
                 if(socket.rooms[names.rooms.lobby]==null){
                     rManager.removeFromGameRoom(names.removeTypes.nav,socket);
-                }else if(socket.rooms[names.rooms.q]!=null){
+                }
+                if(socket.rooms[names.rooms.q]!=null){
                     socket.leave(names.rooms.q);
                     qManager.removeFromQueue(socket);
                 }
