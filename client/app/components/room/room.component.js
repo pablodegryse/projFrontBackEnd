@@ -12,6 +12,10 @@ var core_1 = require("@angular/core");
 var RoomComponent = (function () {
     function RoomComponent() {
     }
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', String)
+    ], RoomComponent.prototype, "gameRole", void 0);
     RoomComponent = __decorate([
         core_1.Component({
             selector: 'pe-room',

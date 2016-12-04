@@ -1,8 +1,10 @@
-import {Component} from "@angular/core";
+import {Component, Input} from "@angular/core";
 
 @Component({
     selector: 'pe-room',
     templateUrl: './views/componentViews/room.component.html'
 })
 export class
-RoomComponent {}
+RoomComponent {
+    @Input() gameRole:string;
+}
