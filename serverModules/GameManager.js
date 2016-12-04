@@ -13,6 +13,9 @@ let GameManager=(function () {
                 if(active[i].drawer.socket.id===socket.id){
                     callback(active[i],action,content);
                 }
+                else{
+                    callback(active[i], socket, action, content);
+                }
                 break;
             }
         }
@@ -22,7 +25,9 @@ let GameManager=(function () {
         room.drawer.socket.broadcast.to(room.id).emit(action,actionContent);
     };
 
-    let messageCallBack=function (room, action, actionContent) {
+    let messageCallBack=function (room, socket, action, actionContent) {
+        console.log("room: " +room.id);
+        console.log('socket: ' + socket.id);
         room.guessers[0].socket.broadcast.to(room.id).emit(action, actionContent);
     };
 

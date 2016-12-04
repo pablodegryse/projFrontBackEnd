@@ -12,8 +12,8 @@ import {SocketService} from "../../services/socket.service";
     templateUrl: './views/componentViews/chat.component.html'
 })
 export class ChatComponent implements OnInit, OnDestroy{
-    message: Message;
-    messages: Message[] =[];
+    message: string;
+    messages: string[];
     connection:any;
     user:User;
     room:Room;
@@ -29,10 +29,11 @@ export class ChatComponent implements OnInit, OnDestroy{
     }
 
     ngOnInit(){
+        this.messages =[];
         this.chatSocket = this._socketService.getSocket();
-        this.chatSocket.on("sendChatMessageToRoom", function(msg){
+        this.chatSocket.on("sendChatMessage", function(msg){
             console.log("message received :" + msg);
-            this.messages.push(msg);
+            //this.messages.push(msg);
         });
         // this.user = localStorage.getItem('user')? JSON.parse(localStorage.getItem('user')): new User('','','Free User','','','');
         // this._roomService.getRoomById(this.user.roomId)
@@ -70,6 +71,7 @@ export class ChatComponent implements OnInit, OnDestroy{
     }
     sendMessage(){
         console.log("message : " + this.message);
+        this.messages.push(this.message);
         this.chatSocket.emit("sendChatMessage", this.message);
     }
 }
