@@ -28,7 +28,12 @@ let GameManager=(function () {
     let messageCallBack=function (room, socket, action, actionContent) {
         console.log("room: " +room.id);
         console.log('socket: ' + socket.id);
-        room.guessers[0].socket.broadcast.to(room.id).emit(action, actionContent);
+        for(let i =0; i < room.guessers.length;i++){
+            if(room.guessers[i].socket.id === socket.id){
+                room.guessers[i].socket.broadcast.to(room.id).emit(action, actionContent);
+            }
+        }
+
     };
 
 
