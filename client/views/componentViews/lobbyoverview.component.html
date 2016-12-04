@@ -1,9 +1,12 @@
 <div class="row">
-    <div class="col-md-6" *ngFor="let room of rooms" >
-        <pe-room-item [room]="room" ></pe-room-item>
+    <div *ngIf="roomsAvailable===false" >
+        <h2>No rooms to show :(</h2>
     </div>
-    <hr>
-    <div class="col-md-4">
-        User Chat?
-    </div>
+    <ul class="list-group" *ngFor="let room of roomList" >
+        <li class="list-group-item">
+            <h3>Room ID: {{room.id}}</h3>
+            <p>Status: {{room.status}}</p>
+            <p>Players slots: {{room.players}}/{{room.maxPlayers}}</p>
+        </li>
+    </ul>
 </div>

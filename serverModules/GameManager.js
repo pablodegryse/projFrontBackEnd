@@ -27,6 +27,7 @@ let GameManager=(function () {
     };
 
 
+
     //public
     return{
         init:init,

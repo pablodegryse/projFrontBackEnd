@@ -1,24 +1,35 @@
-import {Component, OnInit} from '@angular/core';
-import {Room} from "../room/room.model";
-import {RoomService} from "../../services/room.service";
-
+import {Component} from '@angular/core';
+import {SocketService} from "../../services/socket.service";
 @Component({
     selector: 'pe-lobbyoverview',
     templateUrl: './views/componentViews/lobbyoverview.component.html'
 })
-export class LobbyoverviewComponent implements OnInit {
-    rooms:Room[];
+export class LobbyoverviewComponent {
+    roomList:any[];
+    roomsAvailable:boolean=false;
+    localSocket:any;
+    constructor(private socketService:SocketService) {
+        this.localSocket=socketService.getSocket();
+        socketService.requestLobbyMove();
+        this.localSocket.emit("getRoomList");
+        //check if the socket events were already set
+        this.setRoomListEvents(this);
+    }
 
-    constructor(private _roomService:RoomService) { }
-
-    ngOnInit() {
-        this._roomService.getRooms()
-            .subscribe(
-                (rooms:Room[])=>{
-                    this.rooms = rooms;
-                    console.log(this.rooms);
-                }
-            );
+    setRoomListEvents(component){
+        if(this.socketService.roomListEventsSet){
+            this.localSocket.off("roomListResult");
+        }else {
+            this.socketService.roomListEventsSet=true;
+        }
+        this.localSocket.on("roomListResult",function (result) {
+            console.log("got the room:"+result.length);
+            if(result.length>0){
+                component.roomsAvailable=true;
+                component.roomList=result;
+            }
+        });
+        component.socketService.roomListEventsSet=true;
     }
 
 }

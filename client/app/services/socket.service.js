@@ -11,6 +11,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var SocketService = (function () {
     function SocketService() {
+        this.roomListEventsSet = false;
+        this.canvasEventsSet = false;
+        this.gameEventsSet = false;
+        this.initialLobbyJoin = true;
         this.socket = io("/global");
         this.setMainEvents();
     }
@@ -29,6 +33,9 @@ var SocketService = (function () {
     //vraag aan de server om deze socket naar de lobby group te migreren
     SocketService.prototype.requestLobbyMove = function () {
         this.socket.emit("requestMoveToLobby");
+    };
+    SocketService.prototype.lobbyJoin = function () {
+        this.socket.emit("initJoinLobby");
     };
     SocketService.prototype.requestQueueMove = function () {
         this.socket.emit("requestMoveToQueue");

@@ -1,4 +1,4 @@
-import {Component, ViewChild, AfterViewInit} from '@angular/core';
+import {Component, ViewChild, AfterViewInit,Input} from '@angular/core';
 import {SocketService} from "../../services/socket.service";
 declare var CanvasDrawer:any;
 @Component({
@@ -7,6 +7,7 @@ declare var CanvasDrawer:any;
 })
 
 export class CanvasComponent implements AfterViewInit{
+    @Input() gameRole:string;
     drawer:any;
     globalSocket:any;
     @ViewChild('drawCanvas') drawCanvas;
@@ -14,24 +15,24 @@ export class CanvasComponent implements AfterViewInit{
     @ViewChild('serverMessages') serverMessages;
     constructor(private socketService:SocketService){
         this.globalSocket=socketService.getSocket();
+        console.log("canvas ctor called");
     }
     ngAfterViewInit(){
         console.log("after init fired");
         this.drawer=CanvasDrawer;
         this.drawer.init(this.drawCanvas.nativeElement,this.buttonList.nativeElement,this.globalSocket);
-        this.setCanvasEvents(this);
+        //de drawer initieliseren met deze rol
+        console.log("game role is :"+this.gameRole);
+        if(this.gameRole==="drawer"){
+            this.drawer.changeDrawPermission(true);
+        }else if(this.gameRole==="guesser"){ this.drawer.changeDrawPermission(false); }
+        if(!this.socketService.canvasEventsSet){
+            this.setCanvasEvents(this);
+            this.socketService.canvasEventsSet=true;
+        }
     }
 
     setCanvasEvents(component){
-        //de drawer initieliseren met deze rol
-        this.globalSocket.on("RoleInit",function (msg) {
-            if(msg==="drawer"){
-                component.drawer.changeDrawPermission(true);
-            }else if(msg==="guesser"){
-                component.drawer.changeDrawPermission(false);
-            }
-        });
-
         this.globalSocket.on("drawBegin",function () {
             component.drawer.setmouseDown();
             console.log("clicked mouse down");

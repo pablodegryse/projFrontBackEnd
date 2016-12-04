@@ -16,9 +16,9 @@ let SocketHandler=(function () {
     let init=function (server) {
         io=require("socket.io")(server);
         setupGlobalNamespace();
-        rManager.init(globalNameSpace,names);
+        rManager.init(globalNameSpace,names,3);
         gameManager.init(rManager.activeRooms);
-        qManager.init(globalNameSpace,4,rManager,names);
+        qManager.init(globalNameSpace,3,rManager,names);
     };
 
     //iedereen zit altijd in de globale namespace
@@ -31,20 +31,24 @@ let SocketHandler=(function () {
             socket.on('disconnect',function () {
                 console.log(socket.id+" left the global namespace");
                 rManager.removeFromGameRoom(names.removeTypes.forced,socket);
-                qManager.removeFromQueue(socket.id );
+                qManager.removeFromQueue(socket);
+            });
+
+
+            socket.on('lobbyJoin',function () {
+               socket.join(names.rooms.lobby);
             });
 
             //als er vanuit de client naar de lobby genavigeerd werd: migreer de socket
             socket.on('requestMoveToLobby',function () {
-                if(socket.rooms[names.rooms.q]!=null){
+                //only do this when the socket wasnt already in the lobby
+                if(socket.rooms[names.rooms.lobby]==null){
+                    rManager.removeFromGameRoom(names.removeTypes.nav,socket);
+                }else if(socket.rooms[names.rooms.q]!=null){
                     socket.leave(names.rooms.q);
-                    globalNameSpace.emit("info","You left the queue room");
-                    qManager.removeFromQueue(socket.id);
+                    qManager.removeFromQueue(socket);
                 }
-                rManager.removeFromGameRoom(names.removeTypes.nav,socket);
-                qManager.removeFromQueue(socket);
                 socket.join(names.rooms.lobby);
-                globalNameSpace.to("mainLobby").emit("welcome",{"content":"Someone joined the lobby group"});
             });
 
             //als er vanuit de client naar de queue genavigeerd werd: migreer de socket
@@ -74,6 +78,8 @@ let SocketHandler=(function () {
             socket.on('sendChatMessage', function (message) {
                 gameManager.resolveGameAction(socket,gameManager.messageCallBack,"sendChatMessageToRoom",message);
             })
+
+            socket.on('getRoomList',function () { rManager.getRoomList(socket) });
 
         });
     };

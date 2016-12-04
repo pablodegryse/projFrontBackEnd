@@ -1,8 +1,11 @@
 let express = require('express');
 let router = express.Router();
 let path=require("path");
+
 let ApiHandler=require("../serverModules/ApiHandler");
 let errorLogger = require('../serverModules/ErrorLogger');
+
+
 
 router.get('/client/js/*', function(req, res) {
     res.sendFile(path.join(__dirname,'.','client','js',req.url));
@@ -14,7 +17,7 @@ router.get('/client/css/*',function (req,res) {
 });
 
 router.get('/getApiData',function (req,res) {
-    ApiHandler.getData(function (err,data) {
+    ApiHandler.getWordData(function (err,data) {
         if(!err){
             res.setHeader('Content-Type', 'application/json');
             res.send(JSON.stringify(data));

@@ -9,25 +9,39 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var room_service_1 = require("../../services/room.service");
+var socket_service_1 = require("../../services/socket.service");
 var LobbyoverviewComponent = (function () {
-    function LobbyoverviewComponent(_roomService) {
-        this._roomService = _roomService;
+    function LobbyoverviewComponent(socketService) {
+        this.socketService = socketService;
+        this.roomsAvailable = false;
+        this.localSocket = socketService.getSocket();
+        socketService.requestLobbyMove();
+        this.localSocket.emit("getRoomList");
+        //check if the socket events were already set
+        this.setRoomListEvents(this);
     }
-    LobbyoverviewComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        this._roomService.getRooms()
-            .subscribe(function (rooms) {
-            _this.rooms = rooms;
-            console.log(_this.rooms);
+    LobbyoverviewComponent.prototype.setRoomListEvents = function (component) {
+        if (this.socketService.roomListEventsSet) {
+            this.localSocket.off("roomListResult");
+        }
+        else {
+            this.socketService.roomListEventsSet = true;
+        }
+        this.localSocket.on("roomListResult", function (result) {
+            console.log("got the room:" + result.length);
+            if (result.length > 0) {
+                component.roomsAvailable = true;
+                component.roomList = result;
+            }
         });
+        component.socketService.roomListEventsSet = true;
     };
     LobbyoverviewComponent = __decorate([
         core_1.Component({
             selector: 'pe-lobbyoverview',
             templateUrl: './views/componentViews/lobbyoverview.component.html'
         }), 
-        __metadata('design:paramtypes', [room_service_1.RoomService])
+        __metadata('design:paramtypes', [socket_service_1.SocketService])
     ], LobbyoverviewComponent);
     return LobbyoverviewComponent;
 }());
