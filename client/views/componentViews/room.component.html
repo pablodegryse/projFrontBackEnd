@@ -2,10 +2,10 @@
     <pe-canvas [gameRole]="gameRole" ></pe-canvas>
 </div>
 
-<div class="col-md-2" *ngIf="gameRole==='drawer'">
+<div class="col-md-2 pull-right" *ngIf="gameRole==='drawer'">
     <pe-word></pe-word>
 </div>
 
 <div class="col-md-2 pull-right">
-    <pe-chat (messageSend)="updateChat()"></pe-chat>
+    <pe-chat (messageSend)="updateChat()" [gameRole]="gameRole"></pe-chat>
 </div>

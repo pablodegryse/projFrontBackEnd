@@ -1,4 +1,4 @@
-import {Component, OnInit, OnDestroy} from "@angular/core";
+import {Component, OnInit, OnDestroy, Input} from "@angular/core";
 import {ChatService} from "../../services/chat.service";
 import {User} from "../auth/user.model";
 import {Room} from "../room/room.model";
@@ -15,8 +15,11 @@ export class ChatComponent implements OnInit, OnDestroy{
     connection:any;
     user:User;
     room:Room;
+    guess:string;
+    wordToGuess:string;
 
     chatSocket:any;
+    @Input() gameRole:string;
 
     constructor(private _chatService:ChatService,
                 private _socketService:SocketService)
@@ -33,6 +36,11 @@ export class ChatComponent implements OnInit, OnDestroy{
             console.log("msg array in service: " + self._chatService.getMessages());
             self.messages.push(msg);
         });
+        this.chatSocket.on('wordChoiceConfirmed', function(word) {
+            console.log("confirmed word :" + word);
+            self.wordToGuess = word;
+            console.log("word to guess after confirm : "+self.wordToGuess);
+        });
     }
 
 
@@ -45,5 +53,13 @@ export class ChatComponent implements OnInit, OnDestroy{
         this._chatService.addMessage(messageToSend);
         this.chatSocket.emit("sendChatMessage", messageToSend);
         this.message = '';
+    }
+    guessWord(){
+        // var self = this;
+        // console.log("chatComponent: "+this.guess);
+        // console.log("word to guess inside guessword method : " + self.wordToGuess);
+        // (this.guess==this.wordToGuess)? console.log("yay, you guessed it"): console.log("better luck next time");
+        this.chatSocket.emit("guessedWord", this.guess);
+        this.guess = '';
     }
 }

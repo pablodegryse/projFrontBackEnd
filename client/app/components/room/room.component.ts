@@ -23,6 +23,11 @@ export class RoomComponent {
         this.globalSocket.on("revealLetter",function (msg) {
             console.log("Reaveled letter:"+msg.letter);
             console.log("this is the index in the word:"+msg.letterIndex);
-        })
+        });
+        this.globalSocket.on('wordGuessed',function(data){
+            console.log("roomComponent, has guessed:" + data.hasGuessed);
+            console.log(data.socketId);
+            if(data.hasGuessed == true) alert("The word has been guessed by : " + data.socketId);
+        });
     }
 }

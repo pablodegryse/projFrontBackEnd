@@ -3,10 +3,22 @@
         <strong>{{message.username}}:</strong> {{message.content}}
     </div>
     <hr>
+    <div                *ngIf="gameRole === 'guesser'" >
         <input type="text"
                placeholder="Enter Message..."
                [(ngModel)]="message"
                name="message"
-               (keyup.enter)="sendMessage()" >
+               (keyup.enter)="sendMessage()"
+
+        >
+        <hr>
+        <input type="text"
+               placeholder="Enter guess..."
+               [(ngModel)]="guess"
+               name = "guess"
+               (keyup.enter)="guessWord()"
+        >
+    </div>
+
 
 </div>

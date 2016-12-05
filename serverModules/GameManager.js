@@ -89,6 +89,14 @@ let GameManager=(function () {
         socket.broadcast.to(room.id).emit("setupLetterBox",word.length);
     };
 
+    let checkGuessedWord = function (room, socket, action, guessedWord) {
+        console.log(guessedWord);
+        let hasGuessed = false;
+        (guessedWord == room.currentWordToDraw)? hasGuessed = true : hasGuessed = false;
+        console.log("guessedWord = " + guessedWord + ", Word to guess = " +room.currentWordToDraw);
+        socket.broadcast.to(room.id).emit("wordGuessed",{hasGuessed:hasGuessed, socketId: socket.id});
+    };
+
     //public
     return{
         init:init,
@@ -96,7 +104,8 @@ let GameManager=(function () {
         canvasActionCallBack:canvasActionCallBack,
         messageCallBack:messageCallBack,
         serveWordBatch:serveWordsToDraw,
-        confirmWord:confirmWordChoice
+        confirmWord:confirmWordChoice,
+        checkGuessedWord:checkGuessedWord
     };
 })();
 

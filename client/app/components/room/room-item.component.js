@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require("@angular/core");
 var room_model_1 = require("./room.model");
+var user_model_1 = require("../auth/user.model");
 var room_service_1 = require("../../services/room.service");
 var router_1 = require("@angular/router");
 var RoomItemComponent = (function () {
@@ -27,7 +28,8 @@ var RoomItemComponent = (function () {
         console.log("room edited");
     };
     RoomItemComponent.prototype.onJoinRoom = function (room) {
-        this.user = JSON.parse(localStorage.getItem('user'));
+        this.user = JSON.parse(localStorage.getItem('user')) ? JSON.parse(localStorage.getItem('user')) : localStorage.setItem('user', JSON.stringify(new user_model_1.User('', '', 'Free User', '', '', '')));
+        console.log("user :" + this.user);
         room.users.push(this.user);
         this._roomService.updateRoom(room)
             .subscribe(function (data) { return console.log(data); }, function (error) { return console.error(error); });

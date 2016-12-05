@@ -29,6 +29,11 @@ var ChatComponent = (function () {
             console.log("msg array in service: " + self._chatService.getMessages());
             self.messages.push(msg);
         });
+        this.chatSocket.on('wordChoiceConfirmed', function (word) {
+            console.log("confirmed word :" + word);
+            self.wordToGuess = word;
+            console.log("word to guess after confirm : " + self.wordToGuess);
+        });
     };
     ChatComponent.prototype.ngOnDestroy = function () {
     };
@@ -39,6 +44,18 @@ var ChatComponent = (function () {
         this.chatSocket.emit("sendChatMessage", messageToSend);
         this.message = '';
     };
+    ChatComponent.prototype.guessWord = function () {
+        // var self = this;
+        // console.log("chatComponent: "+this.guess);
+        // console.log("word to guess inside guessword method : " + self.wordToGuess);
+        // (this.guess==this.wordToGuess)? console.log("yay, you guessed it"): console.log("better luck next time");
+        this.chatSocket.emit("guessedWord", this.guess);
+        this.guess = '';
+    };
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', String)
+    ], ChatComponent.prototype, "gameRole", void 0);
     ChatComponent = __decorate([
         core_1.Component({
             selector: 'pe-chat',

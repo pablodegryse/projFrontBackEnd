@@ -87,6 +87,12 @@ let SocketHandler=(function () {
                 gameManager.resolveGameAction(socket,gameManager.messageCallBack,"sendChatMessage",message);
             });
 
+            socket.on('guessedWord', function(guess){
+                console.log("made it into the guessedWord socket on the server");
+                console.log("the word received is : " + guess);
+                gameManager.resolveGameAction(socket,gameManager.checkGuessedWord,"guessedWord",guess);
+            });
+
             socket.on('getRoomList',function () { rManager.getRoomList(socket); });
 
         });

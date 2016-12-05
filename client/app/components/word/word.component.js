@@ -20,6 +20,12 @@ var WordComponent = (function () {
         this.setWordSocketEvent(this);
         this.requestWordBatch();
     }
+    WordComponent.prototype.ngOnInit = function () {
+        // this.words = [];
+        // this.words.push("test");
+        // this.words.push("car");
+        // this.words.push("tree");
+    };
     WordComponent.prototype.setWordSocketEvent = function (component) {
         this.globalSocket.off("deliverWordBatch");
         this.globalSocket.on("deliverWordBatch", function (data) {

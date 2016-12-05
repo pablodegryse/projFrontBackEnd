@@ -30,7 +30,8 @@ export class RoomItemComponent implements OnInit, OnDestroy{
     }
 
     onJoinRoom(room:Room){
-        this.user = JSON.parse(localStorage.getItem('user'));
+        this.user = JSON.parse(localStorage.getItem('user'))? JSON.parse(localStorage.getItem('user')): localStorage.setItem('user',JSON.stringify(new User('','','Free User','','','')));
+        console.log("user :" + this.user);
         room.users.push(this.user);
         this._roomService.updateRoom(room)
             .subscribe(
