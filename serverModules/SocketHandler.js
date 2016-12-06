@@ -18,7 +18,7 @@ let SocketHandler=(function () {
         io=require("socket.io")(server);
         setupGlobalNamespace();
         rManager.init(globalNameSpace,names,3);
-        gameManager.init(rManager.activeRooms,apiHandler);
+        gameManager.init(rManager,apiHandler,globalNameSpace);
         qManager.init(globalNameSpace,3,rManager,names);
     };
 
@@ -88,9 +88,7 @@ let SocketHandler=(function () {
             });
 
             socket.on('guessedWord', function(guess){
-                console.log("made it into the guessedWord socket on the server");
-                console.log("the word received is : " + guess);
-                gameManager.resolveGameAction(socket,gameManager.checkGuessedWord,"guessedWord",guess);
+                gameManager.checkGuessedWord(socket,guess);
             });
 
             socket.on('getRoomList',function () { rManager.getRoomList(socket); });

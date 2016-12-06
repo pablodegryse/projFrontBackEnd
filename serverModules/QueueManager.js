@@ -78,7 +78,9 @@ let QueueManager=(function () {
             queue.splice(0,migrationBatchSize);
             let newGameRoom={
                 "id":roomName,
+                "wordsGuessed":0,
                 "currentWordToDraw":"",
+                "guessCount":0,
                 "wordRerolls":2,
                 "drawer":drawer,
                 "guessers":guessers

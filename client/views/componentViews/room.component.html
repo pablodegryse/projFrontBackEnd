@@ -1,5 +1,5 @@
 <div class="col-md-6">
-    <pe-canvas [gameRole]="gameRole" ></pe-canvas>
+    <pe-canvas [gameRole]="gameRole" (roleChanged)="handleRoleChanged($event)" ></pe-canvas>
 </div>
 
 <div class="col-md-2 pull-right" *ngIf="gameRole==='drawer'">

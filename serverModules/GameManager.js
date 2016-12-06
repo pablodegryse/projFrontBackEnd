@@ -2,9 +2,13 @@
 let GameManager=(function () {
     let active;
     let wordApi;
-    let init=function (activeRooms,apiHandler) {
-        active=activeRooms;
+    let globalNS;
+    let rManager;
+    let init=function (roomManager,apiHandler,globalNameSpace) {
+        rManager=roomManager;
+        active=roomManager.activeRooms;
         wordApi=apiHandler;
+        globalNS=globalNameSpace;
     };
 
     //de gameroom van een socket vinden die een event afvuurt
@@ -28,14 +32,11 @@ let GameManager=(function () {
     };
 
     let messageCallBack=function (room, socket, action, actionContent) {
-        console.log("room: " +room.id);
-        console.log('socket: ' + socket.id);
         for(let i =0; i < room.guessers.length;i++){
             if(room.guessers[i].socket.id === socket.id){
                 room.guessers[i].socket.broadcast.to(room.id).emit(action, actionContent);
             }
         }
-
     };
 
     //de room van een socket vinden , data moet niet altijd ingevuld zijn...
@@ -89,12 +90,80 @@ let GameManager=(function () {
         socket.broadcast.to(room.id).emit("setupLetterBox",word.length);
     };
 
-    let checkGuessedWord = function (room, socket, action, guessedWord) {
+    let checkGuessedWord = function (socket,guessedWord) {
+        findRoom(socket,wordGuessCallback,guessedWord);
+    };
+
+    //kijken of geraden woord correct is : zo nee : verhoog gewoon aantal pogingen
+    //zo ja : deel punten uit + kijk of er al 4 geraden zijn en beeindig game indien nodig
+    let wordGuessCallback=function (room,socket,guessedWord) {
         console.log(guessedWord);
-        let hasGuessed = false;
-        (guessedWord == room.currentWordToDraw)? hasGuessed = true : hasGuessed = false;
-        console.log("guessedWord = " + guessedWord + ", Word to guess = " +room.currentWordToDraw);
-        socket.broadcast.to(room.id).emit("wordGuessed",{hasGuessed:hasGuessed, socketId: socket.id});
+        let guessCorrect = false;
+        (guessedWord === room.currentWordToDraw)? guessCorrect = true : guessCorrect = false;
+        socket.broadcast.to(room.id).emit("wordGuessed",{hasGuessed:guessCorrect, socketId: socket.id});
+        room.guessCount++;
+        if(guessCorrect){
+            room.wordsGuessed++;
+            awardPoints(room,socket);
+            if(room.wordsGuessed===room.guessers.length+1){
+                concludeGame(room);
+            }else {
+                rotateDrawer(room);
+            }
+        }
+    };
+
+    let awardPoints=function (room,guesser) {
+        console.log("awarding points:::::::::::::::");
+        switch(true){
+            case (room.guessCount<3):
+                room.drawer.points+=10;
+                break;
+            case (room.guessCount<6):
+                room.drawer.points+=6;
+                break;
+            case (room.guessCount<10):
+                room.drawer.points+=3;
+                break;
+        }
+        //room.drawer.points+=5;
+        console.log("drawer points: "+room.drawer.points);
+        for(let i=0,len=room.guessers.length;i<len;i++){
+            if(room.guessers[i].socket.id===guesser.id){
+                room.guessers[i].points+=5;
+                console.log("guesser points: "+room.guessers[i].points);
+            }
+        }
+    };
+
+    //doordraaien van drawer + room vars resetten
+    let rotateDrawer=function (room) {
+        room.guessCount=0;
+        room.wordRerolls=2;
+        room.guessers.push(room.drawer);
+        room.drawer=room.guessers[0];
+        room.guessers.splice(0,1);
+        room.drawer.socket.broadcast.to(room.id).emit("roleChanged",{"content":"guesser"});
+        room.drawer.socket.emit("roleChanged",{"content":"drawer"});
+    };
+
+    let concludeGame=function (room) {
+        savePointsToDb(room.drawer,room.guessers,room.id,concludeGameCallback);
+    };
+
+    //de punten uit de drawer en guessers halen en diegenen die ingelogd zijn opslaan
+    let savePointsToDb=function (drawer,guessers,roomId,callback) {
+        let winnerName="hierinvullen";
+        callback(roomId,winnerName);
+    };
+
+    let concludeGameCallback=function (roomId,winnerName) {
+        globalNS.to(roomId).emit("gameConcluded",{"msg":"Game Ended!","winner":winnerName});
+        setTimeout(closeGameRoom,1500,roomId);
+    };
+
+    let closeGameRoom=function (roomId) {
+        rManager.removeRoom(roomId)
     };
 
     //public

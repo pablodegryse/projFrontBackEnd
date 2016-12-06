@@ -104,6 +104,18 @@ let RoomManager=(function () {
         }
     };
 
+    let removeRoom=function (roomId) {
+        for(let i=0,len=active.length;i<len;i++){
+            let currentId=active[i].id;
+            if(roomId==currentId){
+                globalNameSpace.to(currentId).emit("GameEnd",{"content":"tooFewUsers"});
+                active.splice(i);
+                console.log("GAME DOnE : everybody go home");
+                break;
+            }
+        }
+    };
+
     let getRoomList=function(socket){
         let list=[];
         for(let i=0,len=active.length;i<len;i++){
@@ -130,6 +142,7 @@ let RoomManager=(function () {
         removeHostRoom:removeHostRoom,
         activeRooms:active,
         getRoomList:getRoomList,
+        removeRoom:removeRoom
     };
 })();
 module.exports=RoomManager;

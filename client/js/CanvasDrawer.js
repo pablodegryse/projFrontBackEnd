@@ -36,6 +36,8 @@ var CanvasDrawer=(function () {
         changeDrawPermission:function(ableTo){
             canDraw=ableTo;
             console.log(canDraw);
+            ctx.beginPath();
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
         }
     };
 

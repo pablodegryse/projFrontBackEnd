@@ -13,6 +13,7 @@ var socket_service_1 = require("../../services/socket.service");
 var CanvasComponent = (function () {
     function CanvasComponent(socketService) {
         this.socketService = socketService;
+        this.roleChanged = new core_1.EventEmitter();
         this.localsocketService = socketService;
         this.globalSocket = socketService.getSocket();
         console.log("canvas ctor called");
@@ -29,12 +30,29 @@ var CanvasComponent = (function () {
         else if (this.gameRole === "guesser") {
             this.drawer.changeDrawPermission(false);
         }
-        if (!this.socketService.canvasEventsSet) {
-            this.setCanvasEvents(this);
+        if (this.socketService.canvasEventsSet) {
+            this.globalSocket.off("roleChanged");
+            this.globalSocket.off("drawBegin");
+            this.globalSocket.off("drawEnd");
+            this.globalSocket.off("drawUpdate");
+            this.globalSocket.off("changedColor");
+        }
+        else {
             this.socketService.canvasEventsSet = true;
         }
+        this.setCanvasEvents(this);
     };
     CanvasComponent.prototype.setCanvasEvents = function (component) {
+        this.globalSocket.on("roleChanged", function (role) {
+            component.gameRole = role.content;
+            component.roleChanged.emit(role.content);
+            if (role.content === "guesser") {
+                component.drawer.changeDrawPermission(false);
+            }
+            else if (role.content === "drawer") {
+                component.drawer.changeDrawPermission(true);
+            }
+        });
         this.globalSocket.on("drawBegin", function () {
             component.drawer.setmouseDown();
             console.log("clicked mouse down");
@@ -54,6 +72,10 @@ var CanvasComponent = (function () {
         core_1.Input(), 
         __metadata('design:type', String)
     ], CanvasComponent.prototype, "gameRole", void 0);
+    __decorate([
+        core_1.Output(), 
+        __metadata('design:type', core_1.EventEmitter)
+    ], CanvasComponent.prototype, "roleChanged", void 0);
     __decorate([
         core_1.ViewChild('drawCanvas'), 
         __metadata('design:type', Object)

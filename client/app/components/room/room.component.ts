@@ -13,6 +13,11 @@ export class RoomComponent {
         this.setupRoomEvents(this);
     }
 
+    handleRoleChanged(role:string){
+        this.gameRole=role;
+        console.log("OUTPUT====>"+role);
+    }
+
     setupRoomEvents(component){
         this.globalSocket.off("setupLetterBox");
         this.globalSocket.on("setupLetterBox",function (numberOfLetters) {
@@ -25,9 +30,7 @@ export class RoomComponent {
             console.log("this is the index in the word:"+msg.letterIndex);
         });
         this.globalSocket.on('wordGuessed',function(data){
-            console.log("roomComponent, has guessed:" + data.hasGuessed);
-            console.log(data.socketId);
-            if(data.hasGuessed == true) alert("The word has been guessed by : " + data.socketId);
+            if(data.hasGuessed == true) console.log("The word has been guessed by : " + data.socketId);
         });
     }
 }

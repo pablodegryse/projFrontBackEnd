@@ -26,7 +26,15 @@ export class ChatComponent implements OnInit, OnDestroy{
     {}
 
     ngOnInit(){
-        this.user = JSON.parse(localStorage.getItem('user'));
+        /*-------------------------FIX DIS PLS -----------------------------------*/
+        /*var user=localStorage.getItem('user');
+        console.log(user);
+        if(user!=null && !''){
+            this.user = JSON.parse(localStorage.getItem('user'));
+        }else {
+            this.user.nickName="Guest"
+        }*/
+        /*-------------------------FIX DIS PLS -----------------------------------*/
         var self = this;
         this.messages =[];
         this.chatSocket = this._socketService.getSocket();
