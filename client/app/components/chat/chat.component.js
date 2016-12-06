@@ -39,7 +39,6 @@ var ChatComponent = (function () {
         this.chatSocket.on('wordChoiceConfirmed', function (word) {
             console.log("confirmed word :" + word);
             self.wordToGuess = word;
-            console.log("word to guess after confirm : " + self.wordToGuess);
         });
     };
     ChatComponent.prototype.ngOnDestroy = function () {

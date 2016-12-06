@@ -126,7 +126,6 @@ let GameManager=(function () {
                 room.drawer.points+=3;
                 break;
         }
-        //room.drawer.points+=5;
         console.log("drawer points: "+room.drawer.points);
         for(let i=0,len=room.guessers.length;i<len;i++){
             if(room.guessers[i].socket.id===guesser.id){

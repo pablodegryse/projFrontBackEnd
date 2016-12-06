@@ -46,7 +46,6 @@ export class ChatComponent implements OnInit, OnDestroy{
         this.chatSocket.on('wordChoiceConfirmed', function(word) {
             console.log("confirmed word :" + word);
             self.wordToGuess = word;
-            console.log("word to guess after confirm : "+self.wordToGuess);
         });
     }
 
