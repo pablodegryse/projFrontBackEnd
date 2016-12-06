@@ -19,6 +19,7 @@ export class WordComponent implements OnInit{
     }
 
     ngOnInit(){
+        // uncomment for offline testing =====> verwijderen voor release build
         // this.words = [];
         // this.words.push("test");
         // this.words.push("car");

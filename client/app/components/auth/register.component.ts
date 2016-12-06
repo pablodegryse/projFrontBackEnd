@@ -36,7 +36,7 @@ export class RegisterComponent implements OnInit {
             .subscribe(
                 data=>{
                     localStorage.setItem('token', data.token);
-                    localStorage.setItem('user', data.user);
+                    localStorage.setItem('user', JSON.stringify(data.user));
                     this._router.navigateByUrl('/')
                 }
             )

@@ -33,7 +33,6 @@ var ChatComponent = (function () {
         this.chatSocket = this._socketService.getSocket();
         this.chatSocket.on("sendChatMessage", function (msg) {
             console.log("message received :" + msg);
-            //this.messages.push(msg);
             console.log("msg array in service: " + self._chatService.getMessages());
             self.messages.push(msg);
         });
@@ -53,10 +52,6 @@ var ChatComponent = (function () {
         this.message = '';
     };
     ChatComponent.prototype.guessWord = function () {
-        // var self = this;
-        // console.log("chatComponent: "+this.guess);
-        // console.log("word to guess inside guessword method : " + self.wordToGuess);
-        // (this.guess==this.wordToGuess)? console.log("yay, you guessed it"): console.log("better luck next time");
         this.chatSocket.emit("guessedWord", this.guess);
         this.guess = '';
     };
