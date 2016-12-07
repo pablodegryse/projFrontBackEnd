@@ -6,7 +6,8 @@ var jwt = require('jsonwebtoken');
 var User = require('../dbmodels/user');
 
 router.get('/', function (req, res, next) {
-    User.find(function (err, users) {
+    User.find()
+        .exec(function (err, users) {
         if(err){
             return res.status(500).json({
                 title:'An error occured',
@@ -14,9 +15,9 @@ router.get('/', function (req, res, next) {
             });
         }
         res.status(200).json({
-            message:'Succes',
-            obj:users
-        })
+            message: 'Success',
+            obj: users
+        });
     })
 });
 

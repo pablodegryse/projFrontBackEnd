@@ -9,9 +9,8 @@ let StaticServer=(function () {
         port=myPort;
         app=express();
 
-        mongoose.connect('localhost:27017/pictionar-e');
-
-        //mongoose.connect('mongodb://testUser:testuser@ds159387.mlab.com:59387/pictionar-e');
+        //mongoose.connect('localhost:27017/pictionar-e');
+        mongoose.connect('mongodb://testUser:testuser@ds159387.mlab.com:59387/pictionar-e');
         setupHttpServer();
         setupExpress();
         SocketHandler.init(server);
@@ -21,9 +20,9 @@ let StaticServer=(function () {
         app.use(bodyParser.json());
         app.use(bodyParser.urlencoded({extended:false}));
         app.use(express.static(path.join(__dirname,'..','client')));
-        app.use(rootRouter);
         app.use('/user', userRoutes);
         app.use('/room',roomRoutes);
+        app.use(rootRouter);
         app.use('/', appRoutes);
 
     };

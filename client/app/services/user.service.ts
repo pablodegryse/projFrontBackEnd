@@ -11,14 +11,14 @@ export class UserService {
     constructor(private _http: Http) {}
 
     getUsers(){
-        this.users =[];
+        //this.users =[];
         return this._http.get('http://localhost:8080/user')
-            .map((response:Response)=>{
-                console.log("response inside getUsers() : " + response);
-                const usersReceived = response.json().obj;
-                console.log("users inside getUsers(): " + usersReceived);
-                for(let user of usersReceived){
-                    this.users.push(new User(
+            .map((response:Response)=> {
+                console.log(response);
+                const users = response.json().obj;
+                let transformedUsers: User[] = [];
+                for (let user of users) {
+                    transformedUsers.push(new User(
                         user.email,
                         user.password,
                         user.nickName,
@@ -27,9 +27,10 @@ export class UserService {
                         user.points
                     ));
                 }
-                return this.users;
+                this.users = transformedUsers;
+                return transformedUsers;
             })
-    }
+    };
 
     getUserById(id: string){
         return this._http.get('http://localhost:8080/user/' +id)

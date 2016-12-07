@@ -15,7 +15,13 @@ export class RankingsComponent implements OnInit{
 
     ngOnInit(){
         //this.users = this._userService.getUsers();
-        this._userService.getUsers().subscribe(data => console.log(JSON.stringify(data)));
+        this._userService.getUsers()
+            .subscribe(
+                (users:User[])=>{
+                    this.users = users;
+                    console.log(this.users);
+                }
+            );
     }
 
 }
