@@ -20,7 +20,7 @@
                 <li class="dropdown" rbDropdown>
                     <a class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">Account <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a >Manage</a></li>
+                        <li routerLinkActive="active"><a [routerLink]="['/user']" >Manage</a></li>
                         <li><a >Friends</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a (click)="onLogOut()" >Log Out</a></li>

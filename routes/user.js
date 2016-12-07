@@ -5,6 +5,21 @@ var jwt = require('jsonwebtoken');
 
 var User = require('../dbmodels/user');
 
+router.get('/', function (req, res, next) {
+    User.find(function (err, users) {
+        if(err){
+            return res.status(500).json({
+                title:'An error occured',
+                error: err
+            });
+        }
+        res.status(200).json({
+            message:'Succes',
+            obj:users
+        })
+    })
+});
+
 router.get('/:id',function(req,res,next){
     User.findById(req.params.id, function (err, user) {
         if(err) {
@@ -28,7 +43,8 @@ router.post('/', function (req, res, next) {
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         password: bcrypt.hashSync(req.body.password, 10),
-        email: req.body.email
+        email: req.body.email,
+        points: "0"
     });
     user.save(function(err, result) {
         if (err) {

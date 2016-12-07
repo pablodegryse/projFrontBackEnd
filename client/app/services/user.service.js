@@ -13,31 +13,28 @@ var http_1 = require("@angular/http");
 require('rxjs/Rx');
 require('rxjs/add/operator/map');
 var user_model_1 = require("../components/auth/user.model");
-var AuthService = (function () {
-    function AuthService(_http) {
+var UserService = (function () {
+    function UserService(_http) {
         this._http = _http;
     }
-    AuthService.prototype.register = function (user) {
-        console.log("inside authservice" + user);
-        var body = JSON.stringify(user);
-        console.log("user received: " + body);
-        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
-        return this._http.post('http://localhost:8080/user', body, { headers: headers })
-            .map(function (response) { return response.json(); });
+    UserService.prototype.getUsers = function () {
+        var _this = this;
+        this.users = [];
+        return this._http.get('http://localhost:8080/user')
+            .map(function (response) {
+            console.log("response inside getUsers() : " + response);
+            //const usersReceived = response.json().obj;
+            //console.log("users inside getUsers(): " + usersReceived);
+            console.log(response.json().obj);
+            for (var _i = 0, _a = _this.users; _i < _a.length; _i++) {
+                var user = _a[_i];
+                console.log(user);
+                _this.users.push(new user_model_1.User(user.email, user.password, user.nickName, user.firstName, user.lastName, user.points));
+            }
+            return _this.users;
+        });
     };
-    AuthService.prototype.signin = function (user) {
-        var body = JSON.stringify(user);
-        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
-        return this._http.post('http://localhost:8080/user/signin', body, { headers: headers })
-            .map(function (response) { return response.json(); });
-    };
-    AuthService.prototype.logout = function () {
-        localStorage.clear();
-    };
-    AuthService.prototype.isLoggedIn = function () {
-        return localStorage.getItem('token') !== null;
-    };
-    AuthService.prototype.getUserById = function (id) {
+    UserService.prototype.getUserById = function (id) {
         return this._http.get('http://localhost:8080/user/' + id)
             .map(function (response) {
             var result = response.json();
@@ -45,11 +42,11 @@ var AuthService = (function () {
             return user;
         });
     };
-    AuthService = __decorate([
+    UserService = __decorate([
         core_1.Injectable(), 
         __metadata('design:paramtypes', [http_1.Http])
-    ], AuthService);
-    return AuthService;
+    ], UserService);
+    return UserService;
 }());
-exports.AuthService = AuthService;
-//# sourceMappingURL=auth.service.js.map
+exports.UserService = UserService;
+//# sourceMappingURL=user.service.js.map

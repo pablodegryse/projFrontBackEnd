@@ -28,6 +28,8 @@ import {ChatComponent} from "./components/chat/chat.component";
 import {WordComponent} from "./components/word/word.component";
 import {RoomLobbyComponent} from "./components/room/room-lobby.component";
 import {ChatService} from "./services/chat.service";
+import {UserProfileComponent} from "./components/user/user-profile.component";
+import {UserService} from "./services/user.service";
 
 
 @NgModule({
@@ -57,9 +59,10 @@ import {ChatService} from "./services/chat.service";
         ChatComponent,
         RoomComponent,
         WordComponent,
-        RoomLobbyComponent
+        RoomLobbyComponent,
+        UserProfileComponent
     ],
-    providers:[AuthService, RoomService, ChatService],
+    providers:[AuthService, RoomService, ChatService, UserService],
     bootstrap:[AppComponent]
 })
 

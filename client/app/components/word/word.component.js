@@ -17,15 +17,15 @@ var WordComponent = (function () {
         this.canRefresh = true;
         this.hideListForSelected = false;
         this.globalSocket = socketService.getSocket();
-        this.setWordSocketEvent(this);
-        this.requestWordBatch();
+        // this.setWordSocketEvent(this);
+        // this.requestWordBatch();
     }
     WordComponent.prototype.ngOnInit = function () {
         // uncomment for offline testing =====> verwijderen voor release build
-        // this.words = [];
-        // this.words.push("test");
-        // this.words.push("car");
-        // this.words.push("tree");
+        this.words = [];
+        this.words.push("test");
+        this.words.push("car");
+        this.words.push("tree");
     };
     WordComponent.prototype.setWordSocketEvent = function (component) {
         this.globalSocket.off("deliverWordBatch");

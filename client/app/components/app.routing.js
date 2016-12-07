@@ -7,6 +7,7 @@ var lobbyoverview_component_1 = require("./lobby/lobbyoverview.component");
 var create_room_component_1 = require("./room/create-room.component");
 var game_component_1 = require("./game/game.component");
 var room_component_1 = require("./room/room.component");
+var user_profile_component_1 = require("./user/user-profile.component");
 var APP_ROUTES = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
     { path: 'home', component: home_component_1.HomeComponent },
@@ -15,7 +16,8 @@ var APP_ROUTES = [
     { path: 'room', component: room_component_1.RoomComponent },
     { path: 'quickjoin', component: game_component_1.GameComponent },
     { path: 'auth', component: authentication_component_1.AuthenticationComponent },
-    { path: 'rankings', component: rankings_component_1.RankingsComponent }
+    { path: 'rankings', component: rankings_component_1.RankingsComponent },
+    { path: 'user', component: user_profile_component_1.UserProfileComponent }
 ];
 exports.routing = router_1.RouterModule.forRoot(APP_ROUTES);
 //# sourceMappingURL=app.routing.js.map

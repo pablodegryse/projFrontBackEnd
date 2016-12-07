@@ -36,6 +36,8 @@ var chat_component_1 = require("./components/chat/chat.component");
 var word_component_1 = require("./components/word/word.component");
 var room_lobby_component_1 = require("./components/room/room-lobby.component");
 var chat_service_1 = require("./services/chat.service");
+var user_profile_component_1 = require("./components/user/user-profile.component");
+var user_service_1 = require("./services/user.service");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -67,9 +69,10 @@ var AppModule = (function () {
                 chat_component_1.ChatComponent,
                 room_component_1.RoomComponent,
                 word_component_1.WordComponent,
-                room_lobby_component_1.RoomLobbyComponent
+                room_lobby_component_1.RoomLobbyComponent,
+                user_profile_component_1.UserProfileComponent
             ],
-            providers: [auth_service_1.AuthService, room_service_1.RoomService, chat_service_1.ChatService],
+            providers: [auth_service_1.AuthService, room_service_1.RoomService, chat_service_1.ChatService, user_service_1.UserService],
             bootstrap: [app_component_1.AppComponent]
         }), 
         __metadata('design:paramtypes', [])

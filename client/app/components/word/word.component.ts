@@ -14,16 +14,16 @@ export class WordComponent implements OnInit{
     globalSocket:any;
     constructor(private socketService:SocketService){
         this.globalSocket=socketService.getSocket();
-        this.setWordSocketEvent(this);
-        this.requestWordBatch();
+        // this.setWordSocketEvent(this);
+        // this.requestWordBatch();
     }
 
     ngOnInit(){
         // uncomment for offline testing =====> verwijderen voor release build
-        // this.words = [];
-        // this.words.push("test");
-        // this.words.push("car");
-        // this.words.push("tree");
+        this.words = [];
+        this.words.push("test");
+        this.words.push("car");
+        this.words.push("tree");
     }
 
     setWordSocketEvent(component){

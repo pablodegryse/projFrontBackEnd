@@ -9,23 +9,20 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("@angular/core");
-var user_service_1 = require("../../services/user.service");
-var RankingsComponent = (function () {
-    function RankingsComponent(_userService) {
-        this._userService = _userService;
+var UserProfileComponent = (function () {
+    function UserProfileComponent() {
     }
-    RankingsComponent.prototype.ngOnInit = function () {
-        //this.users = this._userService.getUsers();
-        this._userService.getUsers().subscribe(function (data) { return console.log(JSON.stringify(data)); });
+    UserProfileComponent.prototype.ngOnInit = function () {
+        this.user = JSON.parse(localStorage.getItem('user'));
     };
-    RankingsComponent = __decorate([
+    UserProfileComponent = __decorate([
         core_1.Component({
-            selector: 'pe-rankings',
-            templateUrl: './views/componentViews/rankings.component.html'
+            selector: 'pe-user-profile',
+            templateUrl: './views/componentViews/user-profile.component.html'
         }), 
-        __metadata('design:paramtypes', [user_service_1.UserService])
-    ], RankingsComponent);
-    return RankingsComponent;
+        __metadata('design:paramtypes', [])
+    ], UserProfileComponent);
+    return UserProfileComponent;
 }());
-exports.RankingsComponent = RankingsComponent;
-//# sourceMappingURL=rankings.component.js.map
+exports.UserProfileComponent = UserProfileComponent;
+//# sourceMappingURL=user-profile.component.js.map
