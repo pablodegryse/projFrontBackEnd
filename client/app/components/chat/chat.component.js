@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require("@angular/core");
 var chat_service_1 = require("../../services/chat.service");
+var user_model_1 = require("../auth/user.model");
 var socket_service_1 = require("../../services/socket.service");
 var message_model_1 = require("./message.model");
 var ChatComponent = (function () {
@@ -19,15 +20,14 @@ var ChatComponent = (function () {
         this.messages = [];
     }
     ChatComponent.prototype.ngOnInit = function () {
-        /*-------------------------FIX DIS PLS -----------------------------------*/
-        /*var user=localStorage.getItem('user');
+        var user = localStorage.getItem('user');
         console.log(user);
-        if(user!=null && !''){
+        if (user != null && !'') {
             this.user = JSON.parse(localStorage.getItem('user'));
-        }else {
-            this.user.nickName="Guest"
-        }*/
-        /*-------------------------FIX DIS PLS -----------------------------------*/
+        }
+        else {
+            this.user = new user_model_1.User('', '', 'Guest');
+        }
         var self = this;
         this.messages = [];
         this.chatSocket = this._socketService.getSocket();

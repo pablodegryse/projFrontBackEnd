@@ -23,12 +23,10 @@ var UserService = (function () {
         return this._http.get('http://localhost:8080/user')
             .map(function (response) {
             console.log("response inside getUsers() : " + response);
-            //const usersReceived = response.json().obj;
-            //console.log("users inside getUsers(): " + usersReceived);
-            console.log(response.json().obj);
-            for (var _i = 0, _a = _this.users; _i < _a.length; _i++) {
-                var user = _a[_i];
-                console.log(user);
+            var usersReceived = response.json().obj;
+            console.log("users inside getUsers(): " + usersReceived);
+            for (var _i = 0, usersReceived_1 = usersReceived; _i < usersReceived_1.length; _i++) {
+                var user = usersReceived_1[_i];
                 _this.users.push(new user_model_1.User(user.email, user.password, user.nickName, user.firstName, user.lastName, user.points));
             }
             return _this.users;
