@@ -15,8 +15,13 @@ var RankingsComponent = (function () {
         this._userService = _userService;
     }
     RankingsComponent.prototype.ngOnInit = function () {
+        var _this = this;
         //this.users = this._userService.getUsers();
-        this._userService.getUsers().subscribe(function (data) { return console.log(JSON.stringify(data)); });
+        this._userService.getUsers()
+            .subscribe(function (users) {
+            _this.users = users;
+            console.log(_this.users);
+        });
     };
     RankingsComponent = __decorate([
         core_1.Component({
