@@ -9,9 +9,9 @@ let StaticServer=(function () {
         port=myPort;
         app=express();
 
-        mongoose.connect('localhost:27017/pictionar-e');
+        //mongoose.connect('localhost:27017/pictionar-e');
 
-        //mongoose.connect('mongodb://testUser:testuser@ds159387.mlab.com:59387/pictionar-e');
+        mongoose.connect('mongodb://testUser:testuser@ds159387.mlab.com:59387/pictionar-e');
         setupHttpServer();
         setupExpress();
         SocketHandler.init(server);
