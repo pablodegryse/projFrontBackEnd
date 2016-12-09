@@ -86,8 +86,10 @@ let GameManager=(function () {
     //het woord bevestigen aan de drawer + laten weten aan de guessers + aantal letters meesturen
     let wordConfirmCallback=function (room,socket,word) {
         room.currentWordToDraw=word;
+        room.wordLetterBox=Array.from(word);
+        room.checkWordBox=Array.from(word);
         socket.emit("wordChoiceConfirmed",word);
-        socket.broadcast.to(room.id).emit("setupLetterBox",word.length);
+        globalNS.to(room.id).emit("setupLetterBox",word.length);
     };
 
     let checkGuessedWord = function (socket,guessedWord) {
@@ -95,12 +97,13 @@ let GameManager=(function () {
     };
 
     //kijken of geraden woord correct is : zo nee : verhoog gewoon aantal pogingen
-    //zo ja : deel punten uit + kijk of er al 4 geraden zijn en beeindig game indien nodig
+    //zo ja : deel punten uit + kijk of er al genoeg geraden zijn en beeindig game indien nodig
     let wordGuessCallback=function (room,socket,guessedWord) {
         console.log(guessedWord);
         let guessCorrect = false;
         (guessedWord === room.currentWordToDraw)? guessCorrect = true : guessCorrect = false;
-        socket.broadcast.to(room.id).emit("wordGuessed",{hasGuessed:guessCorrect, socketId: socket.id});
+        socket.to(room.id).emit("wordGuessed",{hasGuessed:guessCorrect, socketId: socket.id});
+        socket.emit("wordGuessed",{hasGuessed:guessCorrect,isme:true});
         room.guessCount++;
         if(guessCorrect){
             room.wordsGuessed++;
@@ -108,21 +111,24 @@ let GameManager=(function () {
             if(room.wordsGuessed===room.guessers.length+1){
                 concludeGame(room);
             }else {
-                rotateDrawer(room);
+                setTimeout(rotateDrawer,2000,room);
             }
+        }else {
+            checkToRevealLetter(room,revealLetterCallback);
         }
     };
 
+    //point distrubution according to amount of guesses compared to number of guessers in the room
     let awardPoints=function (room,guesser) {
         console.log("awarding points:::::::::::::::");
         switch(true){
-            case (room.guessCount<3):
+            case (room.guessCount<(room.guessers.length)):
                 room.drawer.points+=10;
                 break;
-            case (room.guessCount<6):
+            case (room.guessCount<(room.guessers.length)*2):
                 room.drawer.points+=6;
                 break;
-            case (room.guessCount<10):
+            case (room.guessCount<(room.guessers.length)*3):
                 room.drawer.points+=3;
                 break;
         }
@@ -133,6 +139,27 @@ let GameManager=(function () {
                 console.log("guesser points: "+room.guessers[i].points);
             }
         }
+    };
+    //check if everyone had a guess this round , if so : reveal a letter
+    let checkToRevealLetter=function (room,callback) {
+        console.log("checking to reveal a letter....");
+        if(room.guessCount%room.guessers.length===0){
+            if(room.wordLetterBox.length>0){
+                callback(room);
+            }
+        }
+    };
+
+    let revealLetterCallback=function (room) {
+        let letterBox=room.wordLetterBox;
+        let randomIndex=Math.floor(Math.random()*letterBox.length);
+        let randomLetter=letterBox[randomIndex];
+        let wordLetterIndex=room.checkWordBox.indexOf(randomLetter);
+        //we have to do this because of words with recurring letters ...
+        room.checkWordBox[wordLetterIndex]='$';
+        room.wordLetterBox.splice(randomIndex,1);
+        globalNS.to(room.id).emit("revealLetter",{letter:randomLetter,letterIndex:wordLetterIndex});
+        console.log("revealing letter:"+randomLetter+" - "+"at index  in letterbox:"+randomIndex+" - at index in word:"+wordLetterIndex);
     };
 
     //doordraaien van drawer + room vars resetten

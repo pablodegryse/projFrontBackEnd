@@ -13,27 +13,58 @@ var socket_service_1 = require("../../services/socket.service");
 var RoomComponent = (function () {
     function RoomComponent(socketService) {
         this.socketService = socketService;
+        this.gameMessageClass = "gameMessageInvisible";
+        this.showLetterBox = false;
         this.globalSocket = socketService.getSocket();
         this.setupRoomEvents(this);
     }
     RoomComponent.prototype.handleRoleChanged = function (role) {
         this.gameRole = role;
-        console.log("OUTPUT====>" + role);
+        this.showHideGameMessage(false, null);
     };
     RoomComponent.prototype.setupRoomEvents = function (component) {
         this.globalSocket.off("setupLetterBox");
         this.globalSocket.on("setupLetterBox", function (numberOfLetters) {
-            console.log("number of letter is word to guess:" + numberOfLetters);
+            console.log("number of letter in word to guess:" + numberOfLetters);
+            component.addLetters(numberOfLetters);
         });
         this.globalSocket.off("revealLetter");
         this.globalSocket.on("revealLetter", function (msg) {
             console.log("Reaveled letter:" + msg.letter);
             console.log("this is the index in the word:" + msg.letterIndex);
+            component.showLetter(msg.letter, msg.letterIndex);
         });
         this.globalSocket.on('wordGuessed', function (data) {
-            if (data.hasGuessed == true)
-                console.log("The word has been guessed by : " + data.socketId);
+            if (data.hasGuessed === true) {
+                if (data.isme === true) {
+                    component.showHideGameMessage(true, "Good job, you guesses the word!");
+                }
+                else {
+                    component.showHideGameMessage(true, "The word has been guessed by : " + data.socketId);
+                }
+            }
+            else {
+            }
         });
+    };
+    RoomComponent.prototype.showHideGameMessage = function (isVisible, message) {
+        if (isVisible) {
+            this.gameMessage = message;
+            this.gameMessageClass = "gameMessageVisible";
+        }
+        else {
+            this.gameMessageClass = "gameMessageInvisible";
+        }
+    };
+    RoomComponent.prototype.addLetters = function (boxSize) {
+        this.wordLetters = [];
+        for (var i = 0; i < boxSize; i++) {
+            this.wordLetters.push("_");
+        }
+        this.showLetterBox = true;
+    };
+    RoomComponent.prototype.showLetter = function (letter, index) {
+        this.wordLetters[index] = letter;
     };
     __decorate([
         core_1.Input(), 

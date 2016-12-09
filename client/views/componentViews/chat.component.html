@@ -1,9 +1,8 @@
-<div class="row">
+<div>
     <div *ngFor="let message of messages">
         <strong>{{message.username}}:</strong> {{message.content}}
     </div>
-    <hr>
-    <div                *ngIf="gameRole === 'guesser'" >
+    <div *ngIf="gameRole === 'guesser'" >
         <input type="text"
                placeholder="Enter Message..."
                [(ngModel)]="message"
@@ -11,7 +10,6 @@
                (keyup.enter)="sendMessage()"
 
         >
-        <hr>
         <input type="text"
                placeholder="Enter guess..."
                [(ngModel)]="guess"
@@ -19,6 +17,4 @@
                (keyup.enter)="guessWord()"
         >
     </div>
-
-
 </div>

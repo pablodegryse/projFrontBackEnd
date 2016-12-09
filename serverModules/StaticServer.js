@@ -24,7 +24,6 @@ let StaticServer=(function () {
         app.use('/room',roomRoutes);
         app.use(rootRouter);
         app.use('/', appRoutes);
-
     };
     let setupHttpServer=function () {
         server=require("http").Server(app);

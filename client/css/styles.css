@@ -1,11 +1,3 @@
-h1{
-    color: darkblue;
-}
-
-li{
-    list-style-type: none;
-}
-
 .canvasColor{
     height: 10px;
     border: 1px solid black;
@@ -13,17 +5,194 @@ li{
 }
 
 #drawCanvas{
+    border-radius: 2px;
     border:1px solid black;
 }
 
 .black{
     background: black;
-}.red{
-     background: red;
- }.blue{
-      background: blue;
-  }.green{
-       background: green;
-   }.white{
-        background: white;
-    }
+}
+.red{
+    background: red;
+}
+.blue{
+    background: blue;
+}
+.green{
+    background: green;
+}
+.white{
+    background: white;
+}
+
+.gameMessageVisible{
+    opacity: 1.0;
+    position: fixed;
+    width: 40%;
+    text-align: center;
+    top: 34%;
+    left: 50%;
+    padding: 20px;
+    transform: translate(-50%, 0);
+    transition: opacity 1s;
+    border: solid black 1px;
+    border-radius: 2px;
+}
+
+.gameMessageInvisible{
+    opacity: 0.0;
+    transition: opacity 0.8s;
+    position: fixed;
+    width: 40%;
+    text-align: center;
+    top: 34%;
+    left: 50%;
+    padding: 20px;
+    transform: translate(-50%, 0);
+    border: solid black 1px;
+    border-radius: 2px;
+}
+
+.letterboxWrapper{
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.letterBox{
+    border: solid black 1px;
+    border-bottom: 0;
+    border-radius: 2px 2px 0 0;
+}
+
+.letterList{
+    margin: 0 4px 0 4px;
+    padding: 0;
+    list-style: none;
+    display:flex;
+    flex-flow: row;
+}
+
+.letterList li{
+    width:28px;
+    border-right: 1px gray solid;
+}
+
+.letterList li:last-of-type{
+    width:28px;
+    border-right: 0;
+}
+
+.letter{
+    text-align: center;
+    width: 100%;
+    font-size: 24px;
+    margin: 0
+}
+
+/*----------------------------------------BOOTSTRAP CUSTOMIZATION------------------------------------------------*/
+/*
+.color-primary-0 { color: #7B46C1 }
+.color-primary-1 { color: #D5D0DC }
+.color-primary-2 { color: #A482D1 }
+.color-primary-3 { color: #5F11C8 }
+.color-primary-4 { color: #47049F }
+
+ */
+
+/*----NAV----*/
+.navbar{
+    background-color: #7B46C1;
+    border-radius: 0;
+}
+
+.navbar a{
+    color: white;
+}
+.navbar-nav>li>a:hover,.navbar-nav>li>a:focus,.dropdown-menu,.nav .open>#myToggle{
+    background-color: #A482D1;
+}
+.dropdown-menu>li>a:hover{
+    background-color: #D5D0DC;
+}
+.open>.dropdown-menu>li>a{
+    color: white;
+}
+.open>.dropdown-menu>.active>a{
+    background-color: #D5D0DC;
+    color: black;
+}
+
+/*----NAV----*/
+
+/*----BUTTONS----*/
+.btn{
+    color: white;
+    border-radius: 2px;
+}
+.btn-pictionare{
+    background-color: #5F11C8;
+}
+.btn-pictionare:hover{
+    color: white;
+    background-color: #47049F;
+}
+/*----BUTTONS----*/
+
+/*----HOME & GAME----*/
+.centreTitle{
+    margin-top: 5%;
+    text-align: center;
+    color: #47049F;
+}
+.centreSubtitle{
+    font-size: 1.5em;
+    text-align: center;
+    margin-bottom: 1.5em;
+}
+
+.centreContentContainerRow{
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+}
+.centreContentContainerColumn{
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+}
+.decorationContainer{
+    position: fixed;
+    bottom: 0;
+    right: 0;
+}
+
+/*----HOME & GAME----*/
+
+/*---QUEUE en LOADER---*/
+.loaderWrapper{
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+    margin: 0 auto;
+}
+
+.loader {
+    width: 100%;
+    height: 100%;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #47049F;
+    border-bottom: 4px solid #47049F;
+    border-radius: 50%;
+    animation: spin 1s ease-out infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/*---QUEUE en LOADER---*/

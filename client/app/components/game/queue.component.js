@@ -16,7 +16,7 @@ var QueueComponent = (function () {
     QueueComponent = __decorate([
         core_1.Component({
             selector: "pe-queue",
-            template: "<div>\n                <p>{{message}}</p>\n              </div>"
+            template: "<div class=\"centreContentContainerColumn\">\n                <div class=\"loaderWrapper\">\n                      <div class=\"loader\"></div>          \n                </div>\n                <h2 class=\"centreSubtitle\">{{message}}</h2>\n              </div>"
         }), 
         __metadata('design:paramtypes', [])
     ], QueueComponent);

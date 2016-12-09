@@ -80,6 +80,8 @@ let QueueManager=(function () {
                 "id":roomName,
                 "wordsGuessed":0,
                 "currentWordToDraw":"",
+                "wordLetterBox":[],
+                "checkWordBox":[],
                 "guessCount":0,
                 "wordRerolls":2,
                 "drawer":drawer,

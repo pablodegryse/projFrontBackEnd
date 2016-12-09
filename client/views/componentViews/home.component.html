@@ -1,10 +1,9 @@
 <div class="vertical-center">
-    <div class="homemenu">
-        <i class="fa fa-pencil fa-6" aria-hidden="true"></i><p class="logo" style="size: 20px">PICTIONAR-E</p> <i class="fa fa-pencil fa-5" aria-hidden="true"></i>
-    </div>
-    <div class="row">
-        <button class="btn btn-primary" [routerLink]="['/auth']" *ngIf="!isLoggedIn()" >Sign In</button>
-        <hr>
-        <button class="btn btn-primary" [routerLink]="['/quickjoin']">Play Now</button>
+    <h1 class="centreTitle" >Unleash your inner artist</h1>
+    <h2 class="centreSubtitle">Play with friends and get creative or just have fun with fellow Pictioneers.</h2>
+    <div class="centreContentContainerRow" >
+        <button class="btn btn-pictionare" [routerLink]="['/auth']" *ngIf="!isLoggedIn()" >Sign In</button>
+        <p *ngIf="!isLoggedIn()">or</p>
+        <button class="btn btn-pictionare" [routerLink]="['/quickjoin']">Play Now</button>
     </div>
 </div>

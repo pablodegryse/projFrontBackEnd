@@ -1,11 +1,25 @@
-<div class="col-md-6">
+<div>
     <pe-canvas [gameRole]="gameRole" (roleChanged)="handleRoleChanged($event)" ></pe-canvas>
 </div>
-
-<div class="col-md-2 pull-right" *ngIf="gameRole==='drawer'">
+<div *ngIf="gameRole==='drawer'">
     <pe-word></pe-word>
 </div>
 
-<div class="col-md-2 pull-right">
+<div>
     <pe-chat (messageSend)="updateChat()" [gameRole]="gameRole"></pe-chat>
+</div>
+
+<div class="{{gameMessageClass}}">
+    <button class="closeButton" (click)="showHideGameMessage(false)" >x</button>
+    <p>{{gameMessage}}</p>
+</div>
+
+<div class="letterboxWrapper">
+    <div class="letterBox" *ngIf="showLetterBox===true">
+        <ul class="letterList">
+            <li *ngFor="let letter of wordLetters">
+                <p class="letter">{{letter}}</p>
+            </li>
+        </ul>
+    </div>
 </div>
