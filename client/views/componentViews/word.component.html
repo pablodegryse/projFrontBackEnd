@@ -1,12 +1,12 @@
-<div class="row">
-    <h4>Pick a word:</h4>
-    <ul *ngIf="hideListForSelected===false" >
-        <li *ngFor="let word of words;let i=index" >
-            <input id="{{i}}" type="radio" name="wordChoice" (click)="updateSelectedIndex($event)" value="{{i}}"/>
-            <label for="{{i}}">{{i+1}}. {{word}}</label>
-        </li>
-    </ul>
-    <p *ngIf="hideListForSelected===true">Word to Draw: {{selectedWord}}</p>
-    <button *ngIf="canRefresh===true && hideListForSelected===false" type="button" (click)="requestWordBatch()">Reroll words</button>
-    <button *ngIf="hideListForSelected===false" type="button" (click)="confirmWordChoice()">Select word</button>
+<h4>Pick a word</h4>
+<ul *ngIf="hideListForSelected===false" >
+    <li *ngFor="let word of words;let i=index" >
+        <input id="{{i}}" type="radio" name="wordChoice" (click)="updateSelectedIndex($event)" value="{{i}}"/>
+        <label for="{{i}}">{{i+1}}. {{word}}</label>
+    </li>
+</ul>
+<p *ngIf="hideListForSelected===true">{{selectedWord}}</p>
+<div>
+<button class="btn btn-pictionare" *ngIf="canRefresh===true && hideListForSelected===false" type="button" (click)="requestWordBatch()">Reroll words</button>
+<button class="btn btn-pictionare" *ngIf="hideListForSelected===false" type="button" (click)="confirmWordChoice()">Select word</button>
 </div>

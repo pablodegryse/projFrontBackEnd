@@ -1,19 +1,13 @@
-<div>
+<div class="roomContainer">
     <pe-canvas [gameRole]="gameRole" (roleChanged)="handleRoleChanged($event)" ></pe-canvas>
-</div>
-<div *ngIf="gameRole==='drawer'">
-    <pe-word></pe-word>
-</div>
-
-<div>
+    <div class="interactionContainer">
+    <pe-word *ngIf="gameRole==='drawer'"></pe-word>
     <pe-chat (messageSend)="updateChat()" [gameRole]="gameRole"></pe-chat>
-</div>
-
+    </div>
 <div class="{{gameMessageClass}}">
-    <button class="closeButton" (click)="showHideGameMessage(false)" >x</button>
+    <button class="btn btn-pictionare" (click)="showHideGameMessage(false)" >x</button>
     <p>{{gameMessage}}</p>
 </div>
-
 <div class="letterboxWrapper">
     <div class="letterBox" *ngIf="showLetterBox===true">
         <ul class="letterList">
@@ -22,4 +16,5 @@
             </li>
         </ul>
     </div>
+</div>
 </div>

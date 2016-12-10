@@ -1,15 +1,16 @@
-import {Component, OnInit, OnDestroy, Input} from "@angular/core";
+import {Component, OnInit, Input} from "@angular/core";
 import {ChatService} from "../../services/chat.service";
 import {User} from "../auth/user.model";
 import {Room} from "../room/room.model";
 import {SocketService} from "../../services/socket.service";
 import {Message} from "./message.model";
+import {UserService} from "../../services/user.service";
 
 @Component({
     selector: 'pe-chat',
     templateUrl: './views/componentViews/chat.component.html'
 })
-export class ChatComponent implements OnInit, OnDestroy{
+export class ChatComponent implements OnInit{
     message: string;
     messages: any = [];
     connection:any;
@@ -22,12 +23,12 @@ export class ChatComponent implements OnInit, OnDestroy{
     @Input() gameRole:string;
 
     constructor(private _chatService:ChatService,
-                private _socketService:SocketService)
+                private _socketService:SocketService,
+                private _userService:UserService)
     {}
 
     ngOnInit(){
         var user=localStorage.getItem('user');
-        console.log(user);
         if(user!=null && !''){
             this.user = JSON.parse(localStorage.getItem('user'));
         }else {
@@ -37,18 +38,21 @@ export class ChatComponent implements OnInit, OnDestroy{
         this.messages =[];
         this.chatSocket = this._socketService.getSocket();
         this.chatSocket.on("sendChatMessage", function(msg){
-            console.log("message received :" + msg);
-            console.log("msg array in service: " + self._chatService.getMessages());
             self.messages.push(msg);
         });
         this.chatSocket.on('wordChoiceConfirmed', function(word) {
-            console.log("confirmed word :" + word);
             self.wordToGuess = word;
         });
-    }
-
-
-    ngOnDestroy(){
+        this.chatSocket.off('updateUser');
+        this.chatSocket.on('updateUser', function (user) {
+            if(self.user.email===user.user.email){
+                self.user = user.user;
+                self._userService.updateUser(self.user)
+                    .subscribe((data)=>{
+                        localStorage.setItem('user', JSON.stringify(self.user));
+                    });
+            }
+        });
     }
 
     sendMessage(){
@@ -59,7 +63,8 @@ export class ChatComponent implements OnInit, OnDestroy{
         this.message = '';
     }
     guessWord(){
-        this.chatSocket.emit("guessedWord", this.guess);
+        this.chatSocket.emit("guessedWord", {guess: this.guess, user: this.user});
+        this.chatSocket.on("guessedWord",this.user);
         this.guess = '';
     }
 }

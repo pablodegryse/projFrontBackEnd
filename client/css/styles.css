@@ -1,7 +1,8 @@
 .canvasColor{
-    height: 10px;
+    height: 100%;
+    width: 100%;
     border: 1px solid black;
-    border-radius: 3px;
+    border-radius: 2px;
 }
 
 #drawCanvas{
@@ -35,7 +36,8 @@
     padding: 20px;
     transform: translate(-50%, 0);
     transition: opacity 1s;
-    border: solid black 1px;
+    background-color: #D5D0DC;
+    border: solid #47049F 1px;
     border-radius: 2px;
 }
 
@@ -63,7 +65,7 @@
 }
 
 .letterBox{
-    border: solid black 1px;
+    border: solid #47049F 1px;
     border-bottom: 0;
     border-radius: 2px 2px 0 0;
 }
@@ -107,6 +109,7 @@
 .navbar{
     background-color: #7B46C1;
     border-radius: 0;
+    margin-bottom: 0;
 }
 
 .navbar a{
@@ -143,6 +146,9 @@
 /*----BUTTONS----*/
 
 /*----HOME & GAME----*/
+pe-home{
+    flex: 1 1 auto;
+}
 .centreTitle{
     margin-top: 5%;
     text-align: center;
@@ -196,3 +202,142 @@
 }
 
 /*---QUEUE en LOADER---*/
+
+/*------GAME-----------*/
+pe-game,pe-room{
+    display: flex;
+    flex: 1 1 auto;
+}
+pe-queue{
+    width: 100%;
+    margin-top: 16px;
+}
+
+.container-fullwidth{
+    height: 100%;
+    display: flex;
+    flex-flow: column;
+}
+
+.roomContainer{
+    padding-left: 10px;
+    display: flex;
+    flex-direction: row;
+    flex: 1 1 auto;
+    justify-content: space-between;
+}
+
+.interactionContainer{
+    display: flex;
+    flex-flow: row;
+    flex: 1 1 auto;
+    justify-content: flex-end;
+}
+
+pe-chat{
+    z-index: 123;
+    display: flex;
+    flex-flow: column;
+    background-color: #D5D0DC;
+    max-width: 320px;
+    flex: 1 1 auto;
+}
+.chatOutput{
+    list-style: none;
+    padding: 0;
+    flex: 1 1 auto;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    margin-bottom: 4px;
+}
+.chatOutput li{
+    width: 100%;
+    overflow-clip: true;
+    padding-bottom: 2px;
+    padding-top: 2px;
+    padding-left: 4px;
+    padding-right: 2px;
+    border-bottom: solid gray 1px;
+}
+.chatInput{
+    border-top: 1px solid gray;
+    flex: none;
+    height: 27px;
+    padding-top: 4px;
+    margin-bottom: 4px;
+    padding-left: 4px;
+    padding-right: 4px;
+    display: flex;
+}
+
+.chatInputField,.chatInputField:focus{
+    width: 50%;
+    outline: none;
+    border: 1px solid #47049F;
+    border-radius: 2px;
+    padding-left: 4px;
+}
+.chatInput>.chatInputField:first-of-type{
+    margin-right: 4px;
+}
+
+pe-canvas{
+    margin-top: 10px;
+}
+
+.canvasTools{
+    list-style: none;
+    display: flex;
+    flex-flow: row;
+    margin: 0;
+    padding-left: 0;
+    padding-top: 4px;
+}
+.canvasTools li{
+    height: 20px;
+    width: 20px;
+    margin-left: 4px;
+}
+.canvasTools li:first-of-type{
+    margin-left: 0;
+}
+
+pe-word{
+    z-index: 123;
+    border-right: 1px solid #47049F;
+    background-color: #D5D0DC;
+}
+
+pe-word>h4{
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 4px;
+    padding-right: 4px;
+    text-align: center;
+    font-size: 1.5em;
+    border-bottom: 1px solid gray;
+}
+
+pe-word>p{
+    text-align: center;
+    font-size: 1em;
+}
+pe-word>div{
+    padding-left: 4px;
+    padding-right: 4px;
+}
+pe-word>ul{
+    margin-left: 4px;
+    margin-right: 4px;
+    list-style: none;
+    padding: 0;
+}
+pe-word>ul>li{
+    width: 100%;
+    padding-bottom: 2px;
+    padding-top: 2px;
+    padding-left: 4px;
+    padding-right: 2px;
+}
+
+/*------GAME-----------*/

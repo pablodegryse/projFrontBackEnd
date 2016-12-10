@@ -1,4 +1,6 @@
-import {Component, ViewChild, Input, AfterViewInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {SocketService} from "../../services/socket.service";
+import {User} from "../auth/user.model";
 
 @Component({
     selector:"pe-queue",
@@ -10,6 +12,21 @@ import {Component, ViewChild, Input, AfterViewInit} from '@angular/core';
               </div>`
 })
 
-export class QueueComponent{
+export class QueueComponent implements OnInit{
     message:string="You are in the queue, searching for a game...";
+    user:User;
+    socket:any;
+
+    constructor(private _socketService:SocketService){}
+
+    ngOnInit(){
+        var user=localStorage.getItem('user');
+        if(user!=null && !''){
+            this.user = JSON.parse(localStorage.getItem('user'));
+        }else {
+            this.user = new User('','','Guest');
+        }
+        this.socket = this._socketService.getSocket();
+        this.socket.emit("addUserToSocket", this.user);
+    }
 }

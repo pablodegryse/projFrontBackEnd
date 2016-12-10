@@ -1,20 +1,21 @@
-<div>
-    <div *ngFor="let message of messages">
-        <strong>{{message.username}}:</strong> {{message.content}}
-    </div>
-    <div *ngIf="gameRole === 'guesser'" >
-        <input type="text"
-               placeholder="Enter Message..."
-               [(ngModel)]="message"
-               name="message"
-               (keyup.enter)="sendMessage()"
-
-        >
-        <input type="text"
-               placeholder="Enter guess..."
-               [(ngModel)]="guess"
-               name = "guess"
-               (keyup.enter)="guessWord()"
-        >
-    </div>
+ <ul class="chatOutput">
+        <li class="chatMessage" *ngFor="let message of messages">
+            <strong>{{message.username}}:</strong> {{message.content}}
+        </li>
+    </ul>
+<div class="chatInput" *ngIf="gameRole === 'guesser'" >
+    <input type="text"
+           placeholder="Enter Message..."
+           [(ngModel)]="message"
+           name="message"
+           (keyup.enter)="sendMessage()"
+           class="chatInputField"
+    >
+    <input type="text"
+           placeholder="Enter guess..."
+           [(ngModel)]="guess"
+           name = "guess"
+           (keyup.enter)="guessWord()"
+           class="chatInputField"
+    >
 </div>
