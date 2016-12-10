@@ -11,7 +11,6 @@ export class UserService {
     constructor(private _http: Http) {}
 
     getUsers(){
-        //this.users =[];
         return this._http.get('http://localhost:8080/user')
             .map((response:Response)=> {
                 console.log(response);
@@ -47,5 +46,15 @@ export class UserService {
                 return user;
             });
 
+    }
+
+    updateUser(userToChange:User){
+        const body = JSON.stringify(userToChange);
+        const headers = new Headers({'Content-Type': 'application/json'});
+
+        const userId = localStorage.getItem('user')? JSON.parse(localStorage.getItem('user'))._id:'';
+
+        return this._http.patch('http://localhost:8080/user/' + userId , body, {headers: headers})
+            .map((response: Response) => response.json());
     }
 }

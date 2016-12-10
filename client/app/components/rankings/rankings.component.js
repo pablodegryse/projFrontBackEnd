@@ -16,11 +16,20 @@ var RankingsComponent = (function () {
     }
     RankingsComponent.prototype.ngOnInit = function () {
         var _this = this;
-        //this.users = this._userService.getUsers();
         this._userService.getUsers()
             .subscribe(function (users) {
-            _this.users = users;
-            console.log(_this.users);
+            _this.users = users.sort(function (a, b) {
+                if (a.points > b.points) {
+                    return -1;
+                }
+                else if (a.points < b.points) {
+                    return 1;
+                }
+                else {
+                    return 0;
+                }
+            });
+            return users;
         });
     };
     RankingsComponent = __decorate([

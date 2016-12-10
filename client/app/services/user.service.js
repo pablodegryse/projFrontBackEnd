@@ -19,7 +19,6 @@ var UserService = (function () {
     }
     UserService.prototype.getUsers = function () {
         var _this = this;
-        //this.users =[];
         return this._http.get('http://localhost:8080/user')
             .map(function (response) {
             console.log(response);
@@ -41,6 +40,13 @@ var UserService = (function () {
             var user = new user_model_1.User(result.obj.email, result.obj.password, result.obj.nickName, result.obj.firstName, result.obj.lastName, result.obj.roomId);
             return user;
         });
+    };
+    UserService.prototype.updateUser = function (userToChange) {
+        var body = JSON.stringify(userToChange);
+        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        var userId = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user'))._id : '';
+        return this._http.patch('http://localhost:8080/user/' + userId, body, { headers: headers })
+            .map(function (response) { return response.json(); });
     };
     UserService = __decorate([
         core_1.Injectable(), 

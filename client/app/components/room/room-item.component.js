@@ -28,7 +28,7 @@ var RoomItemComponent = (function () {
         console.log("room edited");
     };
     RoomItemComponent.prototype.onJoinRoom = function (room) {
-        this.user = JSON.parse(localStorage.getItem('user')) ? JSON.parse(localStorage.getItem('user')) : localStorage.setItem('user', JSON.stringify(new user_model_1.User('', '', 'Free User', '', '', '')));
+        this.user = JSON.parse(localStorage.getItem('user')) ? JSON.parse(localStorage.getItem('user')) : localStorage.setItem('user', JSON.stringify(new user_model_1.User('', '', 'Free User', '', '')));
         console.log("user :" + this.user);
         room.users.push(this.user);
         this._roomService.updateRoom(room)

@@ -99,9 +99,11 @@ let GameManager=(function () {
     //kijken of geraden woord correct is : zo nee : verhoog gewoon aantal pogingen
     //zo ja : deel punten uit + kijk of er al genoeg geraden zijn en beeindig game indien nodig
     let wordGuessCallback=function (room,socket,guessedWord) {
-        console.log(guessedWord);
+        console.log("guess = " +guessedWord.guess);
+        console.log("user that guessed = " + guessedWord.user.nickName);
+        socket.user = guessedWord.user;
         let guessCorrect = false;
-        (guessedWord === room.currentWordToDraw)? guessCorrect = true : guessCorrect = false;
+        (guessedWord.guess === room.currentWordToDraw)? guessCorrect = true : guessCorrect = false;
         socket.to(room.id).emit("wordGuessed",{hasGuessed:guessCorrect, socketId: socket.id});
         socket.emit("wordGuessed",{hasGuessed:guessCorrect,isme:true});
         room.guessCount++;
@@ -179,8 +181,15 @@ let GameManager=(function () {
 
     //de punten uit de drawer en guessers halen en diegenen die ingelogd zijn opslaan
     let savePointsToDb=function (drawer,guessers,roomId,callback) {
-        let winnerName="hierinvullen";
-        callback(roomId,winnerName);
+        drawer.socket.user.points += drawer.points;
+        globalNS.to(drawer.socket.id).emit("updateUser",{user:drawer.socket.user});
+        let winner = drawer;
+        for(i=0,len = guessers.length;i<len;i++){
+            guessers[i].socket.user.points += guessers[i].points;
+            globalNS.to(guessers[i].socket.id).emit("updateUser",{user:guessers[i].socket.user});
+            if (guessers[i].points > winner.points) winner = guessers[i];
+        }
+        callback(roomId,winner.socket.user.nickName);
     };
 
     let concludeGameCallback=function (roomId,winnerName) {

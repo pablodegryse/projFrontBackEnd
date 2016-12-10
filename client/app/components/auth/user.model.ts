@@ -4,7 +4,7 @@ export class User {
                 public nickName?: string,
                 public firstName?: string,
                 public lastName?: string,
-                public points?: string,
+                public points?: number,
                 public roomId?:string
     ) {}
 }

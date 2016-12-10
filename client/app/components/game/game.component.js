@@ -18,6 +18,7 @@ var GameComponent = (function () {
         this.isGameReady = false;
         this.localsocketService = socketService;
         this.globalSocket = this.localsocketService.getSocket();
+        this.globalSocket.user = this.user;
         this.localsocketService.requestQueueMove();
         this.router = gameRouter;
         this.setGameEvents(this);

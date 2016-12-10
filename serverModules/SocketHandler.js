@@ -91,6 +91,10 @@ let SocketHandler=(function () {
                 gameManager.checkGuessedWord(socket,guess);
             });
 
+            socket.on('addUserToSocket', function (user) {
+                socket.user = user;
+            });
+
             socket.on('getRoomList',function () { rManager.getRoomList(socket); });
 
         });

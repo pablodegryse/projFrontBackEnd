@@ -14,12 +14,19 @@ export class RankingsComponent implements OnInit{
     }
 
     ngOnInit(){
-        //this.users = this._userService.getUsers();
         this._userService.getUsers()
             .subscribe(
-                (users:User[])=>{
-                    this.users = users;
-                    console.log(this.users);
+                (users:User[])=> {
+                    this.users = users.sort((a: any, b: any)=> {
+                        if (a.points > b.points) {
+                            return -1;
+                        } else if (a.points < b.points) {
+                            return 1;
+                        } else {
+                            return 0;
+                        }
+                    });
+                    return users;
                 }
             );
     }

@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {SocketService} from "../../services/socket.service";
 import {Router} from "@angular/router";
+import {User} from "../auth/user.model";
 
 @Component({
     selector:"pe-game",
@@ -15,10 +16,12 @@ export class GameComponent{
     isGameReady:any=false;
     globalSocket:any;
     localsocketService:SocketService;
+    user:User;
     router;
     constructor(private socketService:SocketService,private gameRouter:Router){
         this.localsocketService=socketService;
         this.globalSocket=this.localsocketService.getSocket();
+        this.globalSocket.user = this.user;
         this.localsocketService.requestQueueMove();
         this.router=gameRouter;
         this.setGameEvents(this);

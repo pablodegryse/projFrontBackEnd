@@ -91,5 +91,33 @@ router.post('/signin', function(req, res, next) {
     });
 });
 
+router.patch('/:id', function (req, res, next) {
+    var decoded = jwt.decode(req.query.token);
+    var userId = req.params.id;
+    User.findById(userId,function (err, user) {
+        if(err){
+            return res.status(500).json({
+                title:'An error occured',
+                error: err
+            });
+        }
+        user.points = req.body.points;
+
+        user.save(function (err, result) {
+            if (err) {
+                return res.status(500).json({
+                    title: 'An error occurred',
+                    error: err
+                });
+            }
+            //user.save();
+            res.status(200).json({
+                message: 'Updated user',
+                obj: result
+            });
+        });
+    });
+});
+
 
 module.exports = router;

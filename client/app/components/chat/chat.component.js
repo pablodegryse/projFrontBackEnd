@@ -13,15 +13,16 @@ var chat_service_1 = require("../../services/chat.service");
 var user_model_1 = require("../auth/user.model");
 var socket_service_1 = require("../../services/socket.service");
 var message_model_1 = require("./message.model");
+var user_service_1 = require("../../services/user.service");
 var ChatComponent = (function () {
-    function ChatComponent(_chatService, _socketService) {
+    function ChatComponent(_chatService, _socketService, _userService) {
         this._chatService = _chatService;
         this._socketService = _socketService;
+        this._userService = _userService;
         this.messages = [];
     }
     ChatComponent.prototype.ngOnInit = function () {
         var user = localStorage.getItem('user');
-        console.log(user);
         if (user != null && !'') {
             this.user = JSON.parse(localStorage.getItem('user'));
         }
@@ -32,16 +33,21 @@ var ChatComponent = (function () {
         this.messages = [];
         this.chatSocket = this._socketService.getSocket();
         this.chatSocket.on("sendChatMessage", function (msg) {
-            console.log("message received :" + msg);
-            console.log("msg array in service: " + self._chatService.getMessages());
             self.messages.push(msg);
         });
         this.chatSocket.on('wordChoiceConfirmed', function (word) {
-            console.log("confirmed word :" + word);
             self.wordToGuess = word;
         });
-    };
-    ChatComponent.prototype.ngOnDestroy = function () {
+        this.chatSocket.off('updateUser');
+        this.chatSocket.on('updateUser', function (user) {
+            if (self.user.email === user.user.email) {
+                self.user = user.user;
+                self._userService.updateUser(self.user)
+                    .subscribe(function (data) {
+                    localStorage.setItem('user', JSON.stringify(self.user));
+                });
+            }
+        });
     };
     ChatComponent.prototype.sendMessage = function () {
         var messageToSend = new message_model_1.Message(this.message, this.user.nickName);
@@ -51,7 +57,8 @@ var ChatComponent = (function () {
         this.message = '';
     };
     ChatComponent.prototype.guessWord = function () {
-        this.chatSocket.emit("guessedWord", this.guess);
+        this.chatSocket.emit("guessedWord", { guess: this.guess, user: this.user });
+        this.chatSocket.on("guessedWord", this.user);
         this.guess = '';
     };
     __decorate([
@@ -63,7 +70,7 @@ var ChatComponent = (function () {
             selector: 'pe-chat',
             templateUrl: './views/componentViews/chat.component.html'
         }), 
-        __metadata('design:paramtypes', [chat_service_1.ChatService, socket_service_1.SocketService])
+        __metadata('design:paramtypes', [chat_service_1.ChatService, socket_service_1.SocketService, user_service_1.UserService])
     ], ChatComponent);
     return ChatComponent;
 }());
