@@ -4,10 +4,9 @@ import {Router} from "@angular/router";
 
 @Component({
     selector:"pe-game",
-    template:`<div>
+    template:`
                 <pe-queue *ngIf="isGameReady===false"></pe-queue>
-                <pe-room *ngIf="isGameReady===true" [gameRole]="gameParentRole" ></pe-room>
-              </div>`
+                <pe-room *ngIf="isGameReady===true" [gameRole]="gameParentRole" ></pe-room>`
 })
 
 export class GameComponent{

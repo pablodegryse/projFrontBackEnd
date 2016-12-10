@@ -38,7 +38,7 @@ export class RoomComponent {
         this.globalSocket.on('wordGuessed',function(data){
             if(data.hasGuessed === true){
                 if(data.isme===true){
-                    component.showHideGameMessage(true,"Good job, you guesses the word!");
+                    component.showHideGameMessage(true,"Good job, you guessed the word!");
                 }else {
                     component.showHideGameMessage(true,"The word has been guessed by : " + data.socketId);
                 }
