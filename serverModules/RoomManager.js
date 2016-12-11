@@ -3,6 +3,7 @@
 let RoomManager=(function () {
     let active=[],names,maxRoomSize;
     let globalNameSpace;
+    let breakForceSearch=false;
 
     let init=function (globalNS,nameObj,roomSize) {
       globalNameSpace=globalNS;
@@ -39,7 +40,13 @@ let RoomManager=(function () {
         console.log("force remove user");
         for(let i=0,len=active.length;i<len;i++){
             let room=active[i];
-            removeFromRoom(room,i,leavingSocket)
+            removeFromRoom(room,i,leavingSocket);
+            //om te stoppen met zoeken want socket is weg
+            if(breakForceSearch){
+                breakForceSearch=false;
+                console.log("breaking force-search loop");
+                break;
+            }
         }
     };
 
@@ -57,14 +64,15 @@ let RoomManager=(function () {
         }
     };
 
-    //actual removal of/from a matched room
+    //actual removal from a matched room
     let removeFromRoom=function (room,roomListIndex,leavingSocket) {
         let socketId=leavingSocket.id;
         //the host left: remove the game from active list and let all participants know
         if(room.id===socketId){
             console.log("Host left; game abandoned and removed from active list");
-            active.splice(roomListIndex);
             globalNameSpace.to(socketId).emit("GameEnd",{"content":"tooFewUsers"});
+            active.splice(roomListIndex,1);
+            breakForceSearch=true;
         }
         else{
             //the drawer left: appoint new drawer
@@ -75,6 +83,7 @@ let RoomManager=(function () {
                 //de nieuwe drawer van rol laten wisselen
                 room.drawer.socket.emit("roleChanged",{"content":"drawer"});
                 checkRoomState(room.id,room.guessers.length,roomListIndex);
+                breakForceSearch=true;
             }
             //a guesser left:
             else {
@@ -85,6 +94,7 @@ let RoomManager=(function () {
                         console.log("guessers length after splice : "+room.guessers.length);
                         checkRoomState(room.id,room.guessers.length,roomListIndex);
                         console.log("guessers loop index:"+i);
+                        breakForceSearch=true;
                         break;
                     }
                 }
@@ -99,7 +109,7 @@ let RoomManager=(function () {
             let currentId=active[i].id;
             if(socket.id==currentId){
                 globalNameSpace.to(currentId).emit("GameEnd",{"content":"tooFewUsers"});
-                active.splice(i);
+                active.splice(i,1);
                 console.log("Host left; game abandoned and removed from active list");
                 break;
             }
@@ -111,7 +121,7 @@ let RoomManager=(function () {
             let currentId=active[i].id;
             if(roomId==currentId){
                 globalNameSpace.to(currentId).emit("GameEnd",{"content":"tooFewUsers"});
-                active.splice(i);
+                active.splice(i,1);
                 console.log("GAME DOnE : everybody go home");
                 break;
             }

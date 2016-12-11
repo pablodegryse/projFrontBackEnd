@@ -341,3 +341,28 @@ pe-word>ul>li{
 }
 
 /*------GAME-----------*/
+
+/*------LIST OVERVIEWS-----------*/
+
+.list-group{
+    margin-top: 16px;
+}
+.list-group-item{
+    padding-bottom: 4px;
+    padding-top: 4px;
+}
+.list-group-item:hover{
+    background-color: #D5D0DC;
+}
+.list-group-item:first-child,.list-group-item:last-child{
+    border-radius: 0;
+}
+.list-group-item>h3{
+    margin-top: 8px;
+}
+.list-group-item>p{
+    margin-bottom: 2px;
+}
+
+/*------LIST OVERVIEWS-----------*/
+
