@@ -1,12 +1,11 @@
-<div class="row">
-    <div *ngIf="roomsAvailable===false" >
-        <h2>No rooms to show :(</h2>
-    </div>
-    <ul class="list-group" *ngFor="let room of roomList" >
-        <li class="list-group-item">
-            <h3>Room ID: {{room.id}}</h3>
-            <p>Status: {{room.status}}</p>
-            <p>Players slots: {{room.players}}/{{room.maxPlayers}}</p>
-        </li>
-    </ul>
+<div *ngIf="roomsAvailable===false" >
+    <h2 class="centreTitle">No rooms to show :(</h2>
 </div>
+<ul class="list-group">
+    <li class="list-group-item" *ngFor="let room of roomList">
+        <h3>Room ID: {{room.id}}</h3>
+        <p>Status: {{room.status}}</p>
+        <p>Players slots: {{room.players}}/{{room.maxPlayers}}</p>
+    </li>
+</ul>
+

@@ -28,7 +28,6 @@ var LobbyoverviewComponent = (function () {
             this.socketService.roomListEventsSet = true;
         }
         this.localSocket.on("roomListResult", function (result) {
-            console.log("got the room:" + result.length);
             if (result.length > 0) {
                 component.roomsAvailable = true;
                 component.roomList = result;
