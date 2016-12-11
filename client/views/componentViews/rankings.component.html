@@ -1,5 +1,7 @@
 <h3 class="centreTitle" >Ranking</h3>
+<div class="centreContentContainerColumn">
     <div *ngFor="let user of users; let i = index ">
         <pe-rankings-item [user]="user" [i]="i" ></pe-rankings-item>
     </div>
+</div>
 

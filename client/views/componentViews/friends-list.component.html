@@ -1,5 +1,7 @@
 <h3 class="centreTitle" >Friends</h3>
-<div *ngFor="let friend of friends; let i = index ">
-    <pe-friend-item [user]="user" [friend]="friend" [i]="i" ></pe-friend-item>
+<div class="centreContentContainerColumn">
+    <div *ngFor="let friend of friends; let i = index ">
+        <pe-friend-item [user]="user" [friend]="friend" [i]="i" ></pe-friend-item>
+    </div>
 </div>
 

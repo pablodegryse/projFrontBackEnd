@@ -1,10 +1,10 @@
-<a class="list-group-item clearfix" style="cursor: pointer" (click)="onSelectUser(user)">
+<li class="list-group-item" style="cursor: pointer" (click)="onSelectUser(user)">
     <div>
         {{i+1}}. {{user.nickName}} : {{user.points}} points
         <div class="rankingDetail" *ngIf="isSelected">
             <p> {{user.firstName}} {{user.lastName}}</p>
 
-            <p> {{user.email}}</p><button *ngIf="(isLoggedIn() && !isFriend)" class="pull-right" (click)="onAddFriend(user)">Add Friend</button>
+            <p> {{user.email}}</p><button *ngIf="(isLoggedIn() && !isFriend)" class="btn btn-pictionare" (click)="onAddFriend(user)">Add Friend</button>
         </div>
     </div>
-</a>
+</li>

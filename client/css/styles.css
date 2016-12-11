@@ -169,6 +169,7 @@ pe-home{
     display: flex;
     flex-flow: column;
     justify-content: center;
+    align-items: center;
 }
 .decorationContainer{
     position: fixed;
