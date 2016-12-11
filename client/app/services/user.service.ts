@@ -13,7 +13,6 @@ export class UserService {
     getUsers(){
         return this._http.get('http://localhost:8080/user')
             .map((response:Response)=> {
-                console.log(response);
                 const users = response.json().obj;
                 let transformedUsers: User[] = [];
                 for (let user of users) {
@@ -23,7 +22,9 @@ export class UserService {
                         user.nickName,
                         user.firstName,
                         user.lastName,
-                        user.points
+                        user.points,
+                        user._id,
+                        user.friends
                     ));
                 }
                 this.users = transformedUsers;
@@ -51,10 +52,31 @@ export class UserService {
     updateUser(userToChange:User){
         const body = JSON.stringify(userToChange);
         const headers = new Headers({'Content-Type': 'application/json'});
-
         const userId = localStorage.getItem('user')? JSON.parse(localStorage.getItem('user'))._id:'';
 
         return this._http.patch('http://localhost:8080/user/' + userId , body, {headers: headers})
             .map((response: Response) => response.json());
+    }
+
+    getFriends(user:User){
+        //noinspection TypeScriptUnresolvedVariable
+        var userId = user._id;
+        return this._http.get('http://localhost:8080/user/' +userId)
+            .map((response:Response)=>{
+                const user = response.json().obj;
+                let transformedFriends : User[] =[];
+                for(let friend of user.friends){
+                    transformedFriends.push(new User(
+                        friend.email,
+                            friend.password,
+                            friend.nickName,
+                            friend.firstName,
+                            friend.lastName,
+                            friend.points,
+                            friend._id
+                    ));
+                }
+                return transformedFriends;
+            })
     }
 }

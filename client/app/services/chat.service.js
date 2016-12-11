@@ -14,9 +14,7 @@ var ChatService = (function () {
         this.messages = [];
     }
     ChatService.prototype.addMessage = function (message) {
-        console.log("chatservice msg received: " + message);
         this.messages.push(message);
-        console.log("array in service : " + this.messages);
     };
     ChatService.prototype.getMessages = function () {
         return this.messages;

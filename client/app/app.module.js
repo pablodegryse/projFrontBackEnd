@@ -38,6 +38,9 @@ var room_lobby_component_1 = require("./components/room/room-lobby.component");
 var chat_service_1 = require("./services/chat.service");
 var user_profile_component_1 = require("./components/user/user-profile.component");
 var user_service_1 = require("./services/user.service");
+var rankings_item_component_1 = require("./components/rankings/rankings-item.component");
+var friends_list_component_1 = require("./components/friends/friends-list.component");
+var friend_item_component_1 = require("./components/friends/friend-item.component");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -63,6 +66,7 @@ var AppModule = (function () {
                 signin_component_1.SigninComponent,
                 logout_component_1.LogoutComponent,
                 rankings_component_1.RankingsComponent,
+                rankings_item_component_1.RankingsItemComponent,
                 lobbyoverview_component_1.LobbyoverviewComponent,
                 create_room_component_1.CreateRoomComponent,
                 room_item_component_1.RoomItemComponent,
@@ -70,7 +74,9 @@ var AppModule = (function () {
                 room_component_1.RoomComponent,
                 word_component_1.WordComponent,
                 room_lobby_component_1.RoomLobbyComponent,
-                user_profile_component_1.UserProfileComponent
+                user_profile_component_1.UserProfileComponent,
+                friends_list_component_1.FriendsListComponent,
+                friend_item_component_1.FriendItemComponent
             ],
             providers: [auth_service_1.AuthService, room_service_1.RoomService, chat_service_1.ChatService, user_service_1.UserService],
             bootstrap: [app_component_1.AppComponent]

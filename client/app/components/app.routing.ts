@@ -8,6 +8,7 @@ import {CreateRoomComponent} from "./room/create-room.component";
 import {GameComponent} from "./game/game.component"
 import {RoomComponent} from "./room/room.component";
 import {UserProfileComponent} from "./user/user-profile.component";
+import {FriendsListComponent} from "./friends/friends-list.component";
 
 const APP_ROUTES: Routes = [
     {path:'', redirectTo:'home', pathMatch: 'full'},
@@ -18,7 +19,8 @@ const APP_ROUTES: Routes = [
     {path:'quickjoin', component:GameComponent},
     {path: 'auth', component: AuthenticationComponent },
     {path:'rankings', component:RankingsComponent},
-    {path:'user', component:UserProfileComponent}
+    {path:'user', component:UserProfileComponent},
+    {path:'friends', component:FriendsListComponent}
 ];
 
 export const routing = RouterModule.forRoot(APP_ROUTES);

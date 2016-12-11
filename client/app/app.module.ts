@@ -30,6 +30,9 @@ import {RoomLobbyComponent} from "./components/room/room-lobby.component";
 import {ChatService} from "./services/chat.service";
 import {UserProfileComponent} from "./components/user/user-profile.component";
 import {UserService} from "./services/user.service";
+import {RankingsItemComponent} from "./components/rankings/rankings-item.component";
+import {FriendsListComponent} from "./components/friends/friends-list.component";
+import {FriendItemComponent} from "./components/friends/friend-item.component";
 
 
 @NgModule({
@@ -53,6 +56,7 @@ import {UserService} from "./services/user.service";
         SigninComponent,
         LogoutComponent,
         RankingsComponent,
+        RankingsItemComponent,
         LobbyoverviewComponent,
         CreateRoomComponent,
         RoomItemComponent,
@@ -60,7 +64,9 @@ import {UserService} from "./services/user.service";
         RoomComponent,
         WordComponent,
         RoomLobbyComponent,
-        UserProfileComponent
+        UserProfileComponent,
+        FriendsListComponent,
+        FriendItemComponent
     ],
     providers:[AuthService, RoomService, ChatService, UserService],
     bootstrap:[AppComponent]

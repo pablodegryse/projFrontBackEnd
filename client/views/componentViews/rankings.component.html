@@ -1,11 +1,5 @@
-<div class="container ">
-    <div class="center col-md-4"  >
-        <h3>Ranking</h3>
-        <ul class="list-group">
-            <li *ngFor="let user of users; let i = index " class="list-group-item ">
-                {{i+1}}. {{user.nickName}} : {{user.points}} points
-            </li>
-        </ul>
+<h3 class="centreTitle" >Ranking</h3>
+    <div *ngFor="let user of users; let i = index ">
+        <pe-rankings-item [user]="user" [i]="i" ></pe-rankings-item>
     </div>
-</div>
 

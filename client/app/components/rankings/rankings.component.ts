@@ -9,6 +9,7 @@ import {UserService} from "../../services/user.service";
 export class RankingsComponent implements OnInit{
     users:User[];
 
+
     constructor(private _userService:UserService){
 
     }
@@ -30,5 +31,7 @@ export class RankingsComponent implements OnInit{
                 }
             );
     }
+
+
 
 }

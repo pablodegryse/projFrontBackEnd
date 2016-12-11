@@ -10,9 +10,7 @@ export class AuthService {
     constructor(private _http: Http) {}
 
     register(user: User) {
-        console.log("inside authservice" + user);
         const body = JSON.stringify(user);
-        console.log("user received: " + body);
         const headers = new Headers({'Content-Type': 'application/json'});
         return this._http.post('http://localhost:8080/user', body, {headers: headers})
             .map((response: Response) => response.json());

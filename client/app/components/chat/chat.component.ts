@@ -45,6 +45,7 @@ export class ChatComponent implements OnInit{
         });
         this.chatSocket.off('updateUser');
         this.chatSocket.on('updateUser', function (user) {
+            if(localStorage.getItem('user')==null) return;
             if(self.user.email===user.user.email){
                 self.user = user.user;
                 self._userService.updateUser(self.user)

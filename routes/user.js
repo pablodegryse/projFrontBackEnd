@@ -22,7 +22,12 @@ router.get('/', function (req, res, next) {
 });
 
 router.get('/:id',function(req,res,next){
-    User.findById(req.params.id, function (err, user) {
+    User.findById(req.params.id)
+        .populate({
+            path:'friends',
+            populate:{path:'friends'}
+        })
+        .exec(function (err, user) {
         if(err) {
             return res.status(500).json({
                 title:'An error occurred',
@@ -97,16 +102,17 @@ router.patch('/:id', function (req, res, next) {
     User.findById(userId,function (err, user) {
         if(err){
             return res.status(500).json({
-                title:'An error occured',
+                title:'An error occured while finding user',
                 error: err
             });
         }
         user.points = req.body.points;
+        user.friends = req.body.friends;
 
         user.save(function (err, result) {
             if (err) {
                 return res.status(500).json({
-                    title: 'An error occurred',
+                    title: 'An error occurred while saving user',
                     error: err
                 });
             }

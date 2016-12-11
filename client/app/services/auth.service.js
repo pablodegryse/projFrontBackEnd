@@ -18,9 +18,7 @@ var AuthService = (function () {
         this._http = _http;
     }
     AuthService.prototype.register = function (user) {
-        console.log("inside authservice" + user);
         var body = JSON.stringify(user);
-        console.log("user received: " + body);
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         return this._http.post('http://localhost:8080/user', body, { headers: headers })
             .map(function (response) { return response.json(); });

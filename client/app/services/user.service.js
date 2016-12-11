@@ -21,12 +21,11 @@ var UserService = (function () {
         var _this = this;
         return this._http.get('http://localhost:8080/user')
             .map(function (response) {
-            console.log(response);
             var users = response.json().obj;
             var transformedUsers = [];
             for (var _i = 0, users_1 = users; _i < users_1.length; _i++) {
                 var user = users_1[_i];
-                transformedUsers.push(new user_model_1.User(user.email, user.password, user.nickName, user.firstName, user.lastName, user.points));
+                transformedUsers.push(new user_model_1.User(user.email, user.password, user.nickName, user.firstName, user.lastName, user.points, user._id, user.friends));
             }
             _this.users = transformedUsers;
             return transformedUsers;
@@ -47,6 +46,20 @@ var UserService = (function () {
         var userId = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user'))._id : '';
         return this._http.patch('http://localhost:8080/user/' + userId, body, { headers: headers })
             .map(function (response) { return response.json(); });
+    };
+    UserService.prototype.getFriends = function (user) {
+        //noinspection TypeScriptUnresolvedVariable
+        var userId = user._id;
+        return this._http.get('http://localhost:8080/user/' + userId)
+            .map(function (response) {
+            var user = response.json().obj;
+            var transformedFriends = [];
+            for (var _i = 0, _a = user.friends; _i < _a.length; _i++) {
+                var friend = _a[_i];
+                transformedFriends.push(new user_model_1.User(friend.email, friend.password, friend.nickName, friend.firstName, friend.lastName, friend.points, friend._id));
+            }
+            return transformedFriends;
+        });
     };
     UserService = __decorate([
         core_1.Injectable(), 

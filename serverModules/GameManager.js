@@ -184,7 +184,7 @@ let GameManager=(function () {
         drawer.socket.user.points += drawer.points;
         globalNS.to(drawer.socket.id).emit("updateUser",{user:drawer.socket.user});
         let winner = drawer;
-        for(i=0,len = guessers.length;i<len;i++){
+        for(let i=0,len = guessers.length;i<len;i++){
             guessers[i].socket.user.points += guessers[i].points;
             globalNS.to(guessers[i].socket.id).emit("updateUser",{user:guessers[i].socket.user});
             if (guessers[i].points > winner.points) winner = guessers[i];

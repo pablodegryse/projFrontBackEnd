@@ -12,7 +12,7 @@
                 <li routerLinkActive="active"><a [routerLink]="['/quickjoin']" >Quick Join</a></li>
                 <li routerLinkActive="active" *ngIf="isLoggedIn()" ><a [routerLink]="['/roomlist']">Room List</a></li>
                 <li routerLinkActive="active" *ngIf="isLoggedIn()"><a [routerLink]="['/createroom']">Create Room</a></li>
-                <li routerLinkActive="active" *ngIf="isLoggedIn()"><a [routerLink]="['/rankings']">Rankings</a></li>
+                <li routerLinkActive="active"><a [routerLink]="['/rankings']">Rankings</a></li>
                 <!--<li routerLinkActive="active" *ngIf="!isLoggedIn()" ><a [routerLink]="['/auth']">Authentication</a></li>-->
             </ul>
 
@@ -21,7 +21,7 @@
                     <a id="myToggle" role="button" aria-haspopup="true" aria-expanded="false">Account <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li routerLinkActive="active"><a [routerLink]="['/user']" >Manage</a></li>
-                        <li><a >Friends</a></li>
+                        <li routerLinkActive="active"><a [routerLink]="['/friends']">Friends</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a (click)="onLogOut()" >Log Out</a></li>
                     </ul>
