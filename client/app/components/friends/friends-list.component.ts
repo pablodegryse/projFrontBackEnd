@@ -27,4 +27,12 @@ export class FriendsListComponent implements OnInit{
             });
     }
 
+    onRemoved(){
+        this._userService.getFriends(this.user)
+            .subscribe((friends:User[])=>{
+                this.friends = friends;
+                console.log(this.friends);
+            });
+    }
+
 }

@@ -17,6 +17,7 @@ var FriendItemComponent = (function () {
         this._authService = _authService;
         this._userService = _userService;
         this.isSelected = false;
+        this.isRemoved = new core_1.EventEmitter();
     }
     FriendItemComponent.prototype.onSelectFriend = function (user) {
         this.isSelected = !this.isSelected;
@@ -24,11 +25,12 @@ var FriendItemComponent = (function () {
     FriendItemComponent.prototype.onRemoveFriend = function (user) {
         var _this = this;
         //noinspection TypeScriptUnresolvedVariable
-        this.user.friends.splice(this.user.friends.indexOf(user._id), 1);
+        this.user.friends.splice(this.user.friends.indexOf(user.userId), 1);
         this._userService.updateUser(this.user)
             .subscribe(function (user) {
             localStorage.setItem('user', JSON.stringify(_this.user));
         });
+        this.isRemoved.emit(null);
     };
     FriendItemComponent.prototype.isLoggedIn = function () {
         return this._authService.isLoggedIn();
@@ -45,6 +47,10 @@ var FriendItemComponent = (function () {
         core_1.Input(), 
         __metadata('design:type', user_model_1.User)
     ], FriendItemComponent.prototype, "user", void 0);
+    __decorate([
+        core_1.Output(), 
+        __metadata('design:type', Object)
+    ], FriendItemComponent.prototype, "isRemoved", void 0);
     FriendItemComponent = __decorate([
         core_1.Component({
             selector: 'pe-friend-item',

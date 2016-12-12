@@ -1,4 +1,4 @@
-import {Component, Input} from "@angular/core";
+import {Component, Input, Output, EventEmitter} from "@angular/core";
 import {User} from "../auth/user.model";
 import {AuthService} from "../../services/auth.service";
 import {UserService} from "../../services/user.service";
@@ -14,6 +14,8 @@ export class FriendItemComponent{
 
     isSelected:boolean=false;
 
+    @Output() isRemoved = new EventEmitter();
+
     constructor(private _authService:AuthService,
                 private _userService:UserService
     ){}
@@ -24,11 +26,12 @@ export class FriendItemComponent{
 
     onRemoveFriend(user:User){
         //noinspection TypeScriptUnresolvedVariable
-        this.user.friends.splice(this.user.friends.indexOf(user._id),1);
+        this.user.friends.splice(this.user.friends.indexOf(user.userId),1);
         this._userService.updateUser(this.user)
             .subscribe((user:User)=>{
                 localStorage.setItem('user', JSON.stringify(this.user))
             });
+        this.isRemoved.emit(null);
     }
 
     isLoggedIn(){

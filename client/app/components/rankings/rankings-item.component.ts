@@ -11,7 +11,7 @@ export class RankingsItemComponent implements OnInit{
     @Input() user:User;
     @Input() i:number;
     isSelected:boolean = false;
-    currentUser:User;
+    currentUser:any;
     isFriend:boolean;
 
     constructor(private _userService:UserService,

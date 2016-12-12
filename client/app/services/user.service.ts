@@ -58,10 +58,10 @@ export class UserService {
             .map((response: Response) => response.json());
     }
 
-    getFriends(user:User){
+    getFriends(user:any){
         //noinspection TypeScriptUnresolvedVariable
         var userId = user._id;
-        return this._http.get('http://localhost:8080/user/' +userId)
+        return this._http.get('http://localhost:8080/user/' + userId)
             .map((response:Response)=>{
                 const user = response.json().obj;
                 let transformedFriends : User[] =[];

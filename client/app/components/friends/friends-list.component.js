@@ -27,6 +27,14 @@ var FriendsListComponent = (function () {
             console.log(_this.friends);
         });
     };
+    FriendsListComponent.prototype.onRemoved = function () {
+        var _this = this;
+        this._userService.getFriends(this.user)
+            .subscribe(function (friends) {
+            _this.friends = friends;
+            console.log(_this.friends);
+        });
+    };
     __decorate([
         core_1.Output(), 
         __metadata('design:type', user_model_1.User)
