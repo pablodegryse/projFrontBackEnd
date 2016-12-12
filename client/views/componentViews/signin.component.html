@@ -1,11 +1,11 @@
-<div class="col-md-8 col-md-offset-2">
+<div>
     <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
             <label for="email">Mail</label>
             <input
                     type="email"
                     id="email"
-                    class="form-control"
+                    class="form-control inputField"
                     formControlName="email">
         </div>
         <div class="form-group">
@@ -13,11 +13,11 @@
             <input
                     type="password"
                     id="password"
-                    class="form-control"
+                    class="form-control inputField"
                     formControlName="password">
         </div>
         <button
-                class="btn btn-primary"
+                class="btn btn-pictionare"
                 type="submit"
                 [disabled]="!myForm.valid">Submit</button>
     </form>

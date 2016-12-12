@@ -165,16 +165,16 @@ pe-home{
     flex-flow: row;
     justify-content: center;
 }
+.centreContentContainerRow>p{
+    padding-top: 8px;
+    margin-left: 12px;
+    margin-right: 12px;
+}
 .centreContentContainerColumn{
     display: flex;
     flex-flow: column;
     justify-content: center;
     align-items: center;
-}
-.decorationContainer{
-    position: fixed;
-    bottom: 0;
-    right: 0;
 }
 
 /*----HOME & GAME----*/
@@ -278,6 +278,12 @@ pe-chat{
     border-radius: 2px;
     padding-left: 4px;
 }
+.inputField{
+    outline: none;
+    border: 1px solid #47049F;
+    border-radius: 2px;
+    padding-left: 4px;
+}
 .chatInput>.chatInputField:first-of-type{
     margin-right: 4px;
 }
@@ -366,4 +372,16 @@ pe-word>ul>li{
 }
 
 /*------LIST OVERVIEWS-----------*/
+
+/*------AUTH en SIGN IN------------*/
+
+pe-authentication{
+    display: flex;
+    justify-content: center;
+}
+.authBlock{
+    margin-right: 16px;
+}
+
+/*------AUTH en SIGN IN------------*/
 
