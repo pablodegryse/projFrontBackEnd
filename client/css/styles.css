@@ -106,6 +106,9 @@
  */
 
 /*----NAV----*/
+#selectedNavLink{
+    background-color: #A482D1;
+}
 .navbar{
     background-color: #7B46C1;
     border-radius: 0;

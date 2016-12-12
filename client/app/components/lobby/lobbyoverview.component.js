@@ -10,15 +10,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var socket_service_1 = require("../../services/socket.service");
+var nav_service_1 = require("../../services/nav.service");
 var LobbyoverviewComponent = (function () {
-    function LobbyoverviewComponent(socketService) {
+    function LobbyoverviewComponent(socketService, _navService) {
         this.socketService = socketService;
+        this._navService = _navService;
         this.roomsAvailable = false;
         this.localSocket = socketService.getSocket();
         socketService.requestLobbyMove();
         this.localSocket.emit("getRoomList");
         //check if the socket events were already set
         this.setRoomListEvents(this);
+        _navService.changeNavSelection("Room List");
     }
     LobbyoverviewComponent.prototype.setRoomListEvents = function (component) {
         if (this.socketService.roomListEventsSet) {
@@ -40,7 +43,7 @@ var LobbyoverviewComponent = (function () {
             selector: 'pe-lobbyoverview',
             templateUrl: './views/componentViews/lobbyoverview.component.html'
         }), 
-        __metadata('design:paramtypes', [socket_service_1.SocketService])
+        __metadata('design:paramtypes', [socket_service_1.SocketService, nav_service_1.NavService])
     ], LobbyoverviewComponent);
     return LobbyoverviewComponent;
 }());

@@ -12,9 +12,12 @@ var core_1 = require("@angular/core");
 var forms_1 = require("@angular/forms");
 var room_model_1 = require("./room.model");
 var room_service_1 = require("../../services/room.service");
+var nav_service_1 = require("../../services/nav.service");
 var CreateRoomComponent = (function () {
-    function CreateRoomComponent(_roomService) {
+    function CreateRoomComponent(_roomService, _navService) {
         this._roomService = _roomService;
+        this._navService = _navService;
+        _navService.changeNavSelection("Create Room");
     }
     CreateRoomComponent.prototype.onSubmit = function () {
         var room = new room_model_1.Room(this.myForm.value.name);
@@ -32,7 +35,7 @@ var CreateRoomComponent = (function () {
             selector: 'pe-create-room',
             templateUrl: './views/componentViews/create-room.component.html'
         }), 
-        __metadata('design:paramtypes', [room_service_1.RoomService])
+        __metadata('design:paramtypes', [room_service_1.RoomService, nav_service_1.NavService])
     ], CreateRoomComponent);
     return CreateRoomComponent;
 }());

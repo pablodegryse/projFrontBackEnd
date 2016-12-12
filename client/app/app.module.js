@@ -28,6 +28,7 @@ var room_item_component_1 = require("./components/room/room-item.component");
 var auth_service_1 = require("./services/auth.service");
 var http_1 = require("@angular/http");
 var room_service_1 = require("./services/room.service");
+var nav_service_1 = require("./services/nav.service");
 var canvas_component_1 = require("./components/game/canvas.component");
 var queue_component_1 = require("./components/game/queue.component");
 var game_component_1 = require("./components/game/game.component");
@@ -78,7 +79,7 @@ var AppModule = (function () {
                 friends_list_component_1.FriendsListComponent,
                 friend_item_component_1.FriendItemComponent
             ],
-            providers: [auth_service_1.AuthService, room_service_1.RoomService, chat_service_1.ChatService, user_service_1.UserService],
+            providers: [auth_service_1.AuthService, room_service_1.RoomService, chat_service_1.ChatService, user_service_1.UserService, nav_service_1.NavService],
             bootstrap: [app_component_1.AppComponent]
         }), 
         __metadata('design:paramtypes', [])

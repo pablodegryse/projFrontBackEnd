@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {SocketService} from "../../services/socket.service";
+import {NavService} from "../../services/nav.service";
 @Component({
     selector: 'pe-lobbyoverview',
     templateUrl: './views/componentViews/lobbyoverview.component.html'
@@ -8,12 +9,13 @@ export class LobbyoverviewComponent {
     roomList:any[];
     roomsAvailable:boolean=false;
     localSocket:any;
-    constructor(private socketService:SocketService) {
+    constructor(private socketService:SocketService,private _navService:NavService) {
         this.localSocket=socketService.getSocket();
         socketService.requestLobbyMove();
         this.localSocket.emit("getRoomList");
         //check if the socket events were already set
         this.setRoomListEvents(this);
+        _navService.changeNavSelection("Room List");
     }
 
     setRoomListEvents(component){

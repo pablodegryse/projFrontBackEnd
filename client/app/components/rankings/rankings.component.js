@@ -10,9 +10,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require("@angular/core");
 var user_service_1 = require("../../services/user.service");
+var nav_service_1 = require("../../services/nav.service");
 var RankingsComponent = (function () {
-    function RankingsComponent(_userService) {
+    function RankingsComponent(_userService, _navService) {
         this._userService = _userService;
+        this._navService = _navService;
+        _navService.changeNavSelection("Rankings");
     }
     RankingsComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -37,7 +40,7 @@ var RankingsComponent = (function () {
             selector: 'pe-rankings',
             templateUrl: './views/componentViews/rankings.component.html'
         }), 
-        __metadata('design:paramtypes', [user_service_1.UserService])
+        __metadata('design:paramtypes', [user_service_1.UserService, nav_service_1.NavService])
     ], RankingsComponent);
     return RankingsComponent;
 }());
