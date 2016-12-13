@@ -1,7 +1,9 @@
-<h3 class="centreTitle" >Ranking</h3>
+<h2 class="centreTitle" >Player Rankings</h2>
 <div class="centreContentContainerColumn">
-    <div *ngFor="let user of users; let i = index ">
-        <pe-rankings-item [user]="user" [i]="i" ></pe-rankings-item>
-    </div>
+    <ul class="list-group">
+        <li class="list-group-item" (click)="onSelectUser(user)" *ngFor="let user of users; let i = index ">
+            <pe-rankings-item  [user]="user" [i]="i" ></pe-rankings-item>
+        </li>
+    </ul>
 </div>
 

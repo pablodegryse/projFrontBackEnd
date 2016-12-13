@@ -2,8 +2,12 @@
     <h1 class="centreTitle" >Unleash your inner artist</h1>
     <h2 class="centreSubtitle">Play with friends and get creative or just have fun with fellow Pictioneers.</h2>
     <div class="centreContentContainerRow" >
-        <button class="btn btn-pictionare" [routerLink]="['/auth']" *ngIf="!isLoggedIn()" >Sign In</button>
+        <button class="btn btn-pictionare" [routerLink]="['/auth']" *ngIf="!isLoggedIn()" >
+            <span class="icon-enter"></span><span class="btn-text">Sign in</span>
+        </button>
         <p *ngIf="!isLoggedIn()">or</p>
-        <button class="btn btn-pictionare" [routerLink]="['/quickjoin']">Play Now</button>
+        <button class="btn btn-pictionare" [routerLink]="['/quickjoin']">
+            <span class="icon-pacman"></span><span class="btn-text">Play Now</span>
+        </button>
     </div>
 </div>
