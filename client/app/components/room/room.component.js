@@ -14,13 +14,14 @@ var RoomComponent = (function () {
     function RoomComponent(socketService) {
         this.socketService = socketService;
         this.gameMessageClass = "gameMessageInvisible";
+        this.messageIconClass = "icon-happy";
         this.showLetterBox = false;
         this.globalSocket = socketService.getSocket();
         this.setupRoomEvents(this);
     }
     RoomComponent.prototype.handleRoleChanged = function (role) {
         this.gameRole = role;
-        this.showHideGameMessage(false, null);
+        this.showHideGameMessage(false, false, null);
     };
     RoomComponent.prototype.setupRoomEvents = function (component) {
         this.globalSocket.off("setupLetterBox");
@@ -37,17 +38,30 @@ var RoomComponent = (function () {
         this.globalSocket.on('wordGuessed', function (data) {
             if (data.hasGuessed === true) {
                 if (data.isme === true) {
-                    component.showHideGameMessage(true, "Good job, you guessed the word!");
+                    component.showHideGameMessage(true, false, "Good job, you guessed the word!");
                 }
                 else {
-                    component.showHideGameMessage(true, "The word has been guessed by : " + data.socketId);
+                    component.showHideGameMessage(true, false, "The word has been guessed by : " + data.socketId);
                 }
             }
+        });
+        this.globalSocket.off("winnerAnnounce");
+        this.globalSocket.on('winnerAnnounce', function (data) {
+            if (data.isme === true) {
+                component.showHideGameMessage(true, true, "Congratulations, you won the game!");
+            }
             else {
+                component.showHideGameMessage(true, true, "The game was won by " + data.winnerName);
             }
         });
     };
-    RoomComponent.prototype.showHideGameMessage = function (isVisible, message) {
+    RoomComponent.prototype.showHideGameMessage = function (isVisible, isWinnerAnnounce, message) {
+        if (isWinnerAnnounce) {
+            this.messageIconClass = "icon-trophy";
+        }
+        else {
+            this.messageIconClass = "icon-happy";
+        }
         if (isVisible) {
             this.gameMessage = message;
             this.gameMessageClass = "gameMessageVisible";

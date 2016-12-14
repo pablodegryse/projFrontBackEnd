@@ -10,6 +10,7 @@ export class RoomComponent {
     globalSocket:any;
     gameMessage:String;
     gameMessageClass:String="gameMessageInvisible";
+    messageIconClass:string="icon-happy";
     wordLetters:string[];
     showLetterBox:boolean=false;
     constructor(private socketService:SocketService){
@@ -19,7 +20,7 @@ export class RoomComponent {
 
     handleRoleChanged(role:string){
         this.gameRole=role;
-        this.showHideGameMessage(false,null);
+        this.showHideGameMessage(false,false,null);
     }
 
     setupRoomEvents(component){
@@ -38,17 +39,30 @@ export class RoomComponent {
         this.globalSocket.on('wordGuessed',function(data){
             if(data.hasGuessed === true){
                 if(data.isme===true){
-                    component.showHideGameMessage(true,"Good job, you guessed the word!");
+                    component.showHideGameMessage(true,false,"Good job, you guessed the word!");
                 }else {
-                    component.showHideGameMessage(true,"The word has been guessed by : " + data.socketId);
+                    component.showHideGameMessage(true,false,"The word has been guessed by : " + data.socketId);
                 }
-            }else {
-                //gewoon in de chat plaatsen
             }
         });
+
+        this.globalSocket.off("winnerAnnounce");
+        this.globalSocket.on('winnerAnnounce',function (data) {
+            if(data.isme===true){
+                component.showHideGameMessage(true,true,"Congratulations, you won the game!");
+            }else {
+                component.showHideGameMessage(true,true,"The game was won by "+data.winnerName);
+            }
+        });
+
     }
 
-    showHideGameMessage(isVisible,message){
+    showHideGameMessage(isVisible,isWinnerAnnounce,message){
+        if(isWinnerAnnounce){
+            this.messageIconClass="icon-trophy";
+        }else {
+            this.messageIconClass="icon-happy";
+        }
         if(isVisible){
             this.gameMessage=message;
             this.gameMessageClass="gameMessageVisible"

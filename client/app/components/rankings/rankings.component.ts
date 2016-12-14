@@ -2,6 +2,7 @@ import {Component, OnInit} from "@angular/core";
 import {User} from "../auth/user.model";
 import {UserService} from "../../services/user.service";
 import {NavService} from "../../services/nav.service";
+import {SocketService} from "../../services/socket.service";
 
 @Component({
     selector: 'pe-rankings',
@@ -9,8 +10,9 @@ import {NavService} from "../../services/nav.service";
 })
 export class RankingsComponent implements OnInit{
     users:User[];
-    constructor(private _userService:UserService,private _navService:NavService){
+    constructor(private _userService:UserService,private _navService:NavService,private _socketService:SocketService){
         _navService.changeNavSelection("Rankings");
+        _socketService.requestLobbyMove();
     }
     ngOnInit(){
         this._userService.getUsers()

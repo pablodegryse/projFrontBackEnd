@@ -22,25 +22,55 @@ body{
 .white{  background: white;  }
 
 .gameMessageVisible{
+    z-index: 123;
     opacity: 1.0;
     position: fixed;
-    width: 40%;
+    max-width: 40%;
     text-align: center;
     top: 34%;
     left: 50%;
-    padding: 20px;
     transform: translate(-50%, 0);
     transition: opacity 1s;
     background-color: #D5D0DC;
     border: solid #47049F 1px;
     border-radius: 2px;
 }
+.messageWrapper{
+    position: relative;
+    overflow: hidden;
+}
+.messageWrapper>p{
+    margin-left: 78px;
+    margin-right: 32px;
+}
+.gameMessageVisible .btn-pictionare{
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    padding: 2px 6px 2px 6px;
+}
+.gameMessageVisible .icon-happy{
+    position: absolute;
+    top: -15px;
+    left: -20px;
+    font-size: 6em;
+}
+.gameMessageVisible .icon-trophy{
+    position: absolute;
+    top: -5px;
+    left: -20px;
+    font-size: 5em;
+    transform: rotate(25deg);
+}
+.gameMessageVisible .messageIcon:before{
+    color: #A482D1;
+}
+
 
 .gameMessageInvisible{
     opacity: 0.0;
     position: fixed;
 }
-
 .letterboxWrapper{
     width: 100%;
     position: fixed;
@@ -123,16 +153,14 @@ ul{
 .nav-row>li>a,.navbar-nav>a,.navbar-nav-right>a{
     display: inline-block;
     font-size: 1.1em;
-    padding: 8px;
-    padding-top: 16px;
-    padding-bottom: 17px;
+    padding:16px 8px 17px 8px;
 }
 
-.navbar-nav>a,.navbar-nav-right>a{
+.navbar-nav li,.navbar-nav-right>a{
     cursor: hand;
 }
 
-.nav-row>li>a:hover{
+.nav-row>li:hover{
     transition: 0.5s background-color;
     background-color: #A482D1;
 }
@@ -161,8 +189,7 @@ ul{
 }
 .dropdown>li{
     width: 100%;
-    padding-top: 8px;
-    padding-bottom: 8px;
+    padding: 8px 0px 8px 0px;
 }
 .dropdown>li:hover{  cursor: hand;}
 .dropdown>li>a{
@@ -212,8 +239,12 @@ ul{
 pe-home{
     flex: 1 1 auto;
 }
+.leftTitle{
+    color: #47049F;
+    margin: 28px 0px 16px 16px;
+}
 .centreTitle{
-    margin-top: 5%;
+    margin-top: 65px;
     text-align: center;
     color: #47049F;
 }
@@ -241,7 +272,6 @@ pe-home{
     align-items: center;
 }
 /*----HOME & GAME----*/
-
 /*---QUEUE en LOADER---*/
 .loaderWrapper{
     display: inline-block;
@@ -259,7 +289,6 @@ pe-home{
     border-radius: 50%;
     animation: spin 1s ease-out infinite;
 }
-
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
@@ -317,20 +346,15 @@ pe-chat{
 .chatOutput li{
     width: 100%;
     overflow-clip: true;
-    padding-bottom: 2px;
-    padding-top: 2px;
-    padding-left: 4px;
-    padding-right: 2px;
+    padding: 2px 2px 2px 4px;
     border-bottom: solid gray 1px;
 }
 .chatInput{
     border-top: 1px solid gray;
     flex: none;
     height: 27px;
-    padding-top: 4px;
     margin-bottom: 4px;
-    padding-left: 4px;
-    padding-right: 4px;
+    padding: 4px 4px 0px 4px;
     display: flex;
 }
 
@@ -364,12 +388,16 @@ pe-canvas{
     padding-top: 4px;
 }
 .canvasTools li{
+    cursor: hand;
     height: 20px;
     width: 20px;
     margin-left: 4px;
 }
 .canvasTools li:first-of-type{
     margin-left: 0;
+}
+.canvasTools li:last-of-type{
+    width: 28px;
 }
 
 pe-word{
@@ -379,10 +407,7 @@ pe-word{
 }
 
 pe-word>h4{
-    padding-top: 8px;
-    padding-bottom: 8px;
-    padding-left: 4px;
-    padding-right: 4px;
+    padding: 8px 4px 8px 4px;
     text-align: center;
     font-size: 1.5em;
     border-bottom: 1px solid gray;
@@ -405,14 +430,10 @@ pe-word>ul{
 }
 pe-word>ul>li{
     width: 100%;
-    padding-bottom: 2px;
-    padding-top: 2px;
-    padding-left: 4px;
-    padding-right: 2px;
+    padding: 2px 2px 2px 4px;
 }
 
 /*------GAME-----------*/
-
 /*------LIST OVERVIEWS-----------*/
 
 .list-group{
@@ -421,9 +442,12 @@ pe-word>ul>li{
 }
 .list-group-item{
     border-top: 1px solid #47049F;
-    padding-left: 16px;
-    padding-bottom: 4px;
-    padding-top: 4px;
+    padding: 4px 0px 4px 16px;
+}
+.list-group-item>.profileLabel{
+    display: inline-block;
+    min-width: 100px;
+    margin: 4px 8px 4px 0px;
 }
 .list-group-item:hover{
     background-color: #D5D0DC;
@@ -503,10 +527,6 @@ pe-rankings-item>p{
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
-
-.icon-home:before {
-    content: "\e900";
-}
 .icon-pencil2{
     margin-right: 8px;
 }
@@ -523,11 +543,13 @@ pe-rankings-item>p{
 .icon-cog:before {
     content: "\e994";
 }
-.icon-stats-bars:before {
-    content: "\e99c";
-}
 .icon-trophy:before {
     content: "\e99e";
+}
+.icon-menu:before {
+    content: "\e9bd";
+    color: white;
+    font-size: 2em;
 }
 .icon-happy:before {
     content: "\e9df";
@@ -538,7 +560,50 @@ pe-rankings-item>p{
 .icon-exit:before {
     content: "\ea14";
 }
+.icon-loop2:before {
+    content: "\ea2e";
+}
+.icon-mobile-nav{
+    display: none;
+}
 
-
+@media (max-width: 714px) {
+    .icon-mobile-nav{
+        display: inline-block;
+        padding: 10px 12px 12px 12px;
+    }
+    .navbar-nav:hover .icon-mobile-nav{
+        background-color: #A482D1;
+        cursor: hand;
+    }
+    .navbar-nav:hover .nav-left-wrapper{
+        display: inline-block;
+    }
+    .nav-left-wrapper{
+        display: none;
+        z-index: 123;
+        position: absolute;
+        top: 54px;;
+        width: 100%;
+    }
+    .nav-row{
+        margin-left: 0;
+        width: 100%;
+        display: flex;
+        flex-flow: column;
+    }
+    .nav-row li{
+        display: flex;
+        width: 100%;
+        background-color: #7B46C1;
+    }
+    .nav-row li:first-of-type{
+        border-top: 1px solid #47049F;
+    }
+    .nav-row li a{
+        flex-grow: 1;
+        margin-left: 4px;
+    }
+}
 
 

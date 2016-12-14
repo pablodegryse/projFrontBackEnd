@@ -12,9 +12,9 @@ export class NavService {
             let child=this.navList.children[i];
             let link=child.children[0];
             if(link.innerHTML===navName){
-                link.setAttribute("id","selectedNavLink");
+                child.setAttribute("id","selectedNavLink");
             }else {
-                link.setAttribute("id","");
+                child.setAttribute("id","");
             }
         }
     }

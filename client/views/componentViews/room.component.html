@@ -5,8 +5,11 @@
     <pe-chat (messageSend)="updateChat()" [gameRole]="gameRole"></pe-chat>
     </div>
 <div class="{{gameMessageClass}}">
-    <button class="btn btn-pictionare" (click)="showHideGameMessage(false)" >x</button>
-    <p>{{gameMessage}}</p>
+    <div class="messageWrapper">
+        <span class="messageIcon {{messageIconClass}}"></span>
+        <button class="btn btn-pictionare" (click)="showHideGameMessage(false)" >x</button>
+        <p>{{gameMessage}}</p>
+    </div>
 </div>
 <div class="letterboxWrapper">
     <div class="letterBox" *ngIf="showLetterBox===true">
