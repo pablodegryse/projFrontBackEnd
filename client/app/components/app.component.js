@@ -10,17 +10,22 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var socket_service_1 = require("../services/socket.service");
+var auth_service_1 = require("../services/auth.service");
 var AppComponent = (function () {
-    function AppComponent(_socketService) {
+    function AppComponent(_socketService, _authService) {
         this._socketService = _socketService;
+        this._authService = _authService;
     }
+    AppComponent.prototype.ngOnDestroy = function () {
+        this._authService.logout();
+    };
     AppComponent = __decorate([
         core_1.Component({
             selector: 'pe-app',
             templateUrl: './views/componentViews/app.component.html',
             providers: [socket_service_1.SocketService]
         }), 
-        __metadata('design:paramtypes', [socket_service_1.SocketService])
+        __metadata('design:paramtypes', [socket_service_1.SocketService, auth_service_1.AuthService])
     ], AppComponent);
     return AppComponent;
 }());

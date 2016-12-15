@@ -10,6 +10,7 @@ var schema = new Schema({
     email: {type: String, required: true, unique: true},
     friends: [{type: Schema.Types.ObjectId, ref: 'User'}],
     points:{type: Number},
+    status:{type:String},
     room: {type: Schema.Types.ObjectId, ref:'Room'}
 });
 

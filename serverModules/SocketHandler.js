@@ -92,6 +92,17 @@ let SocketHandler=(function () {
             });
 
             socket.on('addUserToSocket', function (user) {
+                // for(let i= 0; i< names.rooms.lobby.length;i++){
+                //     if(names.rooms.lobby[i].socket.user.email===user.email){
+                //         console.log('user already exists');
+                //         return;
+                //     }
+                //     else{
+                //         socket.user = user;
+                //     }
+                // }
+                console.log("sockets:" + io.sockets);
+                console.log('lobby : '+ JSON.stringify(names.rooms.lobby));
                 socket.user = user;
             });
 

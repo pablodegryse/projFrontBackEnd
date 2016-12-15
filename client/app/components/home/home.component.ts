@@ -1,12 +1,15 @@
 import {Component} from "@angular/core";
 import {SocketService} from "../../services/socket.service";
 import {AuthService} from "../../services/auth.service";
+import {User} from "../auth/user.model";
 
 @Component({
     selector: 'pe-home',
     templateUrl: './views/componentViews/home.component.html'
 })
 export class HomeComponent {
+    user:User;
+    socket:any;
 
     constructor(private _socketService:SocketService, private _authService:AuthService){
         if(_socketService.initialLobbyJoin){
@@ -15,6 +18,18 @@ export class HomeComponent {
         }else {
             this._socketService.requestLobbyMove();
         }
+    }
+
+    ngOnInit(){
+        var user=localStorage.getItem('user');
+        if(user!=null && !''){
+            this.user = JSON.parse(localStorage.getItem('user'));
+        }else {
+            this.user = new User('','','Guest');
+        }
+        this.socket = this._socketService.getSocket();
+        this.socket.emit("addUserToSocket", this.user);
+
     }
 
     isLoggedIn(){

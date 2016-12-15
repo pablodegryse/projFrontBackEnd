@@ -20,7 +20,7 @@ export class RegisterComponent implements OnInit {
             this.myForm.value.password,
             this.myForm.value.nickName,
             this.myForm.value.firstName,
-            this.myForm.value.lastName
+            this.myForm.value.lastName,
         );
         console.log("register comp:" + user);
 

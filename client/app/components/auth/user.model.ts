@@ -6,6 +6,7 @@ export class User {
                 public lastName?: string,
                 public points?: number,
                 public userId?:string,
+                public status?:string,
                 public friends?:string[],
                 public roomId?:string
     ) {}

@@ -42,8 +42,6 @@ router.get('/:id',function(req,res,next){
 });
 
 router.post('/', function (req, res, next) {
-    console.log("inside user js");
-    console.log(req.body);
     var user = new User({
         nickName: req.body.nickName,
         firstName: req.body.firstName,
@@ -54,7 +52,6 @@ router.post('/', function (req, res, next) {
     });
     user.save(function(err, result) {
         if (err) {
-            console.log("inside save error");
             return res.status(500).json({
                 title: 'An error occurred',
                 error: err
@@ -87,7 +84,15 @@ router.post('/signin', function(req, res, next) {
                 error: {message: 'Invalid login credentials'}
             });
         }
+        if(user.status == 'online'){
+            return res.status(401).json({
+                title:'Signin failed',
+                error: {message:'User already logged in'}
+            });
+        }
         var token = jwt.sign({user: user}, 'secret', {expiresIn: 7200});
+        user.status = 'online';
+        user.save();
         res.status(200).json({
             message: 'Successfully logged in',
             token: token,
@@ -108,6 +113,7 @@ router.patch('/:id', function (req, res, next) {
         }
         user.points = req.body.points;
         user.friends = req.body.friends;
+        user.status = req.body.status;
 
         user.save(function (err, result) {
             if (err) {

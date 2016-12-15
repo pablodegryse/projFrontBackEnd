@@ -28,5 +28,7 @@ export class QueueComponent implements OnInit{
         }
         this.socket = this._socketService.getSocket();
         this.socket.emit("addUserToSocket", this.user);
+
+        console.log('socket user in queue: ' + this.socket.user);
     }
 }

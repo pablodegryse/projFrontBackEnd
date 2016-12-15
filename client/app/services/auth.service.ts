@@ -4,10 +4,14 @@ import 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 
 import {User} from "../components/auth/user.model";
+import {UserService} from "./user.service";
 
 @Injectable()
 export class AuthService {
-    constructor(private _http: Http) {}
+    user:User;
+    constructor(private _http: Http,
+                private _userService:UserService
+    ) {}
 
     register(user: User) {
         const body = JSON.stringify(user);
@@ -16,6 +20,8 @@ export class AuthService {
             .map((response: Response) => response.json());
     }
     signin(user: User) {
+        user.status = 'online';
+        console.log('inside signin status : ' + user.status);
         const body = JSON.stringify(user);
         const headers = new Headers({'Content-Type': 'application/json'});
         return this._http.post('http://localhost:8080/user/signin', body, {headers: headers})
@@ -23,6 +29,9 @@ export class AuthService {
     }
 
     logout() {
+        this.user = JSON.parse(localStorage.getItem('user'));
+        this.user.status = "offline";
+        this._userService.updateUser(this.user).subscribe();
         localStorage.clear();
     }
 

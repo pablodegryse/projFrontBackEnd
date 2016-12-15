@@ -26,6 +26,7 @@ var QueueComponent = (function () {
         }
         this.socket = this._socketService.getSocket();
         this.socket.emit("addUserToSocket", this.user);
+        console.log('socket user in queue: ' + this.socket.user);
     };
     QueueComponent = __decorate([
         core_1.Component({

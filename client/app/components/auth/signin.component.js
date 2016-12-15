@@ -13,10 +13,12 @@ var forms_1 = require("@angular/forms");
 var user_model_1 = require("./user.model");
 var auth_service_1 = require("../../services/auth.service");
 var router_1 = require("@angular/router");
+var user_service_1 = require("../../services/user.service");
 var SigninComponent = (function () {
-    function SigninComponent(_authService, _router) {
+    function SigninComponent(_authService, _router, _userService) {
         this._authService = _authService;
         this._router = _router;
+        this._userService = _userService;
     }
     SigninComponent.prototype.onSubmit = function () {
         var _this = this;
@@ -26,6 +28,7 @@ var SigninComponent = (function () {
             console.log(data);
             localStorage.setItem('token', data.token);
             localStorage.setItem('user', JSON.stringify(data.user));
+            _this._userService.updateUser(data.user).subscribe();
             _this._router.navigateByUrl('/');
         }, function (error) { return console.error(error); });
         this.myForm.reset();
@@ -44,7 +47,7 @@ var SigninComponent = (function () {
             selector: 'pe-signin',
             templateUrl: './views/componentViews/signin.component.html'
         }), 
-        __metadata('design:paramtypes', [auth_service_1.AuthService, router_1.Router])
+        __metadata('design:paramtypes', [auth_service_1.AuthService, router_1.Router, user_service_1.UserService])
     ], SigninComponent);
     return SigninComponent;
 }());
