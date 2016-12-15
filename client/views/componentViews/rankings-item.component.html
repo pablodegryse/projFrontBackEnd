@@ -1,10 +1,9 @@
-<li class="list-group-item" style="cursor: pointer" (click)="onSelectUser(user)">
-    <div>
-        {{i+1}}. {{user.nickName}} : {{user.points}} points
-        <div class="rankingDetail" *ngIf="isSelected">
-            <p> {{user.firstName}} {{user.lastName}}</p>
-
-            <p> {{user.email}}</p><button *ngIf="(isLoggedIn() && !isFriend)" class="btn btn-pictionare" (click)="onAddFriend(user)">Add Friend</button>
-        </div>
-    </div>
-</li>
+<span class="icon-pencil2"></span>
+<p class="rankingRank">{{i+1}}.</p>
+<p class="rankingName">{{user.nickName}}</p>
+<p class="rankingPoints">{{user.points}}</p>
+<p class="rankingPointsLabel">points</p>
+ <div class="rankingDetail" *ngIf="isSelected">
+     <p> {{user.firstName}} {{user.lastName}}</p>
+     <p> {{user.email}}</p><button *ngIf="(isLoggedIn() && !isFriend)" class="btn btn-pictionare" (click)="onAddFriend(user)">Add Friend</button>
+ </div>

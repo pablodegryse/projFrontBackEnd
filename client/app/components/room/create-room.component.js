@@ -9,30 +9,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("@angular/core");
-var forms_1 = require("@angular/forms");
-var room_model_1 = require("./room.model");
-var room_service_1 = require("../../services/room.service");
+var socket_service_1 = require("../../services/socket.service");
 var CreateRoomComponent = (function () {
-    function CreateRoomComponent(_roomService) {
-        this._roomService = _roomService;
+    function CreateRoomComponent(_socketService) {
+        this._socketService = _socketService;
+        _socketService.requestLobbyMove();
     }
-    CreateRoomComponent.prototype.onSubmit = function () {
-        var room = new room_model_1.Room(this.myForm.value.name);
-        this._roomService.createRoom(room)
-            .subscribe(function (data) { return console.log(data); }, function (error) { return console.log(error); });
-        this.myForm.reset();
-    };
-    CreateRoomComponent.prototype.ngOnInit = function () {
-        this.myForm = new forms_1.FormGroup({
-            name: new forms_1.FormControl(null, forms_1.Validators.required),
-        });
-    };
     CreateRoomComponent = __decorate([
         core_1.Component({
             selector: 'pe-create-room',
             templateUrl: './views/componentViews/create-room.component.html'
         }), 
-        __metadata('design:paramtypes', [room_service_1.RoomService])
+        __metadata('design:paramtypes', [socket_service_1.SocketService])
     ], CreateRoomComponent);
     return CreateRoomComponent;
 }());

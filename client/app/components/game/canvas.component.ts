@@ -31,6 +31,7 @@ export class CanvasComponent implements AfterViewInit{
         }else if(this.gameRole==="guesser"){ this.drawer.changeDrawPermission(false); }
         if(this.socketService.canvasEventsSet){
             this.globalSocket.off("roleChanged");
+            this.globalSocket.off("canvasCleared");
             this.globalSocket.off("drawBegin");
             this.globalSocket.off("drawEnd");
             this.globalSocket.off("drawUpdate");
@@ -52,14 +53,16 @@ export class CanvasComponent implements AfterViewInit{
             }
         });
 
+        this.globalSocket.on("canvasCleared",function () {
+           component.drawer.clearCanvas();
+        });
+
         this.globalSocket.on("drawBegin",function () {
             component.drawer.setmouseDown();
-            console.log("clicked mouse down");
         });
 
         this.globalSocket.on("drawEnd",function () {
             component.drawer.setMouseUp();
-            console.log("clicked mouse up");
         });
 
         this.globalSocket.on("drawUpdate",function (msgObj) {

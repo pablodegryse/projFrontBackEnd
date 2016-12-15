@@ -1,32 +1,26 @@
 <nav class="navbar">
-    <div>
-        <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-nav">
         <div class="navbar-header">
             <a class="navbar-brand">Pictonar-E</a>
         </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
+        <span class="icon-mobile-nav icon-menu"></span>
+        <div class="nav-left-wrapper">
+            <ul class="nav-row" id="appNavList">
                 <li routerLinkActive="active"><a [routerLink]="['/home']" >Home</a></li>
                 <li routerLinkActive="active"><a [routerLink]="['/quickjoin']" >Quick Join</a></li>
                 <li routerLinkActive="active" *ngIf="isLoggedIn()" ><a [routerLink]="['/roomlist']">Room List</a></li>
                 <li routerLinkActive="active" *ngIf="isLoggedIn()"><a [routerLink]="['/createroom']">Create Room</a></li>
                 <li routerLinkActive="active"><a [routerLink]="['/rankings']">Rankings</a></li>
-                <!--<li routerLinkActive="active" *ngIf="!isLoggedIn()" ><a [routerLink]="['/auth']">Authentication</a></li>-->
             </ul>
-
-            <ul class="nav navbar-nav navbar-right" *ngIf="isLoggedIn()" >
-                <li class="dropdown" rbDropdown>
-                    <a id="myToggle" role="button" aria-haspopup="true" aria-expanded="false">Account <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li routerLinkActive="active"><a [routerLink]="['/user']" >Manage</a></li>
-                        <li routerLinkActive="active"><a [routerLink]="['/friends']">Friends</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a (click)="onLogOut()" >Log Out</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
+        </div>
+    </div>
+    <div class="navbar-nav-right" *ngIf="isLoggedIn()">
+        <a class="toggleButton" id="myToggle" role="button" aria-haspopup="true" aria-expanded="false">Account <span class="caret"></span></a>
+        <ul class="dropdown">
+            <li routerLinkActive="active"><span class="dropdown-icon icon-cog"></span><a [routerLink]="['/user']" >Manage</a></li>
+            <li routerLinkActive="active"><span class="dropdown-icon icon-users"></span><a [routerLink]="['/friends']">Friends</a></li>
+            <li role="separator" class="divider"></li>
+            <li><span class="dropdown-icon icon-exit"></span><a (click)="onLogOut()" >Log Out</a></li>
+        </ul>
+    </div>
 </nav>

@@ -33,6 +33,9 @@ var CanvasDrawer=(function () {
         changeColor:function (color) {
             changeMyColor(color);
         },
+        clearCanvas:function () {
+          clearMyCanvas();
+        },
         changeDrawPermission:function(ableTo){
             canDraw=ableTo;
             console.log(canDraw);
@@ -51,6 +54,10 @@ var CanvasDrawer=(function () {
     function changeMyColor(color) {
         currentColor=color;
         ctx.strokeStyle=currentColor;
+    }
+    function clearMyCanvas() {
+        ctx.beginPath();
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
     }
     function draw() {
         if(canDraw && currentMousePos.x>0 && currentMousePos.y>0 &&isHeldDown){
@@ -117,6 +124,13 @@ var CanvasDrawer=(function () {
                 }
             });
         }
+        var resetButton = buttonList.getElementsByClassName("canvasClearBtn")[0];
+        resetButton.addEventListener('click',function () {
+            if(canDraw){
+                clearMyCanvas();
+                drawSocket.emit('canvasClear');
+            }
+        })
     }
 })();
 

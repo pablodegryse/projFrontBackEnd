@@ -11,9 +11,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("@angular/core");
 var user_model_1 = require("../auth/user.model");
 var user_service_1 = require("../../services/user.service");
+var socket_service_1 = require("../../services/socket.service");
 var FriendsListComponent = (function () {
-    function FriendsListComponent(_userService) {
+    function FriendsListComponent(_userService, _socketService) {
         this._userService = _userService;
+        this._socketService = _socketService;
+        _socketService.requestLobbyMove();
     }
     FriendsListComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -44,7 +47,7 @@ var FriendsListComponent = (function () {
             selector: 'pe-friends-list',
             templateUrl: './views/componentViews/friends-list.component.html'
         }), 
-        __metadata('design:paramtypes', [user_service_1.UserService])
+        __metadata('design:paramtypes', [user_service_1.UserService, socket_service_1.SocketService])
     ], FriendsListComponent);
     return FriendsListComponent;
 }());

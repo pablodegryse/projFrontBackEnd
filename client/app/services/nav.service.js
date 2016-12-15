@@ -9,17 +9,28 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("@angular/core");
-var AuthenticationComponent = (function () {
-    function AuthenticationComponent() {
+var NavService = (function () {
+    function NavService() {
+        this.navList = document.getElementById("appNavList");
     }
-    AuthenticationComponent = __decorate([
-        core_1.Component({
-            selector: 'pe-authentication',
-            template: "\n        <div class=\"authBlock\">\n        <h2>Register</h2>\n        <pe-register></pe-register>  \n        </div>\n        <div class=\"authBlock\">  \n        <h2>Sign in</h2>\n        <pe-signin></pe-signin>\n        </div>"
-        }), 
+    NavService.prototype.changeNavSelection = function (navName) {
+        console.log(this.navList.children);
+        for (var i = 0, len = this.navList.children.length; i < len; i++) {
+            var child = this.navList.children[i];
+            var link = child.children[0];
+            if (link.innerHTML === navName) {
+                child.setAttribute("id", "selectedNavLink");
+            }
+            else {
+                child.setAttribute("id", "");
+            }
+        }
+    };
+    NavService = __decorate([
+        core_1.Injectable(), 
         __metadata('design:paramtypes', [])
-    ], AuthenticationComponent);
-    return AuthenticationComponent;
+    ], NavService);
+    return NavService;
 }());
-exports.AuthenticationComponent = AuthenticationComponent;
-//# sourceMappingURL=authentication.component.js.map
+exports.NavService = NavService;
+//# sourceMappingURL=nav.service.js.map

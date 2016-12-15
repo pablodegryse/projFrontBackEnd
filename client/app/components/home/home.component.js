@@ -12,10 +12,12 @@ var core_1 = require("@angular/core");
 var socket_service_1 = require("../../services/socket.service");
 var auth_service_1 = require("../../services/auth.service");
 var user_model_1 = require("../auth/user.model");
+var nav_service_1 = require("../../services/nav.service");
 var HomeComponent = (function () {
-    function HomeComponent(_socketService, _authService) {
+    function HomeComponent(_socketService, _authService, _navService) {
         this._socketService = _socketService;
         this._authService = _authService;
+        this._navService = _navService;
         if (_socketService.initialLobbyJoin) {
             this._socketService.lobbyJoin();
             _socketService.initialLobbyJoin = false;
@@ -23,6 +25,7 @@ var HomeComponent = (function () {
         else {
             this._socketService.requestLobbyMove();
         }
+        _navService.changeNavSelection("Home");
     }
     HomeComponent.prototype.ngOnInit = function () {
         var user = localStorage.getItem('user');
@@ -43,7 +46,7 @@ var HomeComponent = (function () {
             selector: 'pe-home',
             templateUrl: './views/componentViews/home.component.html'
         }), 
-        __metadata('design:paramtypes', [socket_service_1.SocketService, auth_service_1.AuthService])
+        __metadata('design:paramtypes', [socket_service_1.SocketService, auth_service_1.AuthService, nav_service_1.NavService])
     ], HomeComponent);
     return HomeComponent;
 }());

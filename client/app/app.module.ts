@@ -19,6 +19,7 @@ import {RoomItemComponent} from "./components/room/room-item.component";
 import {AuthService} from "./services/auth.service";
 import {HttpModule} from "@angular/http";
 import {RoomService} from "./services/room.service";
+import {NavService} from "./services/nav.service";
 
 import {CanvasComponent} from "./components/game/canvas.component";
 import {QueueComponent} from "./components/game/queue.component";
@@ -68,7 +69,7 @@ import {FriendItemComponent} from "./components/friends/friend-item.component";
         FriendsListComponent,
         FriendItemComponent
     ],
-    providers:[AuthService, RoomService, ChatService, UserService],
+    providers:[AuthService, RoomService, ChatService, UserService,NavService],
     bootstrap:[AppComponent]
 })
 

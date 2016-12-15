@@ -77,6 +77,10 @@ let SocketHandler=(function () {
                 gameManager.resolveGameAction(socket,gameManager.canvasActionCallBack,"changedColor",newColor);
             });
 
+            socket.on('canvasClear',function () {
+                gameManager.resolveGameAction(socket,gameManager.canvasActionCallBack,"canvasCleared",null);
+            });
+
             socket.on('requestWordBatch',function () {
                gameManager.serveWordBatch(socket);
             });

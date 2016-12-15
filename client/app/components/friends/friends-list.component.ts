@@ -1,6 +1,7 @@
 import {Component, OnInit, Output} from "@angular/core";
 import {User} from "../auth/user.model";
 import {UserService} from "../../services/user.service";
+import {SocketService} from "../../services/socket.service";
 
 @Component({
     selector: 'pe-friends-list',
@@ -11,7 +12,8 @@ export class FriendsListComponent implements OnInit{
     friends:User[];
     @Output() user:User;
 
-    constructor(private _userService:UserService){
+    constructor(private _userService:UserService,private _socketService:SocketService){
+        _socketService.requestLobbyMove();
     }
 
     ngOnInit(){

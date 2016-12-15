@@ -8,8 +8,6 @@ import {Router} from "@angular/router";
     templateUrl: './views/componentViews/header.component.html'
 })
 export class HeaderComponent implements OnInit{
-
-
     constructor(private _authService:AuthService, private _router:Router){}
 
     ngOnInit(){
@@ -23,6 +21,4 @@ export class HeaderComponent implements OnInit{
         this._authService.logout();
         this._router.navigateByUrl('/');
     }
-
-
 }

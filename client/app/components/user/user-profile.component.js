@@ -9,8 +9,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("@angular/core");
+var socket_service_1 = require("../../services/socket.service");
 var UserProfileComponent = (function () {
-    function UserProfileComponent() {
+    function UserProfileComponent(_socketService) {
+        this._socketService = _socketService;
+        _socketService.requestLobbyMove();
     }
     UserProfileComponent.prototype.ngOnInit = function () {
         this.user = JSON.parse(localStorage.getItem('user'));
@@ -20,7 +23,7 @@ var UserProfileComponent = (function () {
             selector: 'pe-user-profile',
             templateUrl: './views/componentViews/user-profile.component.html'
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [socket_service_1.SocketService])
     ], UserProfileComponent);
     return UserProfileComponent;
 }());

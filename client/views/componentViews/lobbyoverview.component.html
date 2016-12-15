@@ -1,6 +1,9 @@
 <div *ngIf="roomsAvailable===false" >
     <h2 class="centreTitle">No rooms to show :(</h2>
 </div>
+<div *ngIf="roomsAvailable===true">
+    <h2 class="leftTitle">Active rooms</h2>
+</div>
 <ul class="list-group">
     <li class="list-group-item" *ngFor="let room of roomList">
         <h3>Room ID: {{room.id}}</h3>

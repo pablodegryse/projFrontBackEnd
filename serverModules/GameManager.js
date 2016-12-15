@@ -101,28 +101,29 @@ let GameManager=(function () {
     let wordGuessCallback=function (room,socket,guessedWord) {
         console.log("guess = " +guessedWord.guess);
         console.log("user that guessed = " + guessedWord.user.nickName);
-        socket.user = guessedWord.user;
-        let guessCorrect = false;
-        (guessedWord.guess === room.currentWordToDraw)? guessCorrect = true : guessCorrect = false;
-        socket.to(room.id).emit("wordGuessed",{hasGuessed:guessCorrect, socketId: socket.id});
-        socket.emit("wordGuessed",{hasGuessed:guessCorrect,isme:true});
-        room.guessCount++;
-        if(guessCorrect){
-            room.wordsGuessed++;
-            awardPoints(room,socket);
-            if(room.wordsGuessed===room.guessers.length+1){
-                concludeGame(room);
-            }else {
-                setTimeout(rotateDrawer,2000,room);
+        if(room.wordLetterBox.length>0) {
+            socket.user = guessedWord.user;
+            let guessCorrect = false;
+            (guessedWord.guess === room.currentWordToDraw) ? guessCorrect = true : guessCorrect = false;
+            socket.to(room.id).emit("wordGuessed", {hasGuessed: guessCorrect, socketId: socket.user.nickName});
+            socket.emit("wordGuessed", {hasGuessed: guessCorrect, isme: true});
+            room.guessCount++;
+            if (guessCorrect) {
+                room.wordsGuessed++;
+                awardPoints(room, socket);
+                if (room.wordsGuessed === room.guessers.length + 1) {
+                    concludeGame(room);
+                } else {
+                    setTimeout(rotateDrawer, 2000, room);
+                }
+            } else {
+                checkToRevealLetter(room, revealLetterCallback);
             }
-        }else {
-            checkToRevealLetter(room,revealLetterCallback);
         }
     };
 
     //point distrubution according to amount of guesses compared to number of guessers in the room
     let awardPoints=function (room,guesser) {
-        console.log("awarding points:::::::::::::::");
         switch(true){
             case (room.guessCount<(room.guessers.length)):
                 room.drawer.points+=10;
@@ -189,12 +190,13 @@ let GameManager=(function () {
             globalNS.to(guessers[i].socket.id).emit("updateUser",{user:guessers[i].socket.user});
             if (guessers[i].points > winner.points) winner = guessers[i];
         }
-        callback(roomId,winner.socket.user.nickName);
+        callback(roomId,winner);
     };
 
-    let concludeGameCallback=function (roomId,winnerName) {
-        globalNS.to(roomId).emit("gameConcluded",{"msg":"Game Ended!","winner":winnerName});
-        setTimeout(closeGameRoom,1500,roomId);
+    let concludeGameCallback=function (roomId,winnerSocket) {
+        winnerSocket.socket.to(roomId).emit("winnerAnnounce",{"isme":false,"winnerName":winnerSocket.socket.user.nickName});
+        winnerSocket.socket.emit("winnerAnnounce",{"isme":true});
+        setTimeout(closeGameRoom,2500,roomId);
     };
 
     let closeGameRoom=function (roomId) {
