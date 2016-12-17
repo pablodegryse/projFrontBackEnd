@@ -110,13 +110,8 @@ body{
     font-size: 24px;
     margin: 0
 }
-/*
-.color-primary-0 { color: #7B46C1 }
-.color-primary-1 { color: #D5D0DC }
-.color-primary-2 { color: #A482D1 }
-.color-primary-3 { color: #5F11C8 }
-.color-primary-4 { color: #47049F }
- */
+/*.color-primary-0 { color: #7B46C1 } .color-primary-1 { color: #D5D0DC }
+.color-primary-2 { color: #A482D1 } .color-primary-3 { color: #5F11C8 } .color-primary-4 { color: #47049F } */
 
 /*----NAV----*/
 #selectedNavLink{
@@ -235,7 +230,6 @@ ul{
     cursor: pointer;
 }
 /*----BUTTONS----*/
-
 /*----HOME & GAME----*/
 
 .wordBtns{
@@ -304,7 +298,6 @@ pe-home{
 }
 
 /*---QUEUE en LOADER---*/
-
 /*------GAME-----------*/
 pe-game,pe-room{
     display: flex;
@@ -386,6 +379,7 @@ pe-chat{
 
 pe-canvas{
     margin-top: 10px;
+    margin-right: 8px;
 }
 
 .canvasTools{
@@ -472,8 +466,6 @@ pe-word>ul>li{
     margin: 0;
     margin-bottom: 2px;
 }
-
-/*------LIST OVERVIEWS-----------*/
 
 /*------AUTH en SIGN IN------------*/
 
@@ -614,5 +606,3 @@ pe-rankings-item>p{
         margin-left: 4px;
     }
 }
-
-
