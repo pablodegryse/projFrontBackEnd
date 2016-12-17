@@ -61,9 +61,11 @@ var ChatComponent = (function () {
         }
     };
     ChatComponent.prototype.guessWord = function () {
-        this.chatSocket.emit("guessedWord", { guess: this.guess, user: this.user });
-        this.chatSocket.on("guessedWord", this.user);
-        this.guess = '';
+        if (this.guess != null && this.guess != '') {
+            this.chatSocket.emit("guessedWord", { guess: this.guess, user: this.user });
+            this.chatSocket.on("guessedWord", this.user);
+            this.guess = '';
+        }
     };
     __decorate([
         core_1.Input(), 

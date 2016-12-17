@@ -13,7 +13,7 @@ let GameManager=(function () {
 
     //de gameroom van een socket vinden die een event afvuurt
     let resolveGameAction=function (socket,callback,action,content) {
-        if(content.content!=null && content.content!=" "){
+        if(content!=null){
             for(let i=0,len=active.length;i<len;i++){
                 let currentId=active[i].id;
                 if(socket.rooms[currentId]!=null){

@@ -175,6 +175,7 @@ ul{
 }
 
 .dropdown{
+    z-index: 2000;
     display: none;
     background-color: #A482D1;
     position: absolute;
@@ -225,7 +226,7 @@ ul{
     padding-right: 4px;
 }
 
-.btn-pictionare{
+.btn-pictionare:hover{
     background-color: #5F11C8;
 }
 .btn-pictionare{
@@ -236,6 +237,14 @@ ul{
 /*----BUTTONS----*/
 
 /*----HOME & GAME----*/
+
+.wordBtns{
+    display: flex;
+}
+.wordBtns>.btn-pictionare{
+    flex-grow: 1;
+}
+.rerollBtn{ margin-right: 4px}
 pe-home{
     flex: 1 1 auto;
 }
@@ -388,7 +397,7 @@ pe-canvas{
     padding-top: 4px;
 }
 .canvasTools li{
-    cursor: pointer;
+    cursor: hand;
     height: 20px;
     width: 20px;
     margin-left: 4px;

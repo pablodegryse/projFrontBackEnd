@@ -6,7 +6,7 @@
     </li>
 </ul>
 <p *ngIf="hideListForSelected===true">{{selectedWord}}</p>
-<div>
-<button class="btn btn-pictionare" *ngIf="canRefresh===true && hideListForSelected===false" type="button" (click)="requestWordBatch()">Reroll words</button>
+<div class="wordBtns">
+<button class="btn btn-pictionare rerollBtn" *ngIf="canRefresh===true && hideListForSelected===false" type="button" (click)="requestWordBatch()">Reroll words</button>
 <button class="btn btn-pictionare" *ngIf="hideListForSelected===false" type="button" (click)="confirmWordChoice()">Select word</button>
 </div>

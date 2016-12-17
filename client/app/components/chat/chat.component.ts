@@ -66,8 +66,10 @@ export class ChatComponent implements OnInit{
         }
     }
     guessWord(){
-        this.chatSocket.emit("guessedWord", {guess: this.guess, user: this.user});
-        this.chatSocket.on("guessedWord",this.user);
-        this.guess = '';
+        if(this.guess!=null && this.guess!=''){
+            this.chatSocket.emit("guessedWord", {guess: this.guess, user: this.user});
+            this.chatSocket.on("guessedWord",this.user);
+            this.guess = '';
+        }
     }
 }
