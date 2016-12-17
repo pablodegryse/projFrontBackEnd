@@ -39,7 +39,9 @@ var RankingsItemComponent = (function () {
         }
     };
     RankingsItemComponent.prototype.isLoggedIn = function () {
-        return this._authService.isLoggedIn();
+        var result = this._authService.isLoggedIn();
+        console.log(result);
+        return result;
     };
     RankingsItemComponent.prototype.onAddFriend = function (user) {
         var _this = this;

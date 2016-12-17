@@ -157,7 +157,7 @@ ul{
 }
 
 .navbar-nav li,.navbar-nav-right>a{
-    cursor: hand;
+    cursor: pointer;
 }
 
 .nav-row>li:hover{
@@ -191,7 +191,7 @@ ul{
     width: 100%;
     padding: 8px 0px 8px 0px;
 }
-.dropdown>li:hover{  cursor: hand;}
+.dropdown>li{  cursor: pointer;}
 .dropdown>li>a{
     padding-left: 2px;
 }
@@ -228,10 +228,10 @@ ul{
 .btn-pictionare{
     background-color: #5F11C8;
 }
-.btn-pictionare:hover{
+.btn-pictionare{
     color: white;
     background-color: #47049F;
-    cursor: hand;
+    cursor: pointer;
 }
 /*----BUTTONS----*/
 
@@ -388,7 +388,7 @@ pe-canvas{
     padding-top: 4px;
 }
 .canvasTools li{
-    cursor: hand;
+    cursor: pointer;
     height: 20px;
     width: 20px;
     margin-left: 4px;
@@ -574,7 +574,7 @@ pe-rankings-item>p{
     }
     .navbar-nav:hover .icon-mobile-nav{
         background-color: #A482D1;
-        cursor: hand;
+        cursor: pointer;
     }
     .navbar-nav:hover .nav-left-wrapper{
         display: inline-block;

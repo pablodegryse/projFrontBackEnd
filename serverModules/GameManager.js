@@ -13,16 +13,18 @@ let GameManager=(function () {
 
     //de gameroom van een socket vinden die een event afvuurt
     let resolveGameAction=function (socket,callback,action,content) {
-        for(let i=0,len=active.length;i<len;i++){
-            let currentId=active[i].id;
-            if(socket.rooms[currentId]!=null){
-                if(active[i].drawer.socket.id===socket.id){
-                    callback(active[i],action,content);
+        if(content.content!=null && content.content!=" "){
+            for(let i=0,len=active.length;i<len;i++){
+                let currentId=active[i].id;
+                if(socket.rooms[currentId]!=null){
+                    if(active[i].drawer.socket.id===socket.id){
+                        callback(active[i],action,content);
+                    }
+                    else{
+                        callback(active[i], socket, action, content);
+                    }
+                    break;
                 }
-                else{
-                    callback(active[i], socket, action, content);
-                }
-                break;
             }
         }
     };
@@ -162,7 +164,6 @@ let GameManager=(function () {
         room.checkWordBox[wordLetterIndex]='$';
         room.wordLetterBox.splice(randomIndex,1);
         globalNS.to(room.id).emit("revealLetter",{letter:randomLetter,letterIndex:wordLetterIndex});
-        console.log("revealing letter:"+randomLetter+" - "+"at index  in letterbox:"+randomIndex+" - at index in word:"+wordLetterIndex);
     };
 
     //doordraaien van drawer + room vars resetten

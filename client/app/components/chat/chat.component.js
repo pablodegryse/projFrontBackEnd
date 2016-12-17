@@ -52,11 +52,13 @@ var ChatComponent = (function () {
         });
     };
     ChatComponent.prototype.sendMessage = function () {
-        var messageToSend = new message_model_1.Message(this.message, this.user.nickName);
-        this.messages.push(messageToSend);
-        this._chatService.addMessage(messageToSend);
-        this.chatSocket.emit("sendChatMessage", messageToSend);
-        this.message = '';
+        if (this.message != null && this.message != '') {
+            var messageToSend = new message_model_1.Message(this.message, this.user.nickName);
+            this.messages.push(messageToSend);
+            this._chatService.addMessage(messageToSend);
+            this.chatSocket.emit("sendChatMessage", messageToSend);
+            this.message = '';
+        }
     };
     ChatComponent.prototype.guessWord = function () {
         this.chatSocket.emit("guessedWord", { guess: this.guess, user: this.user });

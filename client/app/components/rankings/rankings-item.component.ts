@@ -39,7 +39,9 @@ export class RankingsItemComponent implements OnInit{
         }
     }
     isLoggedIn(){
-        return this._authService.isLoggedIn();
+        let result=this._authService.isLoggedIn();
+        console.log(result);
+        return result;
     }
 
     onAddFriend(user:User){
