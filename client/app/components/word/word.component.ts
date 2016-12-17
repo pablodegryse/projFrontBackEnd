@@ -12,6 +12,8 @@ export class WordComponent implements OnInit{
     canRefresh:boolean = true;
     hideListForSelected:boolean = false;
     globalSocket:any;
+    foldStatus:boolean=false;
+    foldClass:string="unfolded";
     constructor(private socketService:SocketService){
         this.globalSocket=socketService.getSocket();
         this.setWordSocketEvent(this);

@@ -163,6 +163,10 @@ ul{
 .navbar-nav-right:hover .dropdown{
     display: block;
 }
+.navbar-nav-right:hover .foldIcon{
+    transition: 0.5s transform;
+    transform: rotate(90deg);
+}
 
 .navbar-nav-right:hover .toggleButton{
     transition: 0.5s background-color;
@@ -563,6 +567,15 @@ pe-rankings-item>p{
 }
 .icon-loop2:before {
     content: "\ea2e";
+}
+.icon-play3:before {
+    content: "\ea1c";
+}
+.foldIcon{
+    padding-left: 2px;
+    font-size: 0.7em;
+    display: inline-block;
+    transform: rotate(-90deg);
 }
 .icon-mobile-nav{
     display: none;
