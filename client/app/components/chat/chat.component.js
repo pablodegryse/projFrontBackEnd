@@ -42,13 +42,17 @@ var ChatComponent = (function () {
         this.chatSocket.on('updateUser', function (user) {
             if (localStorage.getItem('user') == null)
                 return;
-            if (self.user.email === user.user.email) {
-                self.user = user.user;
-                self._userService.updateUser(self.user)
-                    .subscribe(function (data) {
-                    localStorage.setItem('user', JSON.stringify(self.user));
-                });
+            var currentUser = JSON.parse(localStorage.getItem('user'));
+            if (currentUser.email === user.user.email) {
+                localStorage.setItem('user', JSON.stringify(user.user));
             }
+            // if(self.user.email===user.user.email){
+            //     self.user = user.user;
+            //     self._userService.updateUser(self.user)
+            //         .subscribe((data)=>{
+            //             localStorage.setItem('user', JSON.stringify(self.user));
+            //         });
+            // }
         });
     };
     ChatComponent.prototype.sendMessage = function () {

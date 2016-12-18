@@ -25,7 +25,7 @@ var UserService = (function () {
             var transformedUsers = [];
             for (var _i = 0, users_1 = users; _i < users_1.length; _i++) {
                 var user = users_1[_i];
-                transformedUsers.push(new user_model_1.User(user.email, user.password, user.nickName, user.firstName, user.lastName, user.points, user._id, user.friends));
+                transformedUsers.push(new user_model_1.User(user.email, user.password, user.nickName, user.firstName, user.lastName, user.points, user._id, user.status, user.friends));
             }
             _this.users = transformedUsers;
             return transformedUsers;
@@ -56,7 +56,7 @@ var UserService = (function () {
             var transformedFriends = [];
             for (var _i = 0, _a = user.friends; _i < _a.length; _i++) {
                 var friend = _a[_i];
-                transformedFriends.push(new user_model_1.User(friend.email, friend.password, friend.nickName, friend.firstName, friend.lastName, friend.points, friend._id));
+                transformedFriends.push(new user_model_1.User(friend.email, friend.password, friend.nickName, friend.firstName, friend.lastName, friend.points, friend._id, friend.status, friend.friends));
             }
             return transformedFriends;
         });

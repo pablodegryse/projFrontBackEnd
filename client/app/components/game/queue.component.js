@@ -11,9 +11,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var socket_service_1 = require("../../services/socket.service");
 var user_model_1 = require("../auth/user.model");
+var user_service_1 = require("../../services/user.service");
 var QueueComponent = (function () {
-    function QueueComponent(_socketService) {
+    function QueueComponent(_socketService, _userService) {
         this._socketService = _socketService;
+        this._userService = _userService;
         this.message = "You are in the queue, searching for a game...";
     }
     QueueComponent.prototype.ngOnInit = function () {
@@ -25,15 +27,16 @@ var QueueComponent = (function () {
             this.user = new user_model_1.User('', '', 'Guest');
         }
         this.socket = this._socketService.getSocket();
+        //this.user.status = 'In Queue';
         this.socket.emit("addUserToSocket", this.user);
-        console.log('socket user in queue: ' + this.socket.user);
+        //this._userService.updateUser(this.user).subscribe();
     };
     QueueComponent = __decorate([
         core_1.Component({
             selector: "pe-queue",
             template: "<div class=\"centreContentContainerColumn\">\n                <div class=\"loaderWrapper\">\n                      <div class=\"loader\"></div>          \n                </div>\n                <h2 class=\"centreSubtitle\">{{message}}</h2>\n              </div>"
         }), 
-        __metadata('design:paramtypes', [socket_service_1.SocketService])
+        __metadata('design:paramtypes', [socket_service_1.SocketService, user_service_1.UserService])
     ], QueueComponent);
     return QueueComponent;
 }());

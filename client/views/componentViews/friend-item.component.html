@@ -1,9 +1,8 @@
 <li class="list-group-item" style="cursor: pointer" (click)="onSelectFriend(friend)">
-    <div>
-        {{i+1}}. {{friend.nickName}} : {{friend.points}} points
+    <div class="rankingName">
+        {{i+1}}. {{friend.nickName}} : {{friend.points}} points   {{friend.status}}
         <div class="friendDetail" *ngIf="isSelected">
             <p> {{friend.firstName}} {{friend.lastName}}</p>
-            <p>Status: {{friend.status}}</p>
             <p> {{friend.email}}</p><button *ngIf="isLoggedIn()" class="btn btn-pictionare" (click)="onRemoveFriend(friend)">Remove Friend</button>
         </div>
     </div>

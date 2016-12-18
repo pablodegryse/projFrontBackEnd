@@ -4,6 +4,9 @@ let GameManager=(function () {
     let wordApi;
     let globalNS;
     let rManager;
+    let User = require('../dbmodels/user');
+    let router = require('../routes/user');
+    let http = require('http');
     let init=function (roomManager,apiHandler,globalNameSpace) {
         rManager=roomManager;
         active=roomManager.activeRooms;
@@ -183,14 +186,20 @@ let GameManager=(function () {
     //de punten uit de drawer en guessers halen en diegenen die ingelogd zijn opslaan
     let savePointsToDb=function (drawer,guessers,roomId,callback) {
         drawer.socket.user.points += drawer.points;
+        updateUser(drawer.socket.user);
         globalNS.to(drawer.socket.id).emit("updateUser",{user:drawer.socket.user});
         let winner = drawer;
         for(let i=0,len = guessers.length;i<len;i++){
             guessers[i].socket.user.points += guessers[i].points;
+            updateUser(guessers[i].socket.user);
             globalNS.to(guessers[i].socket.id).emit("updateUser",{user:guessers[i].socket.user});
             if (guessers[i].points > winner.points) winner = guessers[i];
         }
         callback(roomId,winner);
+    };
+
+    let updateUser = function(user){
+      User.updatePoints(user);
     };
 
     let concludeGameCallback=function (roomId,winnerSocket) {

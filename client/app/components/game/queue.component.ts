@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {SocketService} from "../../services/socket.service";
 import {User} from "../auth/user.model";
+import {UserService} from "../../services/user.service";
 
 @Component({
     selector:"pe-queue",
@@ -17,7 +18,9 @@ export class QueueComponent implements OnInit{
     user:User;
     socket:any;
 
-    constructor(private _socketService:SocketService){}
+    constructor(private _socketService:SocketService,
+                private _userService:UserService
+    ){}
 
     ngOnInit(){
         var user=localStorage.getItem('user');
@@ -27,8 +30,8 @@ export class QueueComponent implements OnInit{
             this.user = new User('','','Guest');
         }
         this.socket = this._socketService.getSocket();
+        //this.user.status = 'In Queue';
         this.socket.emit("addUserToSocket", this.user);
-
-        console.log('socket user in queue: ' + this.socket.user);
+        //this._userService.updateUser(this.user).subscribe();
     }
 }

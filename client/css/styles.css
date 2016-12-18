@@ -133,7 +133,7 @@ body{
 .navbar-header{  padding: 8px;  }
 .navbar-brand{  font-size: 2em;  }
 
-ul{
+ul, li{
     list-style: none;
     margin: 0;
     padding: 0;
@@ -502,9 +502,10 @@ pe-rankings-item>p{
     margin: 0;
 }
 .rankingRank{margin-right: 16px;}
-.rankingRank,.rankingName,.rankingPoints,.rankingPointsLabel{
+.rankingRank,.rankingName,.rankingPoints,.rankingPointsLabel, .rankingDetail{
     padding-top: 4px;
     font-size: 1.2em;
+    cursor: pointer;
 }
 .rankingPoints{
     min-width: 50px;

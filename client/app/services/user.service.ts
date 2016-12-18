@@ -10,6 +10,7 @@ export class UserService {
     private users:User[];
     constructor(private _http: Http) {}
 
+
     getUsers(){
         return this._http.get('http://localhost:8080/user')
             .map((response:Response)=> {
@@ -24,6 +25,7 @@ export class UserService {
                         user.lastName,
                         user.points,
                         user._id,
+                        user.status,
                         user.friends
                     ));
                 }
@@ -73,7 +75,9 @@ export class UserService {
                             friend.firstName,
                             friend.lastName,
                             friend.points,
-                            friend._id
+                            friend._id,
+                        friend.status,
+                        friend.friends
                     ));
                 }
                 return transformedFriends;

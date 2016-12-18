@@ -12,11 +12,13 @@ var core_1 = require('@angular/core');
 var socket_service_1 = require("../../services/socket.service");
 var router_1 = require("@angular/router");
 var nav_service_1 = require("../../services/nav.service");
+var user_service_1 = require("../../services/user.service");
 var GameComponent = (function () {
-    function GameComponent(socketService, gameRouter, _navService) {
+    function GameComponent(socketService, gameRouter, _navService, _userService) {
         this.socketService = socketService;
         this.gameRouter = gameRouter;
         this._navService = _navService;
+        this._userService = _userService;
         this.isGameReady = false;
         this.localsocketService = socketService;
         this.globalSocket = this.localsocketService.getSocket();
@@ -60,7 +62,7 @@ var GameComponent = (function () {
             selector: "pe-game",
             template: "\n                <pe-queue *ngIf=\"isGameReady===false\"></pe-queue>\n                <pe-room *ngIf=\"isGameReady===true\" [gameRole]=\"gameParentRole\" ></pe-room>"
         }), 
-        __metadata('design:paramtypes', [socket_service_1.SocketService, router_1.Router, nav_service_1.NavService])
+        __metadata('design:paramtypes', [socket_service_1.SocketService, router_1.Router, nav_service_1.NavService, user_service_1.UserService])
     ], GameComponent);
     return GameComponent;
 }());

@@ -96,18 +96,28 @@ let SocketHandler=(function () {
             });
 
             socket.on('addUserToSocket', function (user) {
-                // for(let i= 0; i< names.rooms.lobby.length;i++){
-                //     if(names.rooms.lobby[i].socket.user.email===user.email){
-                //         console.log('user already exists');
-                //         return;
-                //     }
-                //     else{
-                //         socket.user = user;
-                //     }
-                // }
-                console.log("sockets:" + io.sockets);
-                console.log('lobby : '+ JSON.stringify(names.rooms.lobby));
-                socket.user = user;
+                Object.keys(io.sockets.connected).forEach(function (s) {
+                    if(socket.conn.id === s){
+                        socket.user = user;
+                        io.sockets.sockets[s].user = user;
+                        if(socket.user != undefined && socket.user.nickName != "Guest"){
+                            Object.keys(io.sockets.connected).forEach(function (t) {
+                                if(io.sockets.connected[t].user != undefined){
+                                    if((socket.user.email === io.sockets.connected[t].user.email)&&socket.conn.id!=t){
+                                        console.log("error :  " + socket + 'already connected');
+                                        socket.disconnect();
+                                    }else{
+                                        socket.user = user;
+                                        io.sockets.sockets[s].user = user;
+                                    }
+                                }
+                            });
+                        }else{
+                            io.sockets.sockets[s].user = user;
+                            socket.user = user;
+                        }
+                    }
+                });
             });
 
             socket.on('getRoomList',function () { rManager.getRoomList(socket); });
