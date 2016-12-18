@@ -3,7 +3,6 @@ import {SocketService} from "../../services/socket.service";
 import {Router} from "@angular/router";
 import {User} from "../auth/user.model";
 import {NavService} from "../../services/nav.service";
-import {UserService} from "../../services/user.service";
 
 @Component({
     selector:"pe-game",
@@ -19,7 +18,7 @@ export class GameComponent{
     localsocketService:SocketService;
     user:User;
     router;
-    constructor(private socketService:SocketService,private gameRouter:Router,private _navService:NavService, private _userService:UserService){
+    constructor(private socketService:SocketService,private gameRouter:Router,private _navService:NavService){
         this.localsocketService=socketService;
         this.globalSocket=this.localsocketService.getSocket();
         this.globalSocket.user = this.user;

@@ -13,12 +13,10 @@ var chat_service_1 = require("../../services/chat.service");
 var user_model_1 = require("../auth/user.model");
 var socket_service_1 = require("../../services/socket.service");
 var message_model_1 = require("./message.model");
-var user_service_1 = require("../../services/user.service");
 var ChatComponent = (function () {
-    function ChatComponent(_chatService, _socketService, _userService) {
+    function ChatComponent(_chatService, _socketService) {
         this._chatService = _chatService;
         this._socketService = _socketService;
-        this._userService = _userService;
         this.messages = [];
     }
     ChatComponent.prototype.ngOnInit = function () {
@@ -46,13 +44,6 @@ var ChatComponent = (function () {
             if (currentUser.email === user.user.email) {
                 localStorage.setItem('user', JSON.stringify(user.user));
             }
-            // if(self.user.email===user.user.email){
-            //     self.user = user.user;
-            //     self._userService.updateUser(self.user)
-            //         .subscribe((data)=>{
-            //             localStorage.setItem('user', JSON.stringify(self.user));
-            //         });
-            // }
         });
     };
     ChatComponent.prototype.sendMessage = function () {
@@ -80,7 +71,7 @@ var ChatComponent = (function () {
             selector: 'pe-chat',
             templateUrl: './views/componentViews/chat.component.html'
         }), 
-        __metadata('design:paramtypes', [chat_service_1.ChatService, socket_service_1.SocketService, user_service_1.UserService])
+        __metadata('design:paramtypes', [chat_service_1.ChatService, socket_service_1.SocketService])
     ], ChatComponent);
     return ChatComponent;
 }());

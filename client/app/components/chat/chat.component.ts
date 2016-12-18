@@ -4,7 +4,6 @@ import {User} from "../auth/user.model";
 import {Room} from "../room/room.model";
 import {SocketService} from "../../services/socket.service";
 import {Message} from "./message.model";
-import {UserService} from "../../services/user.service";
 
 @Component({
     selector: 'pe-chat',
@@ -23,8 +22,7 @@ export class ChatComponent implements OnInit{
     @Input() gameRole:string;
 
     constructor(private _chatService:ChatService,
-                private _socketService:SocketService,
-                private _userService:UserService)
+                private _socketService:SocketService)
     {}
 
     ngOnInit(){
@@ -50,14 +48,6 @@ export class ChatComponent implements OnInit{
             if(currentUser.email === user.user.email){
                 localStorage.setItem('user', JSON.stringify(user.user));
             }
-
-            // if(self.user.email===user.user.email){
-            //     self.user = user.user;
-            //     self._userService.updateUser(self.user)
-            //         .subscribe((data)=>{
-            //             localStorage.setItem('user', JSON.stringify(self.user));
-            //         });
-            // }
         });
     }
 

@@ -4,7 +4,6 @@ import {AuthService} from "../../services/auth.service";
 import {User} from "../auth/user.model";
 import {NavService} from "../../services/nav.service";
 
-
 @Component({
     selector: 'pe-home',
     templateUrl: './views/componentViews/home.component.html'
@@ -35,7 +34,6 @@ export class HomeComponent {
         }
         this.socket = this._socketService.getSocket();
         this.socket.emit("addUserToSocket", this.user);
-
     }
 
     isLoggedIn(){

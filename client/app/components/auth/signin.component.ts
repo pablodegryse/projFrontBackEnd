@@ -5,7 +5,6 @@ import {AuthService} from "../../services/auth.service";
 import {Router} from "@angular/router";
 import {UserService} from "../../services/user.service";
 
-
 @Component({
     selector: 'pe-signin',
     templateUrl: './views/componentViews/signin.component.html'

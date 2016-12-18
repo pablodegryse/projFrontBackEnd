@@ -1,4 +1,4 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, OnInit, OnDestroy} from "@angular/core";
 import {User} from "../auth/user.model";
 import {UserService} from "../../services/user.service";
 import {NavService} from "../../services/nav.service";
@@ -8,7 +8,7 @@ import {SocketService} from "../../services/socket.service";
     selector: 'pe-rankings',
     templateUrl: './views/componentViews/rankings.component.html'
 })
-export class RankingsComponent implements OnInit{
+export class RankingsComponent implements OnInit, OnDestroy{
     users:User[];
     constructor(private _userService:UserService,private _navService:NavService,private _socketService:SocketService){
         _navService.changeNavSelection("Rankings");
@@ -30,6 +30,10 @@ export class RankingsComponent implements OnInit{
                     return users;
                 }
             );
+    }
+
+    ngOnDestroy(){
+        this._userService.getUsers().unsubscribe();
     }
 
 }
