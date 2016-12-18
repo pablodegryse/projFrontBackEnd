@@ -15,7 +15,7 @@
         </div>
     </div>
     <div class="navbar-nav-right" *ngIf="isLoggedIn()">
-        <a class="toggleButton" id="myToggle" role="button" aria-haspopup="true" aria-expanded="false">Account <span class="caret"></span></a>
+        <a class="toggleButton" id="myToggle" role="button" aria-haspopup="true" aria-expanded="false">Account<span class="icon-play3 foldIcon"></span></a>
         <ul class="dropdown">
             <li routerLinkActive="active"><span class="dropdown-icon icon-cog"></span><a [routerLink]="['/user']" >Profile</a></li>
             <li routerLinkActive="active"><span class="dropdown-icon icon-users"></span><a [routerLink]="['/friends']">Friends</a></li>

@@ -62,15 +62,19 @@ export class ChatComponent implements OnInit{
     }
 
     sendMessage(){
-        let messageToSend = new Message(this.message,this.user.nickName);
-        this.messages.push(messageToSend);
-        this._chatService.addMessage(messageToSend);
-        this.chatSocket.emit("sendChatMessage", messageToSend);
-        this.message = '';
+        if(this.message!=null && this.message!=''){
+            let messageToSend = new Message(this.message,this.user.nickName);
+            this.messages.push(messageToSend);
+            this._chatService.addMessage(messageToSend);
+            this.chatSocket.emit("sendChatMessage", messageToSend);
+            this.message = '';
+        }
     }
     guessWord(){
-        this.chatSocket.emit("guessedWord", {guess: this.guess, user: this.user});
-        this.chatSocket.on("guessedWord",this.user);
-        this.guess = '';
+        if(this.guess!=null && this.guess!=''){
+            this.chatSocket.emit("guessedWord", {guess: this.guess, user: this.user});
+            this.chatSocket.on("guessedWord",this.user);
+            this.guess = '';
+        }
     }
 }

@@ -16,6 +16,8 @@ var WordComponent = (function () {
         this.selectedIndex = 0;
         this.canRefresh = true;
         this.hideListForSelected = false;
+        this.foldStatus = false;
+        this.foldClass = "unfolded";
         this.globalSocket = socketService.getSocket();
         this.setWordSocketEvent(this);
         this.requestWordBatch();

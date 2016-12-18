@@ -63,18 +63,17 @@ let QueueManager=(function () {
                 }
                 currentSocket.leave(names.rooms.q);
             }
-            cb("Game ready! ",roomName,drawer,guessers);
+            cb(roomName,drawer,guessers);
         }else {
-            cb("Not enough users to make game yet...",null,null);
+            cb(null,null,null);
         }
     };
 
     //als de sockets gemigreerd zijn: stuur een notificatie naar de clients dat ze in een game zijn
     // --> de game kan nu beginnen...
     //---> sla de nieuwe room op in een lijst (met id , de id van de drawer en alle sockets in de room)
-    let migrateResultCallback=function (msg,roomName,drawer,guessers) {
+    let migrateResultCallback=function (roomName,drawer,guessers) {
         if(roomName!=null){
-            globalNameSpace.to(roomName).emit("info",msg+"Welcome to room: "+roomName);
             queue.splice(0,migrationBatchSize);
             let newGameRoom={
                 "id":roomName,

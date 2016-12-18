@@ -88,11 +88,15 @@ let SocketHandler=(function () {
             socket.on('confirmWordChoice',function (word) { gameManager.confirmWord(socket,word); });
 
             socket.on('sendChatMessage', function (message) {
-                gameManager.resolveGameAction(socket,gameManager.messageCallBack,"sendChatMessage",message);
+                if(message.content!=null && message.content!=' '){
+                    gameManager.resolveGameAction(socket,gameManager.messageCallBack,"sendChatMessage",message);
+                }
             });
 
             socket.on('guessedWord', function(guess){
-                gameManager.checkGuessedWord(socket,guess);
+                if(guess.guess!=null && guess.guess!=''){
+                    gameManager.checkGuessedWord(socket,guess);
+                }
             });
 
             socket.on('addUserToSocket', function (user) {

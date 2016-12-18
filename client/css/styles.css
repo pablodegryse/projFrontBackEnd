@@ -110,13 +110,8 @@ body{
     font-size: 24px;
     margin: 0
 }
-/*
-.color-primary-0 { color: #7B46C1 }
-.color-primary-1 { color: #D5D0DC }
-.color-primary-2 { color: #A482D1 }
-.color-primary-3 { color: #5F11C8 }
-.color-primary-4 { color: #47049F }
- */
+/*.color-primary-0 { color: #7B46C1 } .color-primary-1 { color: #D5D0DC }
+.color-primary-2 { color: #A482D1 } .color-primary-3 { color: #5F11C8 } .color-primary-4 { color: #47049F } */
 
 /*----NAV----*/
 #selectedNavLink{
@@ -157,7 +152,7 @@ ul, li{
 }
 
 .navbar-nav li,.navbar-nav-right>a{
-    cursor: hand;
+    cursor: pointer;
 }
 
 .nav-row>li:hover{
@@ -168,6 +163,10 @@ ul, li{
 .navbar-nav-right:hover .dropdown{
     display: block;
 }
+.navbar-nav-right:hover .foldIcon{
+    transition: 0.5s transform;
+    transform: rotate(90deg);
+}
 
 .navbar-nav-right:hover .toggleButton{
     transition: 0.5s background-color;
@@ -175,6 +174,7 @@ ul, li{
 }
 
 .dropdown{
+    z-index: 2000;
     display: none;
     background-color: #A482D1;
     position: absolute;
@@ -191,7 +191,7 @@ ul, li{
     width: 100%;
     padding: 8px 0px 8px 0px;
 }
-.dropdown>li:hover{  cursor: hand;}
+.dropdown>li{  cursor: pointer;}
 .dropdown>li>a{
     padding-left: 2px;
 }
@@ -225,17 +225,24 @@ ul, li{
     padding-right: 4px;
 }
 
-.btn-pictionare{
+.btn-pictionare:hover{
     background-color: #5F11C8;
 }
-.btn-pictionare:hover{
+.btn-pictionare{
     color: white;
     background-color: #47049F;
-    cursor: hand;
+    cursor: pointer;
 }
 /*----BUTTONS----*/
-
 /*----HOME & GAME----*/
+
+.wordBtns{
+    display: flex;
+}
+.wordBtns>.btn-pictionare{
+    flex-grow: 1;
+}
+.rerollBtn{ margin-right: 4px}
 pe-home{
     flex: 1 1 auto;
 }
@@ -295,7 +302,6 @@ pe-home{
 }
 
 /*---QUEUE en LOADER---*/
-
 /*------GAME-----------*/
 pe-game,pe-room{
     display: flex;
@@ -377,6 +383,7 @@ pe-chat{
 
 pe-canvas{
     margin-top: 10px;
+    margin-right: 8px;
 }
 
 .canvasTools{
@@ -463,8 +470,6 @@ pe-word>ul>li{
     margin: 0;
     margin-bottom: 2px;
 }
-
-/*------LIST OVERVIEWS-----------*/
 
 /*------AUTH en SIGN IN------------*/
 
@@ -564,6 +569,15 @@ pe-rankings-item>p{
 .icon-loop2:before {
     content: "\ea2e";
 }
+.icon-play3:before {
+    content: "\ea1c";
+}
+.foldIcon{
+    padding-left: 2px;
+    font-size: 0.7em;
+    display: inline-block;
+    transform: rotate(-90deg);
+}
 .icon-mobile-nav{
     display: none;
 }
@@ -575,7 +589,7 @@ pe-rankings-item>p{
     }
     .navbar-nav:hover .icon-mobile-nav{
         background-color: #A482D1;
-        cursor: hand;
+        cursor: pointer;
     }
     .navbar-nav:hover .nav-left-wrapper{
         display: inline-block;
@@ -606,5 +620,3 @@ pe-rankings-item>p{
         margin-left: 4px;
     }
 }
-
-
