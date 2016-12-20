@@ -51,22 +51,23 @@ var RankingsItemComponent = (function () {
             return localStorage.setItem('user', JSON.stringify(_this.currentUser));
         });
     };
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', user_model_1.User)
-    ], RankingsItemComponent.prototype, "user", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Number)
-    ], RankingsItemComponent.prototype, "i", void 0);
-    RankingsItemComponent = __decorate([
-        core_1.Component({
-            selector: 'pe-rankings-item',
-            templateUrl: './views/componentViews/rankings-item.component.html'
-        }), 
-        __metadata('design:paramtypes', [user_service_1.UserService, auth_service_1.AuthService])
-    ], RankingsItemComponent);
     return RankingsItemComponent;
 }());
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", user_model_1.User)
+], RankingsItemComponent.prototype, "user", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Number)
+], RankingsItemComponent.prototype, "i", void 0);
+RankingsItemComponent = __decorate([
+    core_1.Component({
+        selector: 'pe-rankings-item',
+        templateUrl: './views/componentViews/rankings-item.component.html'
+    }),
+    __metadata("design:paramtypes", [user_service_1.UserService,
+        auth_service_1.AuthService])
+], RankingsItemComponent);
 exports.RankingsItemComponent = RankingsItemComponent;
 //# sourceMappingURL=rankings-item.component.js.map

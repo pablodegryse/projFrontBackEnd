@@ -3,7 +3,4 @@
 <p class="rankingName" (click)="onSelectUser(user)" >{{user.nickName}}</p>
 <p class="rankingPoints">{{user.points}}</p>
 <p class="rankingPointsLabel">points</p>
- <div class="rankingDetail" *ngIf="isSelected">
-     <p> {{user.firstName}} {{user.lastName}}</p>
-     <p> {{user.email}}</p><button *ngIf="(isLoggedIn() && !isFriend)" class="btn btn-pictionare" (click)="onAddFriend(user)">Add Friend</button>
- </div>
+<button *ngIf="(isLoggedIn() && !isFriend)" class="btn btn-pictionare addFriend" (click)="onAddFriend(user)">Add Friend</button>

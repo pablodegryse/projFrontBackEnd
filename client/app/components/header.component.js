@@ -25,14 +25,14 @@ var HeaderComponent = (function () {
         this._authService.logout();
         this._router.navigateByUrl('/');
     };
-    HeaderComponent = __decorate([
-        core_1.Component({
-            selector: 'pe-header',
-            templateUrl: './views/componentViews/header.component.html'
-        }), 
-        __metadata('design:paramtypes', [auth_service_1.AuthService, router_1.Router])
-    ], HeaderComponent);
     return HeaderComponent;
 }());
+HeaderComponent = __decorate([
+    core_1.Component({
+        selector: 'pe-header',
+        templateUrl: './views/componentViews/header.component.html'
+    }),
+    __metadata("design:paramtypes", [auth_service_1.AuthService, router_1.Router])
+], HeaderComponent);
 exports.HeaderComponent = HeaderComponent;
 //# sourceMappingURL=header.component.js.map

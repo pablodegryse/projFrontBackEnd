@@ -33,7 +33,7 @@ export class RankingsComponent implements OnInit, OnDestroy{
     }
 
     ngOnDestroy(){
-        this._userService.getUsers().unsubscribe();
+        //this._userService.getUsers().unsubscribe();
     }
 
 }

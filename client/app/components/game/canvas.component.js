@@ -8,7 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
+var core_1 = require("@angular/core");
 var socket_service_1 = require("../../services/socket.service");
 var CanvasComponent = (function () {
     function CanvasComponent(socketService) {
@@ -70,34 +70,34 @@ var CanvasComponent = (function () {
             component.drawer.changeColor(color);
         });
     };
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', String)
-    ], CanvasComponent.prototype, "gameRole", void 0);
-    __decorate([
-        core_1.Output(), 
-        __metadata('design:type', core_1.EventEmitter)
-    ], CanvasComponent.prototype, "roleChanged", void 0);
-    __decorate([
-        core_1.ViewChild('drawCanvas'), 
-        __metadata('design:type', Object)
-    ], CanvasComponent.prototype, "drawCanvas", void 0);
-    __decorate([
-        core_1.ViewChild('buttonList'), 
-        __metadata('design:type', Object)
-    ], CanvasComponent.prototype, "buttonList", void 0);
-    __decorate([
-        core_1.ViewChild('serverMessages'), 
-        __metadata('design:type', Object)
-    ], CanvasComponent.prototype, "serverMessages", void 0);
-    CanvasComponent = __decorate([
-        core_1.Component({
-            selector: "pe-canvas",
-            templateUrl: "./views/componentViews/canvas.component.html"
-        }), 
-        __metadata('design:paramtypes', [socket_service_1.SocketService])
-    ], CanvasComponent);
     return CanvasComponent;
 }());
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", String)
+], CanvasComponent.prototype, "gameRole", void 0);
+__decorate([
+    core_1.Output(),
+    __metadata("design:type", core_1.EventEmitter)
+], CanvasComponent.prototype, "roleChanged", void 0);
+__decorate([
+    core_1.ViewChild('drawCanvas'),
+    __metadata("design:type", Object)
+], CanvasComponent.prototype, "drawCanvas", void 0);
+__decorate([
+    core_1.ViewChild('buttonList'),
+    __metadata("design:type", Object)
+], CanvasComponent.prototype, "buttonList", void 0);
+__decorate([
+    core_1.ViewChild('serverMessages'),
+    __metadata("design:type", Object)
+], CanvasComponent.prototype, "serverMessages", void 0);
+CanvasComponent = __decorate([
+    core_1.Component({
+        selector: "pe-canvas",
+        templateUrl: "./views/componentViews/canvas.component.html"
+    }),
+    __metadata("design:paramtypes", [socket_service_1.SocketService])
+], CanvasComponent);
 exports.CanvasComponent = CanvasComponent;
 //# sourceMappingURL=canvas.component.js.map

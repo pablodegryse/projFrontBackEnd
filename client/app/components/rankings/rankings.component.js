@@ -38,14 +38,17 @@ var RankingsComponent = (function () {
             return users;
         });
     };
-    RankingsComponent = __decorate([
-        core_1.Component({
-            selector: 'pe-rankings',
-            templateUrl: './views/componentViews/rankings.component.html'
-        }), 
-        __metadata('design:paramtypes', [user_service_1.UserService, nav_service_1.NavService, socket_service_1.SocketService])
-    ], RankingsComponent);
+    RankingsComponent.prototype.ngOnDestroy = function () {
+        //this._userService.getUsers().unsubscribe();
+    };
     return RankingsComponent;
 }());
+RankingsComponent = __decorate([
+    core_1.Component({
+        selector: 'pe-rankings',
+        templateUrl: './views/componentViews/rankings.component.html'
+    }),
+    __metadata("design:paramtypes", [user_service_1.UserService, nav_service_1.NavService, socket_service_1.SocketService])
+], RankingsComponent);
 exports.RankingsComponent = RankingsComponent;
 //# sourceMappingURL=rankings.component.js.map

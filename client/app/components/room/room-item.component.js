@@ -37,18 +37,18 @@ var RoomItemComponent = (function () {
     RoomItemComponent.prototype.ngOnDestroy = function () {
         //this._roomService.roomIsUpdated.unsubscribe();
     };
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', room_model_1.Room)
-    ], RoomItemComponent.prototype, "room", void 0);
-    RoomItemComponent = __decorate([
-        core_1.Component({
-            selector: 'pe-room-item',
-            templateUrl: './views/componentViews/room-item.component.html'
-        }), 
-        __metadata('design:paramtypes', [room_service_1.RoomService, router_1.Router])
-    ], RoomItemComponent);
     return RoomItemComponent;
 }());
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", room_model_1.Room)
+], RoomItemComponent.prototype, "room", void 0);
+RoomItemComponent = __decorate([
+    core_1.Component({
+        selector: 'pe-room-item',
+        templateUrl: './views/componentViews/room-item.component.html'
+    }),
+    __metadata("design:paramtypes", [room_service_1.RoomService, router_1.Router])
+], RoomItemComponent);
 exports.RoomItemComponent = RoomItemComponent;
 //# sourceMappingURL=room-item.component.js.map

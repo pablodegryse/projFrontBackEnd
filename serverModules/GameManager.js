@@ -16,7 +16,6 @@ let GameManager=(function () {
 
     //de gameroom van een socket vinden die een event afvuurt
     let resolveGameAction=function (socket,callback,action,content) {
-        if(content!=null){
             for(let i=0,len=active.length;i<len;i++){
                 let currentId=active[i].id;
                 if(socket.rooms[currentId]!=null){
@@ -29,7 +28,6 @@ let GameManager=(function () {
                     break;
                 }
             }
-        }
     };
 
     let canvasActionCallBack=function (room,action,actionContent) {
@@ -114,6 +112,7 @@ let GameManager=(function () {
             socket.emit("wordGuessed", {hasGuessed: guessCorrect, isme: true});
             room.guessCount++;
             if (guessCorrect) {
+                room.wordLetterBox=[];
                 room.wordsGuessed++;
                 awardPoints(room, socket);
                 if (room.wordsGuessed === room.guessers.length + 1) {

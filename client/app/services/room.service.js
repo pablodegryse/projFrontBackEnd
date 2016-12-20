@@ -10,8 +10,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
-require('rxjs/Rx');
-require('rxjs/add/operator/map');
+require("rxjs/Rx");
+require("rxjs/add/operator/map");
 var room_model_1 = require("../components/room/room.model");
 var RoomService = (function () {
     function RoomService(http) {
@@ -63,11 +63,11 @@ var RoomService = (function () {
         return this.http.patch('http://localhost:8080/room/' + room.roomId + user, body, { headers: headers })
             .map(function (response) { return response.json(); });
     };
-    RoomService = __decorate([
-        core_1.Injectable(), 
-        __metadata('design:paramtypes', [http_1.Http])
-    ], RoomService);
     return RoomService;
 }());
+RoomService = __decorate([
+    core_1.Injectable(),
+    __metadata("design:paramtypes", [http_1.Http])
+], RoomService);
 exports.RoomService = RoomService;
 //# sourceMappingURL=room.service.js.map

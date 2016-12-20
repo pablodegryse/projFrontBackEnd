@@ -46,14 +46,14 @@ var RegisterComponent = (function () {
             password: new forms_1.FormControl(null, forms_1.Validators.required)
         });
     };
-    RegisterComponent = __decorate([
-        core_1.Component({
-            selector: 'pe-register',
-            templateUrl: './views/componentViews/register.component.html'
-        }), 
-        __metadata('design:paramtypes', [auth_service_1.AuthService, router_1.Router])
-    ], RegisterComponent);
     return RegisterComponent;
 }());
+RegisterComponent = __decorate([
+    core_1.Component({
+        selector: 'pe-register',
+        templateUrl: './views/componentViews/register.component.html'
+    }),
+    __metadata("design:paramtypes", [auth_service_1.AuthService, router_1.Router])
+], RegisterComponent);
 exports.RegisterComponent = RegisterComponent;
 //# sourceMappingURL=register.component.js.map

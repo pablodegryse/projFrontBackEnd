@@ -80,18 +80,18 @@ var RoomComponent = (function () {
     RoomComponent.prototype.showLetter = function (letter, index) {
         this.wordLetters[index] = letter;
     };
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', String)
-    ], RoomComponent.prototype, "gameRole", void 0);
-    RoomComponent = __decorate([
-        core_1.Component({
-            selector: 'pe-room',
-            templateUrl: './views/componentViews/room.component.html'
-        }), 
-        __metadata('design:paramtypes', [socket_service_1.SocketService])
-    ], RoomComponent);
     return RoomComponent;
 }());
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", String)
+], RoomComponent.prototype, "gameRole", void 0);
+RoomComponent = __decorate([
+    core_1.Component({
+        selector: 'pe-room',
+        templateUrl: './views/componentViews/room.component.html'
+    }),
+    __metadata("design:paramtypes", [socket_service_1.SocketService])
+], RoomComponent);
 exports.RoomComponent = RoomComponent;
 //# sourceMappingURL=room.component.js.map

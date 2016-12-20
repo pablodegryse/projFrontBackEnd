@@ -17,6 +17,8 @@ export class ChatComponent implements OnInit{
     room:Room;
     guess:string;
     wordToGuess:string;
+    previousGuessTiming:number;
+    currentGuessTiming:number=0;
 
     chatSocket:any;
     @Input() gameRole:string;
@@ -62,9 +64,28 @@ export class ChatComponent implements OnInit{
     }
     guessWord(){
         if(this.guess!=null && this.guess!=''){
-            this.chatSocket.emit("guessedWord", {guess: this.guess, user: this.user});
-            this.chatSocket.on("guessedWord",this.user);
-            this.guess = '';
+            if(this.previousGuessTiming>0){
+                this.currentGuessTiming=new Date().getTime();
+                if(this.currentGuessTiming-this.previousGuessTiming>4000){
+                    this.previousGuessTiming=this.currentGuessTiming;
+                    console.log("u gooood on timing makker");
+                    this.chatSocket.emit("guessedWord", {guess: this.guess, user: this.user});
+                    this.chatSocket.on("guessedWord",this.user);
+                    this.guess = '';
+                }else {
+                    console.log("timeout makker");
+                    let clientNotice = new Message("Please wait before guessing again...","Info");
+                    this.messages.push(clientNotice)
+                }
+            }else {
+                console.log("timing is 0 blijkbaar");
+                let ms=new Date().getTime();
+                this.currentGuessTiming=ms;
+                this.previousGuessTiming=ms;
+                this.chatSocket.emit("guessedWord", {guess: this.guess, user: this.user});
+                this.chatSocket.on("guessedWord",this.user);
+                this.guess = '';
+            }
         }
     }
 }

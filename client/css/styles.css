@@ -499,10 +499,16 @@ pe-authentication{
     height: 100%;
 }
 /*--------RANKINGS---------*/
-pe-rankings-item{
+pe-rankings-item,pe-friend-item>div{
     display: flex;
 }
-pe-rankings-item>p{
+pe-friend-item>div{
+    min-height: 32px;
+}
+pe-rankings-item:hover .addFriend,pe-friend-item:hover .removeFriend{
+    display: inline-block;
+}
+pe-rankings-item>p,pe-friend-item>div>p{
     display: inline-block;
     margin: 0;
 }
@@ -511,6 +517,15 @@ pe-rankings-item>p{
     padding-top: 4px;
     font-size: 1.2em;
     cursor: pointer;
+}
+.friendStatus{
+    padding-top: 4px;
+    font-size: 1.2em;
+    margin-left: 16px;
+}
+.addFriend,.removeFriend{
+    display: none;
+    margin-left: 8px;
 }
 .rankingPoints{
     min-width: 50px;

@@ -59,14 +59,14 @@ var WordComponent = (function () {
         console.log("confirmed word");
         this.globalSocket.emit("confirmWordChoice", this.words[this.selectedIndex]);
     };
-    WordComponent = __decorate([
-        core_1.Component({
-            selector: 'pe-word',
-            templateUrl: './views/componentViews/word.component.html'
-        }), 
-        __metadata('design:paramtypes', [socket_service_1.SocketService])
-    ], WordComponent);
     return WordComponent;
 }());
+WordComponent = __decorate([
+    core_1.Component({
+        selector: 'pe-word',
+        templateUrl: './views/componentViews/word.component.html'
+    }),
+    __metadata("design:paramtypes", [socket_service_1.SocketService])
+], WordComponent);
 exports.WordComponent = WordComponent;
 //# sourceMappingURL=word.component.js.map

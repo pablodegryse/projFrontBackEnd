@@ -19,11 +19,11 @@ var ChatService = (function () {
     ChatService.prototype.getMessages = function () {
         return this.messages;
     };
-    ChatService = __decorate([
-        core_1.Injectable(), 
-        __metadata('design:paramtypes', [])
-    ], ChatService);
     return ChatService;
 }());
+ChatService = __decorate([
+    core_1.Injectable(),
+    __metadata("design:paramtypes", [])
+], ChatService);
 exports.ChatService = ChatService;
 //# sourceMappingURL=chat.service.js.map

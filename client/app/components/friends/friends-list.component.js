@@ -38,18 +38,18 @@ var FriendsListComponent = (function () {
             console.log(_this.friends);
         });
     };
-    __decorate([
-        core_1.Output(), 
-        __metadata('design:type', user_model_1.User)
-    ], FriendsListComponent.prototype, "user", void 0);
-    FriendsListComponent = __decorate([
-        core_1.Component({
-            selector: 'pe-friends-list',
-            templateUrl: './views/componentViews/friends-list.component.html'
-        }), 
-        __metadata('design:paramtypes', [user_service_1.UserService, socket_service_1.SocketService])
-    ], FriendsListComponent);
     return FriendsListComponent;
 }());
+__decorate([
+    core_1.Output(),
+    __metadata("design:type", user_model_1.User)
+], FriendsListComponent.prototype, "user", void 0);
+FriendsListComponent = __decorate([
+    core_1.Component({
+        selector: 'pe-friends-list',
+        templateUrl: './views/componentViews/friends-list.component.html'
+    }),
+    __metadata("design:paramtypes", [user_service_1.UserService, socket_service_1.SocketService])
+], FriendsListComponent);
 exports.FriendsListComponent = FriendsListComponent;
 //# sourceMappingURL=friends-list.component.js.map

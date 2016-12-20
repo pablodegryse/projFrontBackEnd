@@ -10,6 +10,9 @@ var CanvasDrawer=(function () {
     var currentMousePos={ x:0, y:0 };
     var drawSocket;
 
+    var previousMs;
+    var currentMs;
+    var drawTime;
     //public functies
     return {
         init:function (canvas,buttonList,socket) {
@@ -61,13 +64,22 @@ var CanvasDrawer=(function () {
     }
     function draw() {
         if(canDraw && currentMousePos.x>0 && currentMousePos.y>0 &&isHeldDown){
-            drawSocket.emit('drawUpdate',{
-                'oldPos':previousMousePos,
-                'currentPos':currentMousePos
-            });
-            ctx.lineTo(currentMousePos.x,currentMousePos.y);
-            ctx.moveTo(currentMousePos.x,currentMousePos.y);
-            ctx.stroke();
+            var ms=new Date().getTime();
+            currentMs=ms;
+            //console.log("previous MS:"+previousMs+" -- currentMS: "+currentMs);
+            drawTime=currentMs-previousMs;
+            console.log("drawTime is:"+drawTime);
+            if(drawTime>25){
+                console.log("drawing now");
+                drawSocket.emit('drawUpdate',{
+                    'oldPos':previousMousePos,
+                    'currentPos':currentMousePos
+                });
+                ctx.lineTo(currentMousePos.x,currentMousePos.y);
+                ctx.moveTo(currentMousePos.x,currentMousePos.y);
+                ctx.stroke();
+                previousMs=currentMs;
+            }
         }
     }
     function drawFromServer() {
@@ -103,6 +115,8 @@ var CanvasDrawer=(function () {
 
         canvas.addEventListener('mousedown',function () {
             if(canDraw){
+                var ms=new Date().getTime();
+                previousMs=ms;
                 isHeldDown=true;
                 ctx.beginPath();
                 drawSocket.emit('drawBegin','true');

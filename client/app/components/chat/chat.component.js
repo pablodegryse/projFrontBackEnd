@@ -18,6 +18,7 @@ var ChatComponent = (function () {
         this._chatService = _chatService;
         this._socketService = _socketService;
         this.messages = [];
+        this.currentGuessTiming = 0;
     }
     ChatComponent.prototype.ngOnInit = function () {
         var user = localStorage.getItem('user');
@@ -57,23 +58,45 @@ var ChatComponent = (function () {
     };
     ChatComponent.prototype.guessWord = function () {
         if (this.guess != null && this.guess != '') {
-            this.chatSocket.emit("guessedWord", { guess: this.guess, user: this.user });
-            this.chatSocket.on("guessedWord", this.user);
-            this.guess = '';
+            if (this.previousGuessTiming > 0) {
+                this.currentGuessTiming = new Date().getTime();
+                if (this.currentGuessTiming - this.previousGuessTiming > 4000) {
+                    this.previousGuessTiming = this.currentGuessTiming;
+                    console.log("u gooood on timing makker");
+                    this.chatSocket.emit("guessedWord", { guess: this.guess, user: this.user });
+                    this.chatSocket.on("guessedWord", this.user);
+                    this.guess = '';
+                }
+                else {
+                    console.log("timeout makker");
+                    var clientNotice = new message_model_1.Message("Please wait before guessing again...", "Info");
+                    this.messages.push(clientNotice);
+                }
+            }
+            else {
+                console.log("timing is 0 blijkbaar");
+                var ms = new Date().getTime();
+                this.currentGuessTiming = ms;
+                this.previousGuessTiming = ms;
+                this.chatSocket.emit("guessedWord", { guess: this.guess, user: this.user });
+                this.chatSocket.on("guessedWord", this.user);
+                this.guess = '';
+            }
         }
     };
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', String)
-    ], ChatComponent.prototype, "gameRole", void 0);
-    ChatComponent = __decorate([
-        core_1.Component({
-            selector: 'pe-chat',
-            templateUrl: './views/componentViews/chat.component.html'
-        }), 
-        __metadata('design:paramtypes', [chat_service_1.ChatService, socket_service_1.SocketService])
-    ], ChatComponent);
     return ChatComponent;
 }());
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", String)
+], ChatComponent.prototype, "gameRole", void 0);
+ChatComponent = __decorate([
+    core_1.Component({
+        selector: 'pe-chat',
+        templateUrl: './views/componentViews/chat.component.html'
+    }),
+    __metadata("design:paramtypes", [chat_service_1.ChatService,
+        socket_service_1.SocketService])
+], ChatComponent);
 exports.ChatComponent = ChatComponent;
 //# sourceMappingURL=chat.component.js.map
