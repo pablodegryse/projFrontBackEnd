@@ -80,6 +80,7 @@ let RoomManager=(function () {
                 room.drawer.socket.leave(room.id);
                 room.drawer=room.guessers[0];
                 room.guessers.splice(0,1);
+                room.wordRerolls=2;
                 //de nieuwe drawer van rol laten wisselen
                 room.drawer.socket.emit("roleChanged",{"content":"drawer"});
                 checkRoomState(room.id,room.guessers.length,roomListIndex);
