@@ -31,7 +31,6 @@ var UserService = (function () {
             return transformedUsers;
         });
     };
-    ;
     UserService.prototype.getUserById = function (id) {
         return this._http.get('http://localhost:8080/user/' + id)
             .map(function (response) {

@@ -1,6 +1,6 @@
 <span class="icon-pencil2"  ></span>
 <p class="rankingRank">{{i+1}}.</p>
-<p class="rankingName" (click)="onSelectUser(user)" >{{user.nickName}}</p>
+<p class="rankingName">{{user.nickName}}</p>
 <p class="rankingPoints">{{user.points}}</p>
 <p class="rankingPointsLabel">points</p>
 <button *ngIf="(isLoggedIn() && !isFriend)" class="btn btn-pictionare addFriend" (click)="onAddFriend(user)">Add Friend</button>

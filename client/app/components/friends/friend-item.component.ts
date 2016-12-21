@@ -14,7 +14,7 @@ export class FriendItemComponent{
 
     isSelected:boolean=false;
 
-    @Output() isRemoved = new EventEmitter();
+    @Output() isRemoved = new EventEmitter<any>();
 
     constructor(private _authService:AuthService,
                 private _userService:UserService
@@ -31,7 +31,7 @@ export class FriendItemComponent{
             .subscribe((user:User)=>{
                 localStorage.setItem('user', JSON.stringify(this.user))
             });
-        this.isRemoved.emit(null);
+        this.isRemoved.emit("remove");
     }
 
     isLoggedIn(){

@@ -30,7 +30,7 @@ var FriendItemComponent = (function () {
             .subscribe(function (user) {
             localStorage.setItem('user', JSON.stringify(_this.user));
         });
-        this.isRemoved.emit(null);
+        this.isRemoved.emit("remove");
     };
     FriendItemComponent.prototype.isLoggedIn = function () {
         return this._authService.isLoggedIn();

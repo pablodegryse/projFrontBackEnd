@@ -23,29 +23,26 @@ var RankingsItemComponent = (function () {
         if (userInStorage != null && !'') {
             this.currentUser = JSON.parse(localStorage.getItem('user'));
         }
-    };
-    RankingsItemComponent.prototype.onSelectUser = function (user) {
         this.isSelected = !this.isSelected;
         if ((!this.isLoggedIn())) {
             this.isFriend = true;
             return;
         }
         //noinspection TypeScriptUnresolvedVariable
-        this.isFriend = (user.userId === this.currentUser._id) ? true : false;
+        this.isFriend = (this.user.userId === this.currentUser._id) ? true : false;
         for (var i = 0; i < this.currentUser.friends.length; i++) {
-            if (user.userId === this.currentUser.friends[i]) {
+            if (this.user.userId === this.currentUser.friends[i]) {
                 this.isFriend = true;
             }
         }
     };
     RankingsItemComponent.prototype.isLoggedIn = function () {
-        var result = this._authService.isLoggedIn();
-        console.log(result);
-        return result;
+        return this._authService.isLoggedIn();
     };
     RankingsItemComponent.prototype.onAddFriend = function (user) {
         var _this = this;
         this.currentUser.friends.push(user.userId);
+        this.isFriend = !this.isFriend;
         this._userService.updateUser(this.currentUser)
             .subscribe(function (data) {
             return localStorage.setItem('user', JSON.stringify(_this.currentUser));
