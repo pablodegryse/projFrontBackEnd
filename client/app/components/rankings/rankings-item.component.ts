@@ -22,30 +22,27 @@ export class RankingsItemComponent implements OnInit{
         if(userInStorage!=null && !''){
             this.currentUser = JSON.parse(localStorage.getItem('user'));
         }
-    }
-
-    onSelectUser(user:User){
         this.isSelected = !this.isSelected;
         if((!this.isLoggedIn())){
             this.isFriend=true;
             return;
         }
         //noinspection TypeScriptUnresolvedVariable
-        this.isFriend = (user.userId === this.currentUser._id)? true:false;
+        this.isFriend = (this.user.userId === this.currentUser._id)? true:false;
         for(let i=0;i<this.currentUser.friends.length;i++){
-            if(user.userId === this.currentUser.friends[i]){
+            if(this.user.userId === this.currentUser.friends[i]){
                 this.isFriend = true;
             }
         }
     }
+
     isLoggedIn(){
-        let result=this._authService.isLoggedIn();
-        console.log(result);
-        return result;
+        return this._authService.isLoggedIn();
     }
 
     onAddFriend(user:User){
         this.currentUser.friends.push(user.userId);
+        this.isFriend =! this.isFriend;
         this._userService.updateUser(this.currentUser)
             .subscribe((data)=>
                 localStorage.setItem('user', JSON.stringify(this.currentUser)));

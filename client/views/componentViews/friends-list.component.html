@@ -1,7 +1,7 @@
 <h2 class="leftTitle" >Friends</h2>
-<div class="centreContentContainerColumn">
+<div class="centreContentContainerColumn" (isRemoved)="onRemoved()">
     <ul class="list-group">
-    <li class="list-group-item" *ngFor="let friend of friends; let i = index " (isRemoved)="onRemoved()" >
+    <li class="list-group-item" *ngFor="let friend of friends; let i = index " >
         <pe-friend-item [user]="user" [friend]="friend" [i]="i" ></pe-friend-item>
     </li>
     </ul>

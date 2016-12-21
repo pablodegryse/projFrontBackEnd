@@ -597,7 +597,7 @@ pe-rankings-item>p,pe-friend-item>div>p{
     display: none;
 }
 
-@media (max-width: 714px) {
+@media screen and (max-width: 714px) {
     .icon-mobile-nav{
         display: inline-block;
         padding: 10px 12px 12px 12px;
@@ -608,12 +608,14 @@ pe-rankings-item>p,pe-friend-item>div>p{
     }
     .navbar-nav:hover .nav-left-wrapper{
         display: inline-block;
+
     }
     .nav-left-wrapper{
         display: none;
         z-index: 123;
         position: absolute;
         top: 54px;
+        left:0px;
         width: 100%;
     }
     .nav-row{
