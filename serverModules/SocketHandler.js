@@ -26,6 +26,7 @@ let SocketHandler=(function () {
     let setupGlobalNamespace=function () {
         globalNameSpace=io.of(names.namespaces.global);
         globalNameSpace.on('connection',function (socket) {
+            socket.emit('serverInit',"connected to Pictionar-E");
             console.log("Someone joined the global namespace!");
             //als er iemand de namespace verlaat: alles groups van de socket worden autmatisch geleaved
             //+ verwijder de socket uit de queue

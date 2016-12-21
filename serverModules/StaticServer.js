@@ -53,7 +53,8 @@ let StaticServer=(function () {
 
     //public
     return{
-      init:init
+        init:init,
+        serverSocketHandler:SocketHandler
     };
 
 })();
