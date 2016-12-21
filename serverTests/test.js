@@ -4,7 +4,7 @@ let ErrorLogger=require('../serverModules/ErrorLogger');
 let ApiHandler=require('../serverModules/ApiHandler');
 let RoomManager=require('../serverModules/RoomManager');
 let ioClient=require('socket.io-client');
-let socket;
+let socket1,socket2,socket3;
 
 describe('backend testing', function() {
     describe('staticServer tests', function() {
@@ -36,21 +36,43 @@ describe('backend testing', function() {
     //test moet in aparte cmd uitgevoerd worden terwijl de server draait...
     describe('Socket server response tests',function () {
         before(function (done) {
-            socket = ioClient.connect('http://localhost:8080/global', {
+            socket1 = ioClient.connect('http://localhost:8080/global', {
                 'reconnection delay' : 0
                 , 'reopen delay' : 0
                 , 'force new connection' : true
                 , transports: ['websocket']
             });
-            socket.on('serverInit',function (msg) {
+            socket2 = ioClient.connect('http://localhost:8080/global', {
+                'reconnection delay' : 0
+                , 'reopen delay' : 0
+                , 'force new connection' : true
+                , transports: ['websocket']
+            });
+            socket3 = ioClient.connect('http://localhost:8080/global', {
+                'reconnection delay' : 0
+                , 'reopen delay' : 0
+                , 'force new connection' : true
+                , transports: ['websocket']
+            });
+            socket1.on('serverInit',function (msg) {
                 expect(msg).to.equal('connected to Pictionar-E');
+                socket1.emit("requestMoveToQueue",null);
+            });
+            socket2.on('serverInit',function (msg) {
+                expect(msg).to.equal('connected to Pictionar-E');
+                socket2.emit("requestMoveToQueue",null);
+            });
+            socket3.on('serverInit',function (msg) {
+                expect(msg).to.equal('connected to Pictionar-E');
+                socket3.emit("requestMoveToQueue",null);
+            });
+            socket1.on('GameReady',function (msg) {
+                expect(msg.content).to.equal("drawer");
                 done();
             });
         });
-
-
-        it('should not be undefined and get message from server',function () {
-            expect(socket).to.not.be.undefined;
+        it('should get message from server and queued up and socket1 should be assigned drawer',function () {
+            expect(socket1).to.not.be.undefined;
         });
     });
 
