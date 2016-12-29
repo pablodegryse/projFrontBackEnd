@@ -235,7 +235,9 @@ ul, li{
 }
 /*----BUTTONS----*/
 /*----HOME & GAME----*/
-
+pe-home{
+    background: url("http://i.imgur.com/1vht2ny.png") no-repeat center fixed;
+}
 .wordBtns{
     display: flex;
 }
