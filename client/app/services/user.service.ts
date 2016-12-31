@@ -10,7 +10,6 @@ export class UserService {
     private users:User[];
     constructor(private _http: Http) {}
 
-
     getUsers(){
         return this._http.get('http://localhost:8080/user')
             .map((response:Response)=> {
@@ -48,7 +47,6 @@ export class UserService {
                 );
                 return user;
             });
-
     }
 
     updateUser(userToChange:User){

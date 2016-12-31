@@ -1,0 +1,28 @@
+<!-- Jasmine dependencies -->
+<link href="cdnjs.cloudflare.com/ajax/libs/jasmine/2.4.1/jasmine.css" />
+<script src="cdnjs.cloudflare.com/ajax/libs/jasmine/2.4.1/jasmine.js"></script>
+<script src="cdnjs.cloudflare.com/ajax/libs/jasmine/2.4.1/jasmine-html.js"></script>
+<script src="cdnjs.cloudflare.com/ajax/libs/jasmine/2.4.1/boot.js"></script>
+
+<!-- Angular 2 dependencies -->
+<script src="https://code.angularjs.org/tools/system.js"></script>
+<script src="https://code.angularjs.org/tools/typescript.js"></script>
+<script src="config.js"></script>
+<script src="https://code.angularjs.org/2.0.0-beta.7/angular2-polyfills.min.js"></script>
+<script src="https://code.angularjs.org/2.0.0-beta.7/angular2.js"></script>
+<!-- Angular 2 testing dependencies -->
+<script src="https://code.angularjs.org/2.0.0-beta.7/testing.dev.js"></script>
+
+<script>
+    //load all dependencies at the same time
+    Promise.all([
+        //required to test on browser
+        System.import('src/setup.spec'),
+        //specs
+        System.import('./../app/clientTests/register.component.spec.ts'),
+
+    ]).then(function(modules) {
+        //manually trigger Jasmine test-runner
+        window.onload();
+    }).catch(console.error.bind(console));
+</script>
