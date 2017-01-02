@@ -2,6 +2,7 @@ import {CanvasComponent} from "../components/game/canvas.component";
 import {ComponentFixture, TestBed, async} from "@angular/core/testing";
 import {DebugElement} from "@angular/core";
 import {By} from "@angular/platform-browser";
+import any = jasmine.any;
 describe('CanvasComponent',()=>{
    let comp: CanvasComponent;
    let fixture: ComponentFixture<CanvasComponent>;
@@ -11,8 +12,8 @@ describe('CanvasComponent',()=>{
    beforeEach(async(()=>{
       TestBed.configureTestingModule({
          declarations:[CanvasComponent]
-      })
-          .compileComponents();
+      });
+      TestBed.compileComponents();
    }));
 
    beforeEach(()=>{

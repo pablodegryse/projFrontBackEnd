@@ -1,16 +1,6 @@
 module.exports = function(config) {
 
-  var appBase    = 'app/';      // transpiled app JS and map files
-  var appSrcBase = 'app/';      // app source TS files
-  var appAssets  = '/base/app'; // component assets fetched by Angular's compiler
-  var appHtml = '/base/views/';
-
-  // Testing helpers (optional) are conventionally in a folder called `testing`
-  var testingBase    = 'testing/'; // transpiled test JS and map files
-  var testingSrcBase = 'testing/'; // test source TS files
-
   config.set({
-    basePath: '',
     frameworks: ['jasmine'],
 
     plugins: [
@@ -20,7 +10,6 @@ module.exports = function(config) {
     ],
 
     client: {
-      builtPaths: [appBase, testingBase, appHtml], // add more spec base paths as needed
       clearContext: false // leave Jasmine Spec Runner output visible in browser
     },
 
@@ -36,11 +25,9 @@ module.exports = function(config) {
     files: [
       // System.js for module loading
       'node_modules/systemjs/dist/system.src.js',
-
       // Polyfills
       'node_modules/core-js/client/shim.js',
       'node_modules/reflect-metadata/Reflect.js',
-
       // zone.js
       'node_modules/zone.js/dist/zone.js',
       'node_modules/zone.js/dist/long-stack-trace-zone.js',
@@ -49,46 +36,39 @@ module.exports = function(config) {
       'node_modules/zone.js/dist/jasmine-patch.js',
       'node_modules/zone.js/dist/async-test.js',
       'node_modules/zone.js/dist/fake-async-test.js',
-
       // RxJs
       { pattern: 'node_modules/rxjs/**/*.js', included: false, watched: false },
       { pattern: 'node_modules/rxjs/**/*.js.map', included: false, watched: false },
-
       // Paths loaded via module imports:
       // Angular itself
       { pattern: 'node_modules/@angular/**/*.js', included: false, watched: false },
       { pattern: 'node_modules/@angular/**/*.js.map', included: false, watched: false },
-
       { pattern: 'systemjs.config.js', included: false, watched: false },
       { pattern: 'systemjs.config.extras.js', included: false, watched: false },
       'karma-test-shim.js', // optionally extend SystemJS mapping e.g., with barrels
 
       // transpiled application & spec code paths loaded via module imports
-      { pattern: appBase + '**/*.js', included: false, watched: true },
-      { pattern: testingBase + '**/*.js', included: false, watched: true },
+      //{ pattern:'**/*.js', included: false, watched: true },
+      { pattern:'app/**/*.js', included: false, watched: true },
 
 
       // Asset (HTML & CSS) paths loaded via Angular's component compiler
       // (these paths need to be rewritten, see proxies section)
-      { pattern: appBase + '**/*.html', included: false, watched: true, served:true },
-      { pattern: appBase + '**/*.css', included: false, watched: true },
-      { pattern: '/views/**/*.html', included: false, watched: true },
+      { pattern:'views/componentViews/*.html', included: false},
+        { pattern:'views/*.html', included: false},
+
 
       // Paths for debugging with source maps in dev tools
-      { pattern: appSrcBase + '**/*.ts', included: false, watched: false },
-      { pattern: appBase + '**/*.js.map', included: false, watched: false },
-      { pattern: testingSrcBase + '**/*.ts', included: false, watched: false },
-      { pattern: testingBase + '**/*.js.map', included: false, watched: false}
+      { pattern:'app/clientTests/*.ts', included: false, watched: false },
+      { pattern:'app/clientTests/*.js', included: false, watched: false },
+      { pattern:'app/clientTests/*.js.map', included: false, watched: false}
     ],
 
-    // Proxied base paths for loading assets
-    proxies: {
-      // required for component assets fetched by Angular's compiler
-      "/app/": appAssets
-    },
+      //hier per component je proxy bijmaken (base wordt toegevoegd door de proxy)
+      proxies: {
+          "/views/componentViews/canvas.component.html": "/base/views/componentViews/canvas.component.html"
+      },
 
-    exclude: [],
-    preprocessors: {},
     reporters: ['progress', 'kjhtml'],
 
     port: 9876,

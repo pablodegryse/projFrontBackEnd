@@ -10,8 +10,8 @@ describe('CanvasComponent', function () {
     beforeEach(testing_1.async(function () {
         testing_1.TestBed.configureTestingModule({
             declarations: [canvas_component_1.CanvasComponent]
-        })
-            .compileComponents();
+        });
+        testing_1.TestBed.compileComponents();
     }));
     beforeEach(function () {
         fixture = testing_1.TestBed.createComponent(canvas_component_1.CanvasComponent);
