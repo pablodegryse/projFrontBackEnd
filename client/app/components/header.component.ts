@@ -2,7 +2,6 @@ import {Component, OnInit} from "@angular/core";
 import {AuthService} from "../services/auth.service";
 import {Router} from "@angular/router";
 
-
 @Component({
     selector: 'pe-header',
     templateUrl: './views/componentViews/header.component.html'

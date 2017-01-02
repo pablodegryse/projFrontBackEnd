@@ -66,7 +66,9 @@ module.exports = function(config) {
 
       //hier per component je proxy bijmaken (base wordt toegevoegd door de proxy)
       proxies: {
-          "/views/componentViews/canvas.component.html": "/base/views/componentViews/canvas.component.html"
+          "/views/componentViews/register.component.html": "/base/views/componentViews/register.component.html",
+        "/views/componentViews/chat.component.html": "/base/views/componentViews/chat.component.html",
+        "/views/componentViews/canvas.component.html": "/base/views/componentViews/canvas.component.html"
       },
 
     reporters: ['progress', 'kjhtml'],
