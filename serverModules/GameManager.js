@@ -18,7 +18,7 @@ let GameManager=(function () {
     let resolveGameAction=function (socket,callback,action,content) {
             for(let i=0,len=active.length;i<len;i++){
                 let currentId=active[i].id;
-                if(socket.rooms[currentId]!=null){
+                if(socket.rooms[currentId]!==null){
                     if(active[i].drawer.socket.id===socket.id){
                         callback(active[i],action,content);
                     }
@@ -46,7 +46,7 @@ let GameManager=(function () {
     let findRoom=function (socket,callback,data) {
         for(let i=0,len=active.length;i<len;i++){
             let currentId=active[i].id;
-            if(socket.rooms[currentId]!=null){
+            if(socket.rooms[currentId]!==null){
                 callback(active[i],socket,data);
                 break;
             }
@@ -82,7 +82,7 @@ let GameManager=(function () {
     };
 
     let confirmWordChoice=function (socket,word) {
-        findRoom(socket,wordConfirmCallback,word)
+        findRoom(socket,wordConfirmCallback,word);
     };
 
     //het woord bevestigen aan de drawer + laten weten aan de guessers + aantal letters meesturen
@@ -203,7 +203,7 @@ let GameManager=(function () {
     };
 
     let closeGameRoom=function (roomId) {
-        rManager.removeRoom(roomId)
+        rManager.removeRoom(roomId);
     };
 
     //public

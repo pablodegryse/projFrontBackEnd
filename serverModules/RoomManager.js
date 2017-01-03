@@ -17,7 +17,7 @@ let RoomManager=(function () {
 
     //kijken of er nog genoeg spelers zijn om de room in de 'active' lijst te houden
     let checkRoomState=function (roomId,guessers,activeRoomListIndex){
-        if(guessers==0){
+        if(guessers===0){
             globalNameSpace.to(roomId).emit("GameEnd",{"content":"tooFewUsers"});
             active.splice(activeRoomListIndex);
         }
@@ -53,7 +53,7 @@ let RoomManager=(function () {
         for(let i=0,len=active.length;i<len;i++){
             let currentId=active[i].id;
             //we got a match + stop after the match was handled
-            if(leavingSocket.rooms[currentId]!=null){
+            if(leavingSocket.rooms[currentId]!==null){
                 removeFromRoom(active[i],i,leavingSocket);
                 break;
             }
@@ -131,7 +131,7 @@ let RoomManager=(function () {
             };
             list.push(roomOjb);
         }
-        roomListCallback(socket,list)
+        roomListCallback(socket,list);
     };
 
     let roomListCallback=function (socket,list) {

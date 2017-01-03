@@ -25,6 +25,6 @@ let ApiHandler=(function () {
     //public
     return{
         getWordData:getWordData
-    }
+    };
 })();
 module.exports=ApiHandler;

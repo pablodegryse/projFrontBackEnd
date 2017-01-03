@@ -42,10 +42,10 @@ let SocketHandler=(function () {
             //als er vanuit de client naar de lobby genavigeerd werd: migreer de socket
             socket.on('requestMoveToLobby',function () {
                 //only do this when the socket wasnt already in the lobby
-                if(socket.rooms[names.rooms.lobby]==null){
+                if(socket.rooms[names.rooms.lobby]===null){
                     rManager.removeFromGameRoom(names.removeTypes.nav,socket);
                 }
-                if(socket.rooms[names.rooms.q]!=null){
+                if(socket.rooms[names.rooms.q]!==null){
                     socket.leave(names.rooms.q);
                     qManager.removeFromQueue(socket);
                 }
@@ -87,13 +87,13 @@ let SocketHandler=(function () {
             socket.on('confirmWordChoice',function (word) { gameManager.confirmWord(socket,word); });
 
             socket.on('sendChatMessage', function (message) {
-                if(message.content!=null && message.content!=' '){
+                if(message.content!==null && message.content!==' '){
                     gameManager.resolveGameAction(socket,gameManager.messageCallBack,"sendChatMessage",message);
                 }
             });
 
             socket.on('guessedWord', function(guess){
-                if(guess.guess!=null && guess.guess!=''){
+                if(guess.guess!==null && guess.guess!==''){
                     gameManager.checkGuessedWord(socket,guess);
                 }
             });
@@ -103,9 +103,9 @@ let SocketHandler=(function () {
                     if(socket.conn.id === s){
                         socket.user = user;
                         io.sockets.sockets[s].user = user;
-                        if(socket.user != undefined && socket.user.nickName != "Guest"){
+                        if(socket.user !== undefined && socket.user.nickName !=="Guest"){
                             Object.keys(io.sockets.connected).forEach(function (t) {
-                                if(io.sockets.connected[t].user != undefined){
+                                if(io.sockets.connected[t].user !== undefined){
                                     if((socket.user.email === io.sockets.connected[t].user.email)&&socket.conn.id!=t){
                                         socket.disconnect();
                                     }else{

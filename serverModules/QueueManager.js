@@ -11,7 +11,7 @@ let QueueManager=(function () {
     };
 
     let addUserToQueue=function (socket) {
-        if(socket.rooms[names.rooms.lobby]!=null){
+        if(socket.rooms[names.rooms.lobby]!==null){
             socket.leave(names.rooms.lobby);
             globalNameSpace.emit("info","You left the lobby room");
         }
@@ -55,10 +55,10 @@ let QueueManager=(function () {
                     drawer={
                         "socket":currentSocket,
                         "points":0
-                    }
+                    };
                 }else {
                     currentSocket.join(roomName);
-                    guessers.push({"socket":currentSocket,"points":0})
+                    guessers.push({"socket":currentSocket,"points":0});
                 }
                 currentSocket.leave(names.rooms.q);
             }
@@ -72,7 +72,7 @@ let QueueManager=(function () {
     // --> de game kan nu beginnen...
     //---> sla de nieuwe room op in een lijst (met id , de id van de drawer en alle sockets in de room)
     let migrateResultCallback=function (roomName,drawer,guessers) {
-        if(roomName!=null){
+        if(roomName!==null){
             queue.splice(0,migrationBatchSize);
             let newGameRoom={
                 "id":roomName,

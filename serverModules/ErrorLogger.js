@@ -12,16 +12,16 @@ let ErrorLogger=(function () {
                     }
                     fs.close(fd,function () {
                         console.log("Error logged succesfully");
-                    })
-                })
+                    });
+                });
             }
-        })
+        });
     };
 
     //public
     return{
         log:log
-    }
+    };
 
 })();
 module.exports=ErrorLogger;
