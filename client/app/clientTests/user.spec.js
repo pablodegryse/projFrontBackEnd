@@ -1,5 +1,5 @@
 "use strict";
-var user_model_1 = require("../components/auth/user.model");
+var user_model_1 = require('../components/auth/user.model');
 describe('UserModel testing', function () {
     var user;
     beforeEach(function () {

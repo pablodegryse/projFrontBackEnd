@@ -41,16 +41,14 @@ var SigninComponent = (function () {
             password: new forms_1.FormControl(null, forms_1.Validators.required)
         });
     };
+    SigninComponent = __decorate([
+        core_1.Component({
+            selector: 'pe-signin',
+            templateUrl: './views/componentViews/signin.component.html'
+        }), 
+        __metadata('design:paramtypes', [auth_service_1.AuthService, router_1.Router, user_service_1.UserService])
+    ], SigninComponent);
     return SigninComponent;
 }());
-SigninComponent = __decorate([
-    core_1.Component({
-        selector: 'pe-signin',
-        templateUrl: './views/componentViews/signin.component.html'
-    }),
-    __metadata("design:paramtypes", [auth_service_1.AuthService,
-        router_1.Router,
-        user_service_1.UserService])
-], SigninComponent);
 exports.SigninComponent = SigninComponent;
 //# sourceMappingURL=signin.component.js.map

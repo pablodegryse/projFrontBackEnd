@@ -9,7 +9,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("@angular/core");
-//declare var CanvasDrawer:any;
 var socketMockService = (function () {
     function socketMockService() {
     }
@@ -20,11 +19,11 @@ var socketMockService = (function () {
     socketMockService.prototype.getSocket = function () {
         return { name: 'testSocket' };
     };
+    socketMockService = __decorate([
+        core_1.Injectable(), 
+        __metadata('design:paramtypes', [])
+    ], socketMockService);
     return socketMockService;
 }());
-socketMockService = __decorate([
-    core_1.Injectable(),
-    __metadata("design:paramtypes", [])
-], socketMockService);
 exports.socketMockService = socketMockService;
 //# sourceMappingURL=socketMock.service.js.map

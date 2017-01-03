@@ -12,14 +12,14 @@ var core_1 = require("@angular/core");
 var LogoutComponent = (function () {
     function LogoutComponent() {
     }
+    LogoutComponent = __decorate([
+        core_1.Component({
+            selector: 'pe-logout',
+            template: "\n        <div class=\"col-md-8 col-md-offset-2\">\n            <button class=\"btn btn-danger\" >Logout</button>\n        </div>\n    "
+        }), 
+        __metadata('design:paramtypes', [])
+    ], LogoutComponent);
     return LogoutComponent;
 }());
-LogoutComponent = __decorate([
-    core_1.Component({
-        selector: 'pe-logout',
-        template: "\n        <div class=\"col-md-8 col-md-offset-2\">\n            <button class=\"btn btn-danger\" >Logout</button>\n        </div>\n    "
-    }),
-    __metadata("design:paramtypes", [])
-], LogoutComponent);
 exports.LogoutComponent = LogoutComponent;
 //# sourceMappingURL=logout.component.js.map

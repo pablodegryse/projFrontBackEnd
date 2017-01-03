@@ -12,14 +12,14 @@ var core_1 = require("@angular/core");
 var AuthenticationComponent = (function () {
     function AuthenticationComponent() {
     }
+    AuthenticationComponent = __decorate([
+        core_1.Component({
+            selector: 'pe-authentication',
+            template: "\n        <div class=\"authBlock\">\n        <h2>Register</h2>\n        <pe-register></pe-register>  \n        </div>\n        <div class=\"authBlock\">  \n        <h2>Sign in</h2>\n        <pe-signin></pe-signin>\n        </div>"
+        }), 
+        __metadata('design:paramtypes', [])
+    ], AuthenticationComponent);
     return AuthenticationComponent;
 }());
-AuthenticationComponent = __decorate([
-    core_1.Component({
-        selector: 'pe-authentication',
-        template: "\n        <div class=\"authBlock\">\n        <h2>Register</h2>\n        <pe-register></pe-register>  \n        </div>\n        <div class=\"authBlock\">  \n        <h2>Sign in</h2>\n        <pe-signin></pe-signin>\n        </div>"
-    }),
-    __metadata("design:paramtypes", [])
-], AuthenticationComponent);
 exports.AuthenticationComponent = AuthenticationComponent;
 //# sourceMappingURL=authentication.component.js.map

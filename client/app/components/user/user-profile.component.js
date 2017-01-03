@@ -18,14 +18,14 @@ var UserProfileComponent = (function () {
     UserProfileComponent.prototype.ngOnInit = function () {
         this.user = JSON.parse(localStorage.getItem('user'));
     };
+    UserProfileComponent = __decorate([
+        core_1.Component({
+            selector: 'pe-user-profile',
+            templateUrl: './views/componentViews/user-profile.component.html'
+        }), 
+        __metadata('design:paramtypes', [socket_service_1.SocketService])
+    ], UserProfileComponent);
     return UserProfileComponent;
 }());
-UserProfileComponent = __decorate([
-    core_1.Component({
-        selector: 'pe-user-profile',
-        templateUrl: './views/componentViews/user-profile.component.html'
-    }),
-    __metadata("design:paramtypes", [socket_service_1.SocketService])
-], UserProfileComponent);
 exports.UserProfileComponent = UserProfileComponent;
 //# sourceMappingURL=user-profile.component.js.map

@@ -12,14 +12,14 @@ var core_1 = require("@angular/core");
 var RoomLobbyComponent = (function () {
     function RoomLobbyComponent() {
     }
+    RoomLobbyComponent = __decorate([
+        core_1.Component({
+            selector: 'pe-room-lobby',
+            templateUrl: './views/componentViews/room-lobby.component.html'
+        }), 
+        __metadata('design:paramtypes', [])
+    ], RoomLobbyComponent);
     return RoomLobbyComponent;
 }());
-RoomLobbyComponent = __decorate([
-    core_1.Component({
-        selector: 'pe-room-lobby',
-        templateUrl: './views/componentViews/room-lobby.component.html'
-    }),
-    __metadata("design:paramtypes", [])
-], RoomLobbyComponent);
 exports.RoomLobbyComponent = RoomLobbyComponent;
 //# sourceMappingURL=room-lobby.component.js.map

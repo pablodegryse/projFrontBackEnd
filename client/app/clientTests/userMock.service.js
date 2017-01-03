@@ -17,11 +17,11 @@ var userMockService = (function () {
     userMockService.prototype.getUsers = function () {
         return this.users;
     };
+    userMockService = __decorate([
+        core_1.Injectable(), 
+        __metadata('design:paramtypes', [])
+    ], userMockService);
     return userMockService;
 }());
-userMockService = __decorate([
-    core_1.Injectable(),
-    __metadata("design:paramtypes", [])
-], userMockService);
 exports.userMockService = userMockService;
 //# sourceMappingURL=userMock.service.js.map

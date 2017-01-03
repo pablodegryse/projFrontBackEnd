@@ -15,14 +15,14 @@ var CreateRoomComponent = (function () {
         this._socketService = _socketService;
         _socketService.requestLobbyMove();
     }
+    CreateRoomComponent = __decorate([
+        core_1.Component({
+            selector: 'pe-create-room',
+            templateUrl: './views/componentViews/create-room.component.html'
+        }), 
+        __metadata('design:paramtypes', [socket_service_1.SocketService])
+    ], CreateRoomComponent);
     return CreateRoomComponent;
 }());
-CreateRoomComponent = __decorate([
-    core_1.Component({
-        selector: 'pe-create-room',
-        templateUrl: './views/componentViews/create-room.component.html'
-    }),
-    __metadata("design:paramtypes", [socket_service_1.SocketService])
-], CreateRoomComponent);
 exports.CreateRoomComponent = CreateRoomComponent;
 //# sourceMappingURL=create-room.component.js.map

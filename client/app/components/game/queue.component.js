@@ -8,7 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require("@angular/core");
+var core_1 = require('@angular/core');
 var socket_service_1 = require("../../services/socket.service");
 var user_model_1 = require("../auth/user.model");
 var QueueComponent = (function () {
@@ -27,14 +27,14 @@ var QueueComponent = (function () {
         this.socket = this._socketService.getSocket();
         this.socket.emit("addUserToSocket", this.user);
     };
+    QueueComponent = __decorate([
+        core_1.Component({
+            selector: "pe-queue",
+            template: "<div class=\"centreContentContainerColumn\">\n                <div class=\"loaderWrapper\">\n                      <div class=\"loader\"></div>          \n                </div>\n                <h2 class=\"centreSubtitle\">{{message}}</h2>\n              </div>"
+        }), 
+        __metadata('design:paramtypes', [socket_service_1.SocketService])
+    ], QueueComponent);
     return QueueComponent;
 }());
-QueueComponent = __decorate([
-    core_1.Component({
-        selector: "pe-queue",
-        template: "<div class=\"centreContentContainerColumn\">\n                <div class=\"loaderWrapper\">\n                      <div class=\"loader\"></div>          \n                </div>\n                <h2 class=\"centreSubtitle\">{{message}}</h2>\n              </div>"
-    }),
-    __metadata("design:paramtypes", [socket_service_1.SocketService])
-], QueueComponent);
 exports.QueueComponent = QueueComponent;
 //# sourceMappingURL=queue.component.js.map

@@ -25,11 +25,11 @@ var NavService = (function () {
             }
         }
     };
+    NavService = __decorate([
+        core_1.Injectable(), 
+        __metadata('design:paramtypes', [])
+    ], NavService);
     return NavService;
 }());
-NavService = __decorate([
-    core_1.Injectable(),
-    __metadata("design:paramtypes", [])
-], NavService);
 exports.NavService = NavService;
 //# sourceMappingURL=nav.service.js.map

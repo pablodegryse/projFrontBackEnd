@@ -8,7 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require("@angular/core");
+var core_1 = require('@angular/core');
 var DropdownDirective = (function () {
     function DropdownDirective() {
         this.isOpen = false;
@@ -26,30 +26,29 @@ var DropdownDirective = (function () {
     DropdownDirective.prototype.close = function () {
         this.isOpen = false;
     };
+    __decorate([
+        core_1.HostBinding('class.open'), 
+        __metadata('design:type', Object)
+    ], DropdownDirective.prototype, "opened", null);
+    __decorate([
+        core_1.HostListener('click'), 
+        __metadata('design:type', Function), 
+        __metadata('design:paramtypes', []), 
+        __metadata('design:returntype', void 0)
+    ], DropdownDirective.prototype, "open", null);
+    __decorate([
+        core_1.HostListener('mouseleave'), 
+        __metadata('design:type', Function), 
+        __metadata('design:paramtypes', []), 
+        __metadata('design:returntype', void 0)
+    ], DropdownDirective.prototype, "close", null);
+    DropdownDirective = __decorate([
+        core_1.Directive({
+            selector: '[rbDropdown]'
+        }), 
+        __metadata('design:paramtypes', [])
+    ], DropdownDirective);
     return DropdownDirective;
 }());
-__decorate([
-    core_1.HostBinding('class.open'),
-    __metadata("design:type", Object),
-    __metadata("design:paramtypes", [])
-], DropdownDirective.prototype, "opened", null);
-__decorate([
-    core_1.HostListener('click'),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", void 0)
-], DropdownDirective.prototype, "open", null);
-__decorate([
-    core_1.HostListener('mouseleave'),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", void 0)
-], DropdownDirective.prototype, "close", null);
-DropdownDirective = __decorate([
-    core_1.Directive({
-        selector: '[rbDropdown]'
-    }),
-    __metadata("design:paramtypes", [])
-], DropdownDirective);
 exports.DropdownDirective = DropdownDirective;
 //# sourceMappingURL=dropdown.directives.js.map

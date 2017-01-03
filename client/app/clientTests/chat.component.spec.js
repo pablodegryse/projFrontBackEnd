@@ -6,7 +6,6 @@ var forms_1 = require("@angular/forms");
 var chat_service_1 = require("../services/chat.service");
 var socket_service_1 = require("../services/socket.service");
 var socketMock_service_1 = require("./socketMock.service");
-//declare var CanvasDrawer:any;
 describe('ChatComponent', function () {
     var comp;
     var fixture;

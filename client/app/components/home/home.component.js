@@ -41,14 +41,14 @@ var HomeComponent = (function () {
     HomeComponent.prototype.isLoggedIn = function () {
         return this._authService.isLoggedIn();
     };
+    HomeComponent = __decorate([
+        core_1.Component({
+            selector: 'pe-home',
+            templateUrl: './views/componentViews/home.component.html'
+        }), 
+        __metadata('design:paramtypes', [socket_service_1.SocketService, auth_service_1.AuthService, nav_service_1.NavService])
+    ], HomeComponent);
     return HomeComponent;
 }());
-HomeComponent = __decorate([
-    core_1.Component({
-        selector: 'pe-home',
-        templateUrl: './views/componentViews/home.component.html'
-    }),
-    __metadata("design:paramtypes", [socket_service_1.SocketService, auth_service_1.AuthService, nav_service_1.NavService])
-], HomeComponent);
 exports.HomeComponent = HomeComponent;
 //# sourceMappingURL=home.component.js.map

@@ -8,7 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require("@angular/core");
+var core_1 = require('@angular/core');
 var socket_service_1 = require("../../services/socket.service");
 var nav_service_1 = require("../../services/nav.service");
 var LobbyoverviewComponent = (function () {
@@ -19,7 +19,6 @@ var LobbyoverviewComponent = (function () {
         this.localSocket = socketService.getSocket();
         socketService.requestLobbyMove();
         this.localSocket.emit("getRoomList");
-        //check if the socket events were already set
         this.setRoomListEvents(this);
         _navService.changeNavSelection("Room List");
     }
@@ -38,14 +37,14 @@ var LobbyoverviewComponent = (function () {
         });
         component.socketService.roomListEventsSet = true;
     };
+    LobbyoverviewComponent = __decorate([
+        core_1.Component({
+            selector: 'pe-lobbyoverview',
+            templateUrl: './views/componentViews/lobbyoverview.component.html'
+        }), 
+        __metadata('design:paramtypes', [socket_service_1.SocketService, nav_service_1.NavService])
+    ], LobbyoverviewComponent);
     return LobbyoverviewComponent;
 }());
-LobbyoverviewComponent = __decorate([
-    core_1.Component({
-        selector: 'pe-lobbyoverview',
-        templateUrl: './views/componentViews/lobbyoverview.component.html'
-    }),
-    __metadata("design:paramtypes", [socket_service_1.SocketService, nav_service_1.NavService])
-], LobbyoverviewComponent);
 exports.LobbyoverviewComponent = LobbyoverviewComponent;
 //# sourceMappingURL=lobbyoverview.component.js.map

@@ -8,7 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require("@angular/core");
+var core_1 = require('@angular/core');
 var socket_service_1 = require("../services/socket.service");
 var auth_service_1 = require("../services/auth.service");
 core_1.enableProdMode();
@@ -20,16 +20,15 @@ var AppComponent = (function () {
     AppComponent.prototype.ngOnDestroy = function () {
         this._authService.logout();
     };
+    AppComponent = __decorate([
+        core_1.Component({
+            selector: 'pe-app',
+            templateUrl: './views/componentViews/app.component.html',
+            providers: [socket_service_1.SocketService]
+        }), 
+        __metadata('design:paramtypes', [socket_service_1.SocketService, auth_service_1.AuthService])
+    ], AppComponent);
     return AppComponent;
 }());
-AppComponent = __decorate([
-    core_1.Component({
-        selector: 'pe-app',
-        templateUrl: './views/componentViews/app.component.html',
-        providers: [socket_service_1.SocketService]
-    }),
-    __metadata("design:paramtypes", [socket_service_1.SocketService,
-        auth_service_1.AuthService])
-], AppComponent);
 exports.AppComponent = AppComponent;
 //# sourceMappingURL=app.component.js.map
