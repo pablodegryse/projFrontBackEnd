@@ -22,12 +22,10 @@ export class RegisterComponent implements OnInit {
             this.myForm.value.firstName,
             this.myForm.value.lastName,
         );
-        console.log("register comp:" + user);
 
         this._authService.register(user).subscribe(
             data => this.signIn(user)
         );
-
         this.myForm.reset();
     }
 

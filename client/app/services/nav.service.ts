@@ -7,7 +7,6 @@ export class NavService {
     }
 
     changeNavSelection(navName){
-        console.log(this.navList.children);
         for(let i=0,len=this.navList.children.length;i<len;i++){
             let child=this.navList.children[i];
             let link=child.children[0];

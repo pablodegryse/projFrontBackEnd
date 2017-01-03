@@ -22,16 +22,12 @@ export class WordComponent implements OnInit{
 
     ngOnInit(){
         // uncomment for offline testing =====> verwijderen voor release build
-        // this.words = [];
-        // this.words.push("test");
-        // this.words.push("car");
-        // this.words.push("tree");
+        // this.words = []; this.words.push("test"); this.words.push("car"); this.words.push("tree");
     }
 
     setWordSocketEvent(component){
         this.globalSocket.off("deliverWordBatch");
         this.globalSocket.on("deliverWordBatch",function (data) {
-           console.log('words:' + data);
            component.canRefresh = data.rollStatus;
            component.words = [];
            for(let word of data.words){
@@ -50,14 +46,12 @@ export class WordComponent implements OnInit{
     }
 
     requestWordBatch(){
-        console.log("requested words");
         if(this.canRefresh){
             this.globalSocket.emit("requestWordBatch");
         }
     }
 
     confirmWordChoice(){
-        console.log("confirmed word");
         this.globalSocket.emit("confirmWordChoice",this.words[this.selectedIndex]);
     }
 

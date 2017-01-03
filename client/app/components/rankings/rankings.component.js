@@ -39,7 +39,6 @@ var RankingsComponent = (function () {
         });
     };
     RankingsComponent.prototype.ngOnDestroy = function () {
-        //this._userService.getUsers().unsubscribe();
     };
     return RankingsComponent;
 }());

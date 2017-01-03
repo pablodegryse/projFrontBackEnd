@@ -27,11 +27,9 @@ let SocketHandler=(function () {
         globalNameSpace=io.of(names.namespaces.global);
         globalNameSpace.on('connection',function (socket) {
             socket.emit('serverInit',"connected to Pictionar-E");
-            console.log("Someone joined the global namespace!");
             //als er iemand de namespace verlaat: alles groups van de socket worden autmatisch geleaved
             //+ verwijder de socket uit de queue
             socket.on('disconnect',function () {
-                console.log(socket.id+" left the global namespace");
                 rManager.removeFromGameRoom(names.removeTypes.forced,socket);
                 qManager.removeFromQueue(socket);
             });
@@ -109,7 +107,6 @@ let SocketHandler=(function () {
                             Object.keys(io.sockets.connected).forEach(function (t) {
                                 if(io.sockets.connected[t].user != undefined){
                                     if((socket.user.email === io.sockets.connected[t].user.email)&&socket.conn.id!=t){
-                                        console.log("error :  " + socket + 'already connected');
                                         socket.disconnect();
                                     }else{
                                         socket.user = user;

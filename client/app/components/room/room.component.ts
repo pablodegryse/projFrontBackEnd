@@ -26,14 +26,11 @@ export class RoomComponent {
     setupRoomEvents(component){
         this.globalSocket.off("setupLetterBox");
         this.globalSocket.on("setupLetterBox",function (numberOfLetters) {
-            console.log("number of letter in word to guess:"+numberOfLetters);
             component.addLetters(numberOfLetters);
         });
 
         this.globalSocket.off("revealLetter");
         this.globalSocket.on("revealLetter",function (msg) {
-            console.log("Reaveled letter:"+msg.letter);
-            console.log("this is the index in the word:"+msg.letterIndex);
             component.showLetter(msg.letter,msg.letterIndex);
         });
         this.globalSocket.on('wordGuessed',function(data){

@@ -21,7 +21,6 @@ var RegisterComponent = (function () {
     RegisterComponent.prototype.onSubmit = function () {
         var _this = this;
         var user = new user_model_1.User(this.myForm.value.email, this.myForm.value.password, this.myForm.value.nickName, this.myForm.value.firstName, this.myForm.value.lastName);
-        console.log("register comp:" + user);
         this._authService.register(user).subscribe(function (data) { return _this.signIn(user); });
         this.myForm.reset();
     };

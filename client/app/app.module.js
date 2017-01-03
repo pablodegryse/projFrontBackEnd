@@ -24,10 +24,8 @@ var forms_1 = require("@angular/forms");
 var rankings_component_1 = require("./components/rankings/rankings.component");
 var lobbyoverview_component_1 = require("./components/lobby/lobbyoverview.component");
 var create_room_component_1 = require("./components/room/create-room.component");
-var room_item_component_1 = require("./components/room/room-item.component");
 var auth_service_1 = require("./services/auth.service");
 var http_1 = require("@angular/http");
-var room_service_1 = require("./services/room.service");
 var nav_service_1 = require("./services/nav.service");
 var canvas_component_1 = require("./components/game/canvas.component");
 var queue_component_1 = require("./components/game/queue.component");
@@ -72,7 +70,6 @@ AppModule = __decorate([
             rankings_item_component_1.RankingsItemComponent,
             lobbyoverview_component_1.LobbyoverviewComponent,
             create_room_component_1.CreateRoomComponent,
-            room_item_component_1.RoomItemComponent,
             chat_component_1.ChatComponent,
             room_component_1.RoomComponent,
             word_component_1.WordComponent,
@@ -81,7 +78,7 @@ AppModule = __decorate([
             friends_list_component_1.FriendsListComponent,
             friend_item_component_1.FriendItemComponent
         ],
-        providers: [auth_service_1.AuthService, room_service_1.RoomService, chat_service_1.ChatService, user_service_1.UserService, nav_service_1.NavService],
+        providers: [auth_service_1.AuthService, chat_service_1.ChatService, user_service_1.UserService, nav_service_1.NavService],
         bootstrap: [app_component_1.AppComponent]
     }),
     __metadata("design:paramtypes", [])

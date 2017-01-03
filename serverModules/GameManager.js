@@ -56,7 +56,6 @@ let GameManager=(function () {
     //random woorden geven aan de drawer als hij nog rerolls over heeft
     //we werken met rerolls om zeker te zijn dat een drawer een deftig woord vindt
     let serveWordsToDraw=function (socket) {
-        console.log("words requested");
         findRoom(socket,wordServeCallback);
     };
 
@@ -102,8 +101,6 @@ let GameManager=(function () {
     //kijken of geraden woord correct is : zo nee : verhoog gewoon aantal pogingen
     //zo ja : deel punten uit + kijk of er al genoeg geraden zijn en beeindig game indien nodig
     let wordGuessCallback=function (room,socket,guessedWord) {
-        console.log("guess = " +guessedWord.guess);
-        console.log("user that guessed = " + guessedWord.user.nickName);
         if(room.wordLetterBox.length>0) {
             socket.user = guessedWord.user;
             let guessCorrect = false;
@@ -139,17 +136,14 @@ let GameManager=(function () {
                 room.drawer.points+=3;
                 break;
         }
-        console.log("drawer points: "+room.drawer.points);
         for(let i=0,len=room.guessers.length;i<len;i++){
             if(room.guessers[i].socket.id===guesser.id){
                 room.guessers[i].points+=5;
-                console.log("guesser points: "+room.guessers[i].points);
             }
         }
     };
     //check if everyone had a guess this round , if so : reveal a letter
     let checkToRevealLetter=function (room,callback) {
-        console.log("checking to reveal a letter....");
         if(room.guessCount%room.guessers.length===0){
             if(room.wordLetterBox.length>0){
                 callback(room);

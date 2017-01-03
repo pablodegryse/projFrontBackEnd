@@ -16,14 +16,11 @@ var CanvasComponent = (function () {
         this.roleChanged = new core_1.EventEmitter();
         this.localsocketService = socketService;
         this.globalSocket = socketService.getSocket();
-        console.log("canvas ctor called");
     }
     CanvasComponent.prototype.ngAfterViewInit = function () {
-        console.log("after init fired");
         this.drawer = CanvasDrawer;
         this.drawer.init(this.drawCanvas.nativeElement, this.buttonList.nativeElement, this.globalSocket);
         //de drawer initieliseren met deze rol
-        console.log("game role is :" + this.gameRole);
         if (this.gameRole === "drawer") {
             this.drawer.changeDrawPermission(true);
         }

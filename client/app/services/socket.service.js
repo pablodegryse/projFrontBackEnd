@@ -16,19 +16,9 @@ var SocketService = (function () {
         this.gameEventsSet = false;
         this.initialLobbyJoin = true;
         this.socket = io("/global");
-        this.setMainEvents();
     }
     SocketService.prototype.getSocket = function () {
         return this.socket;
-    };
-    //zet de client socket events , zodat we acties/berichten van de server kunnen opvangen
-    SocketService.prototype.setMainEvents = function () {
-        this.socket.on("welcome", function (msg) {
-            console.log("SERVER MSG: " + msg.content);
-        });
-        this.socket.on("info", function (msg) {
-            console.log("SERVER INFO: " + msg);
-        });
     };
     //vraag aan de server om deze socket naar de lobby group te migreren
     SocketService.prototype.requestLobbyMove = function () {

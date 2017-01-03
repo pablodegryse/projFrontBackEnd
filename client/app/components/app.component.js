@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("@angular/core");
 var socket_service_1 = require("../services/socket.service");
 var auth_service_1 = require("../services/auth.service");
+core_1.enableProdMode();
 var AppComponent = (function () {
     function AppComponent(_socketService, _authService) {
         this._socketService = _socketService;

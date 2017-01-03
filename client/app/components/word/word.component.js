@@ -24,15 +24,11 @@ var WordComponent = (function () {
     }
     WordComponent.prototype.ngOnInit = function () {
         // uncomment for offline testing =====> verwijderen voor release build
-        // this.words = [];
-        // this.words.push("test");
-        // this.words.push("car");
-        // this.words.push("tree");
+        // this.words = []; this.words.push("test"); this.words.push("car"); this.words.push("tree");
     };
     WordComponent.prototype.setWordSocketEvent = function (component) {
         this.globalSocket.off("deliverWordBatch");
         this.globalSocket.on("deliverWordBatch", function (data) {
-            console.log('words:' + data);
             component.canRefresh = data.rollStatus;
             component.words = [];
             for (var _i = 0, _a = data.words; _i < _a.length; _i++) {
@@ -50,13 +46,11 @@ var WordComponent = (function () {
         this.selectedIndex = event.target.value;
     };
     WordComponent.prototype.requestWordBatch = function () {
-        console.log("requested words");
         if (this.canRefresh) {
             this.globalSocket.emit("requestWordBatch");
         }
     };
     WordComponent.prototype.confirmWordChoice = function () {
-        console.log("confirmed word");
         this.globalSocket.emit("confirmWordChoice", this.words[this.selectedIndex]);
     };
     return WordComponent;

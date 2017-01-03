@@ -5,17 +5,16 @@
     <base href="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
-    <link rel="stylesheet" href="../css/styles.css">
-    <!-- 1. Load libraries -->
-    <!-- Polyfill for older browsers -->
+    <link rel="stylesheet" href="../css/styles.min.css">
+
     <script src="../node_modules/core-js/client/shim.min.js"></script>
     <script src="../node_modules/zone.js/dist/zone.js"></script>
     <script src="../node_modules/reflect-metadata/Reflect.js"></script>
     <script src="../node_modules/systemjs/dist/system.src.js"></script>
-    <!-- 2. Configure SystemJS -->
+
     <script src="../systemjs.config.js"></script>
     <script src="../socket.io/socket.io.js"></script>
-    <script src="../js/CanvasDrawer.js"></script>
+    <script src="../js/CanvasDrawer.min.js"></script>
     <script>
         System.import('../app/app.main.js').catch(function(err){ console.error(err); });
     </script>

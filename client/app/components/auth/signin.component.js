@@ -25,7 +25,6 @@ var SigninComponent = (function () {
         var user = new user_model_1.User(this.myForm.value.email, this.myForm.value.password);
         this._authService.signin(user)
             .subscribe(function (data) {
-            console.log(data);
             localStorage.setItem('token', data.token);
             localStorage.setItem('user', JSON.stringify(data.user));
             _this._userService.updateUser(data.user).subscribe();

@@ -27,7 +27,6 @@ var FriendsListComponent = (function () {
         this._userService.getFriends(this.user)
             .subscribe(function (friends) {
             _this.friends = friends;
-            console.log(_this.friends);
         });
     };
     FriendsListComponent.prototype.onRemoved = function () {
@@ -35,7 +34,6 @@ var FriendsListComponent = (function () {
         this._userService.getFriends(this.user)
             .subscribe(function (friends) {
             _this.friends = friends;
-            console.log(_this.friends);
         });
     };
     return FriendsListComponent;

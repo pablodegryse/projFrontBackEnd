@@ -3,7 +3,6 @@ var router = express.Router();
 var jwt = require('jsonwebtoken');
 
 var User = require('../dbmodels/user');
-
 var Message = require('../dbmodels/message');
 
 router.get('/', function (req, res, next) {

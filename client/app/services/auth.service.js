@@ -27,7 +27,6 @@ var AuthService = (function () {
     };
     AuthService.prototype.signin = function (user) {
         user.status = 'online';
-        console.log('inside signin status : ' + user.status);
         var body = JSON.stringify(user);
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         return this._http.post('http://localhost:8080/user/signin', body, { headers: headers })

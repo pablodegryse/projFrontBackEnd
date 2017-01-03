@@ -41,7 +41,6 @@ var CanvasDrawer=(function () {
         },
         changeDrawPermission:function(ableTo){
             canDraw=ableTo;
-            console.log(canDraw);
             ctx.beginPath();
             ctx.clearRect(0, 0, canvas.width, canvas.height);
         }
@@ -66,11 +65,8 @@ var CanvasDrawer=(function () {
         if(canDraw && currentMousePos.x>0 && currentMousePos.y>0 &&isHeldDown){
             var ms=new Date().getTime();
             currentMs=ms;
-            //console.log("previous MS:"+previousMs+" -- currentMS: "+currentMs);
             drawTime=currentMs-previousMs;
-            console.log("drawTime is:"+drawTime);
             if(drawTime>25){
-                console.log("drawing now");
                 drawSocket.emit('drawUpdate',{
                     'oldPos':previousMousePos,
                     'currentPos':currentMousePos
@@ -144,7 +140,7 @@ var CanvasDrawer=(function () {
                 clearMyCanvas();
                 drawSocket.emit('canvasClear');
             }
-        })
+        });
     }
 })();
 

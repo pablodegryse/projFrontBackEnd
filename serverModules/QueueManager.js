@@ -35,7 +35,6 @@ let QueueManager=(function () {
 
     //telkens er iemand de q room joined : kijk of we genoeg spelers in de queue hebben om een game te maken
     let checkQueue=function(cb){
-        console.log("queue length: "+queue.length);
         if(queue.length===migrationBatchSize){
             cb(true,migrateResultCallback);
         }else {
@@ -91,7 +90,6 @@ let QueueManager=(function () {
             for(let i=0;i<migrationBatchSize-1;i++){
                 guessers[i].socket.emit("GameReady",{"content":"guesser"});
             }
-            console.log("queue length after splice: "+queue.length);
         }
     };
 

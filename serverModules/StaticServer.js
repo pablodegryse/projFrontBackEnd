@@ -17,12 +17,9 @@ let StaticServer=(function () {
           }
         };
 
-        //DB uri --> comment/uncomment voor offline testing
-        //dbUri = 'localhost:27017/pictionar-e';
+        //DB uri --> comment/uncomment voor offline testing  -- dbUri = 'localhost:27017/pictionar-e';
         dbUri = 'mongodb://testUser:testuser@ds159387.mlab.com:59387/pictionar-e';
-
         mongoose.connect(dbUri,dbOptions);
-
         mongoose.connection.on("error",function (error) {
             console.log("connection error: " + error.message);
         });

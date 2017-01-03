@@ -22,7 +22,6 @@ export class SigninComponent {
         this._authService.signin(user)
             .subscribe(
                 data => {
-                    console.log(data);
                     localStorage.setItem('token', data.token);
                     localStorage.setItem('user', JSON.stringify(data.user));
                     this._userService.updateUser(data.user).subscribe();

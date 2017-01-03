@@ -21,7 +21,6 @@ export class AuthService {
     }
     signin(user: User) {
         user.status = 'online';
-        console.log('inside signin status : ' + user.status);
         const body = JSON.stringify(user);
         const headers = new Headers({'Content-Type': 'application/json'});
         return this._http.post('http://localhost:8080/user/signin', body, {headers: headers})

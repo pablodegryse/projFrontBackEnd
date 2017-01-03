@@ -14,11 +14,9 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {RankingsComponent} from "./components/rankings/rankings.component";
 import {LobbyoverviewComponent} from "./components/lobby/lobbyoverview.component";
 import {CreateRoomComponent} from "./components/room/create-room.component";
-import {RoomItemComponent} from "./components/room/room-item.component";
 
 import {AuthService} from "./services/auth.service";
 import {HttpModule} from "@angular/http";
-import {RoomService} from "./services/room.service";
 import {NavService} from "./services/nav.service";
 
 import {CanvasComponent} from "./components/game/canvas.component";
@@ -60,7 +58,6 @@ import {FriendItemComponent} from "./components/friends/friend-item.component";
         RankingsItemComponent,
         LobbyoverviewComponent,
         CreateRoomComponent,
-        RoomItemComponent,
         ChatComponent,
         RoomComponent,
         WordComponent,
@@ -69,7 +66,7 @@ import {FriendItemComponent} from "./components/friends/friend-item.component";
         FriendsListComponent,
         FriendItemComponent
     ],
-    providers:[AuthService, RoomService, ChatService, UserService,NavService],
+    providers:[AuthService, ChatService, UserService,NavService],
     bootstrap:[AppComponent]
 })
 

@@ -1,9 +1,2 @@
 SERVER ERROR LOG :
 --------------------------------------
-2016-11-29 15:22:22  |  ReferenceError: usersToMigrate is not defined
-2016-11-29 15:23:26  |  ReferenceError: names is not defined
-2016-11-29 15:25:14  |  TypeError: Cannot read property 'to' of undefined
-2016-11-29 15:27:23  |  TypeError: Cannot read property 'to' of undefined
-2016-11-29 15:28:22  |  TypeError: Cannot read property 'push' of undefined
-2016-11-29 15:51:05  |  TypeError: Cannot read property '/global#MrlXwtZq_ClbLk2RAAAC' of undefined
-2016-12-02 14:00:04  |  Error: Request aborted

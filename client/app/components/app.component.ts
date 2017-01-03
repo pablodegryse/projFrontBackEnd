@@ -1,6 +1,7 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component, OnDestroy, enableProdMode} from '@angular/core';
 import {SocketService} from "../services/socket.service";
 import {AuthService} from "../services/auth.service";
+enableProdMode();
 
 @Component({
     selector: 'pe-app',

@@ -1,7 +1,6 @@
 import {Component, OnInit, Input} from "@angular/core";
 import {ChatService} from "../../services/chat.service";
 import {User} from "../auth/user.model";
-import {Room} from "../room/room.model";
 import {SocketService} from "../../services/socket.service";
 import {Message} from "./message.model";
 
@@ -14,7 +13,6 @@ export class ChatComponent implements OnInit{
     messages: any = [];
     connection:any;
     user:User;
-    room:Room;
     guess:string;
     wordToGuess:string;
     previousGuessTiming:number;
@@ -68,17 +66,14 @@ export class ChatComponent implements OnInit{
                 this.currentGuessTiming=new Date().getTime();
                 if(this.currentGuessTiming-this.previousGuessTiming>4000){
                     this.previousGuessTiming=this.currentGuessTiming;
-                    console.log("u gooood on timing makker");
                     this.chatSocket.emit("guessedWord", {guess: this.guess, user: this.user});
                     this.chatSocket.on("guessedWord",this.user);
                     this.guess = '';
                 }else {
-                    console.log("timeout makker");
                     let clientNotice = new Message("Please wait before guessing again...","Info");
                     this.messages.push(clientNotice)
                 }
             }else {
-                console.log("timing is 0 blijkbaar");
                 let ms=new Date().getTime();
                 this.currentGuessTiming=ms;
                 this.previousGuessTiming=ms;

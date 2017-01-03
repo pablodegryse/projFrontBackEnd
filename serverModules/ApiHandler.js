@@ -4,7 +4,6 @@ let ApiHandler=(function () {
     let getWordData=function (callback,socket,rollStatus) {
         //random woord api hier aanspreken
         http.get(url,function (response) {
-            console.log("doing request to api");
             let json="";
             response.on('data', function (chunk) {
                 json+= chunk;

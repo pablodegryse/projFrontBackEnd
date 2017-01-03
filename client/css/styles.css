@@ -189,7 +189,7 @@ ul, li{
 }
 .dropdown>li{
     width: 100%;
-    padding: 8px 0px 8px 0px;
+    padding: 8px 0 8px 0;
 }
 .dropdown>li{  cursor: pointer;}
 .dropdown>li>a{
@@ -250,7 +250,7 @@ pe-home{
 }
 .leftTitle{
     color: #47049F;
-    margin: 28px 0px 16px 16px;
+    margin: 28px 0 16px 16px;
 }
 .centreTitle{
     margin-top: 65px;
@@ -362,7 +362,7 @@ pe-chat{
     flex: none;
     height: 27px;
     margin-bottom: 4px;
-    padding: 4px 4px 0px 4px;
+    padding: 4px 4px 0 4px;
     display: flex;
 }
 
@@ -451,12 +451,12 @@ pe-word>ul>li{
 }
 .list-group-item{
     border-top: 1px solid #47049F;
-    padding: 4px 0px 4px 16px;
+    padding: 4px 0 4px 16px;
 }
 .list-group-item>.profileLabel{
     display: inline-block;
     min-width: 100px;
-    margin: 4px 8px 4px 0px;
+    margin: 4px 8px 4px 0;
 }
 .list-group-item:hover{
     background-color: #D5D0DC;
@@ -617,7 +617,7 @@ pe-rankings-item>p,pe-friend-item>div>p{
         z-index: 123;
         position: absolute;
         top: 54px;
-        left:0px;
+        left:0;
         width: 100%;
     }
     .nav-row{

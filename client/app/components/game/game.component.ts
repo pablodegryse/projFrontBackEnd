@@ -37,11 +37,9 @@ export class GameComponent{
             this.socketService.gameEventsSet=true;
         }
         this.globalSocket.on("gameConcluded",function (endMsg) {
-            console.log(endMsg.msg+"---"+endMsg.winner);
         });
 
         this.globalSocket.on("GameReady",function (msg) {
-            console.log("gameready called in game component");
             if(msg.content==="drawer"){
                 component.gameParentRole=msg.content;
             }else if(msg.content==="guesser"){

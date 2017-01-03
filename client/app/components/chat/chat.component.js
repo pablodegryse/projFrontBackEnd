@@ -62,19 +62,16 @@ var ChatComponent = (function () {
                 this.currentGuessTiming = new Date().getTime();
                 if (this.currentGuessTiming - this.previousGuessTiming > 4000) {
                     this.previousGuessTiming = this.currentGuessTiming;
-                    console.log("u gooood on timing makker");
                     this.chatSocket.emit("guessedWord", { guess: this.guess, user: this.user });
                     this.chatSocket.on("guessedWord", this.user);
                     this.guess = '';
                 }
                 else {
-                    console.log("timeout makker");
                     var clientNotice = new message_model_1.Message("Please wait before guessing again...", "Info");
                     this.messages.push(clientNotice);
                 }
             }
             else {
-                console.log("timing is 0 blijkbaar");
                 var ms = new Date().getTime();
                 this.currentGuessTiming = ms;
                 this.previousGuessTiming = ms;

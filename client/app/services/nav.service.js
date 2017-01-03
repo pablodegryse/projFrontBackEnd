@@ -14,7 +14,6 @@ var NavService = (function () {
         this.navList = document.getElementById("appNavList");
     }
     NavService.prototype.changeNavSelection = function (navName) {
-        console.log(this.navList.children);
         for (var i = 0, len = this.navList.children.length; i < len; i++) {
             var child = this.navList.children[i];
             var link = child.children[0];
