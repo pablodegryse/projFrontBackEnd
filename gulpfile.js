@@ -4,11 +4,11 @@ var gulp = require("gulp"),sourcemaps=require("gulp-sourcemaps"),
 
 const PATHS ={
     CSS:{
-        SRC:'./client/css/*.css',
+        SRC:'./client/css/styles.css',
         DEST:'./client/css/'
     },
     JS:{
-        SRC:'./client/js/*.js/',
+        SRC:'./client/js/CanvasDrawer.js/',
         DEST:'./client/js/'
     }
 };
