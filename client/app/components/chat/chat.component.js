@@ -81,18 +81,19 @@ var ChatComponent = (function () {
             }
         }
     };
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', String)
-    ], ChatComponent.prototype, "gameRole", void 0);
-    ChatComponent = __decorate([
-        core_1.Component({
-            selector: 'pe-chat',
-            templateUrl: './views/componentViews/chat.component.html'
-        }), 
-        __metadata('design:paramtypes', [chat_service_1.ChatService, socket_service_1.SocketService])
-    ], ChatComponent);
     return ChatComponent;
 }());
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", String)
+], ChatComponent.prototype, "gameRole", void 0);
+ChatComponent = __decorate([
+    core_1.Component({
+        selector: 'pe-chat',
+        templateUrl: './views/componentViews/chat.component.html'
+    }),
+    __metadata("design:paramtypes", [chat_service_1.ChatService,
+        socket_service_1.SocketService])
+], ChatComponent);
 exports.ChatComponent = ChatComponent;
 //# sourceMappingURL=chat.component.js.map

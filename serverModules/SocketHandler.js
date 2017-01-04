@@ -42,7 +42,7 @@ let SocketHandler=(function () {
             //als er vanuit de client naar de lobby genavigeerd werd: migreer de socket
             socket.on('requestMoveToLobby',function () {
                 //only do this when the socket wasnt already in the lobby
-                if(socket.rooms[names.rooms.lobby]===null){
+                if(socket.rooms[names.rooms.lobby]===undefined){
                     rManager.removeFromGameRoom(names.removeTypes.nav,socket);
                 }
                 if(socket.rooms[names.rooms.q]!==null){

@@ -112,7 +112,7 @@ let GameManager=(function () {
                 room.wordLetterBox=[];
                 room.wordsGuessed++;
                 awardPoints(room, socket);
-                if (room.wordsGuessed === room.guessers.length + 1) {
+                if (room.wordsGuessed === room.guessers.length+1) {
                     concludeGame(room);
                 } else {
                     setTimeout(rotateDrawer, 2000, room);

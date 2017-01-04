@@ -8,7 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
+var core_1 = require("@angular/core");
 var socket_service_1 = require("../../services/socket.service");
 var router_1 = require("@angular/router");
 var nav_service_1 = require("../../services/nav.service");
@@ -53,14 +53,14 @@ var GameComponent = (function () {
             }
         });
     };
-    GameComponent = __decorate([
-        core_1.Component({
-            selector: "pe-game",
-            template: "\n                <pe-queue *ngIf=\"isGameReady===false\"></pe-queue>\n                <pe-room *ngIf=\"isGameReady===true\" [gameRole]=\"gameParentRole\" ></pe-room>"
-        }), 
-        __metadata('design:paramtypes', [socket_service_1.SocketService, router_1.Router, nav_service_1.NavService])
-    ], GameComponent);
     return GameComponent;
 }());
+GameComponent = __decorate([
+    core_1.Component({
+        selector: "pe-game",
+        template: "\n                <pe-queue *ngIf=\"isGameReady===false\"></pe-queue>\n                <pe-room *ngIf=\"isGameReady===true\" [gameRole]=\"gameParentRole\" ></pe-room>"
+    }),
+    __metadata("design:paramtypes", [socket_service_1.SocketService, router_1.Router, nav_service_1.NavService])
+], GameComponent);
 exports.GameComponent = GameComponent;
 //# sourceMappingURL=game.component.js.map

@@ -10,8 +10,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
-require('rxjs/Rx');
-require('rxjs/add/operator/map');
+require("rxjs/Rx");
+require("rxjs/add/operator/map");
 var user_model_1 = require("../components/auth/user.model");
 var user_service_1 = require("./user.service");
 var AuthService = (function () {
@@ -49,11 +49,12 @@ var AuthService = (function () {
             return user;
         });
     };
-    AuthService = __decorate([
-        core_1.Injectable(), 
-        __metadata('design:paramtypes', [http_1.Http, user_service_1.UserService])
-    ], AuthService);
     return AuthService;
 }());
+AuthService = __decorate([
+    core_1.Injectable(),
+    __metadata("design:paramtypes", [http_1.Http,
+        user_service_1.UserService])
+], AuthService);
 exports.AuthService = AuthService;
 //# sourceMappingURL=auth.service.js.map

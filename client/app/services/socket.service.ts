@@ -18,6 +18,7 @@ export class SocketService{
     //vraag aan de server om deze socket naar de lobby group te migreren
     requestLobbyMove(){
         this.socket.emit("requestMoveToLobby");
+        console.log("request lobby movee!");
     }
 
     lobbyJoin(){

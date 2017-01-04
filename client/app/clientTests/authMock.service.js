@@ -23,11 +23,11 @@ var authMockService = (function () {
     authMockService.prototype.isLoggedIn = function () {
         return true;
     };
-    authMockService = __decorate([
-        core_1.Injectable(), 
-        __metadata('design:paramtypes', [])
-    ], authMockService);
     return authMockService;
 }());
+authMockService = __decorate([
+    core_1.Injectable(),
+    __metadata("design:paramtypes", [])
+], authMockService);
 exports.authMockService = authMockService;
 //# sourceMappingURL=authMock.service.js.map

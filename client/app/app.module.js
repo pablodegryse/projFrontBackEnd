@@ -8,9 +8,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var platform_browser_1 = require('@angular/platform-browser');
-var app_component_1 = require('./components/app.component');
+var core_1 = require("@angular/core");
+var platform_browser_1 = require("@angular/platform-browser");
+var app_component_1 = require("./components/app.component");
 var app_routing_1 = require("./components/app.routing");
 var home_component_1 = require("./components/home/home.component");
 var dropdown_directives_1 = require("./components/dropdown.directives");
@@ -42,45 +42,45 @@ var friend_item_component_1 = require("./components/friends/friend-item.componen
 var AppModule = (function () {
     function AppModule() {
     }
-    AppModule = __decorate([
-        core_1.NgModule({
-            imports: [
-                platform_browser_1.BrowserModule,
-                app_routing_1.routing,
-                forms_1.FormsModule,
-                forms_1.ReactiveFormsModule,
-                http_1.HttpModule
-            ],
-            declarations: [
-                app_component_1.AppComponent,
-                canvas_component_1.CanvasComponent,
-                queue_component_1.QueueComponent,
-                game_component_1.GameComponent,
-                home_component_1.HomeComponent,
-                dropdown_directives_1.DropdownDirective,
-                header_component_1.HeaderComponent,
-                authentication_component_1.AuthenticationComponent,
-                register_component_1.RegisterComponent,
-                signin_component_1.SigninComponent,
-                logout_component_1.LogoutComponent,
-                rankings_component_1.RankingsComponent,
-                rankings_item_component_1.RankingsItemComponent,
-                lobbyoverview_component_1.LobbyoverviewComponent,
-                create_room_component_1.CreateRoomComponent,
-                chat_component_1.ChatComponent,
-                room_component_1.RoomComponent,
-                word_component_1.WordComponent,
-                room_lobby_component_1.RoomLobbyComponent,
-                user_profile_component_1.UserProfileComponent,
-                friends_list_component_1.FriendsListComponent,
-                friend_item_component_1.FriendItemComponent
-            ],
-            providers: [auth_service_1.AuthService, chat_service_1.ChatService, user_service_1.UserService, nav_service_1.NavService],
-            bootstrap: [app_component_1.AppComponent]
-        }), 
-        __metadata('design:paramtypes', [])
-    ], AppModule);
     return AppModule;
 }());
+AppModule = __decorate([
+    core_1.NgModule({
+        imports: [
+            platform_browser_1.BrowserModule,
+            app_routing_1.routing,
+            forms_1.FormsModule,
+            forms_1.ReactiveFormsModule,
+            http_1.HttpModule
+        ],
+        declarations: [
+            app_component_1.AppComponent,
+            canvas_component_1.CanvasComponent,
+            queue_component_1.QueueComponent,
+            game_component_1.GameComponent,
+            home_component_1.HomeComponent,
+            dropdown_directives_1.DropdownDirective,
+            header_component_1.HeaderComponent,
+            authentication_component_1.AuthenticationComponent,
+            register_component_1.RegisterComponent,
+            signin_component_1.SigninComponent,
+            logout_component_1.LogoutComponent,
+            rankings_component_1.RankingsComponent,
+            rankings_item_component_1.RankingsItemComponent,
+            lobbyoverview_component_1.LobbyoverviewComponent,
+            create_room_component_1.CreateRoomComponent,
+            chat_component_1.ChatComponent,
+            room_component_1.RoomComponent,
+            word_component_1.WordComponent,
+            room_lobby_component_1.RoomLobbyComponent,
+            user_profile_component_1.UserProfileComponent,
+            friends_list_component_1.FriendsListComponent,
+            friend_item_component_1.FriendItemComponent
+        ],
+        providers: [auth_service_1.AuthService, chat_service_1.ChatService, user_service_1.UserService, nav_service_1.NavService],
+        bootstrap: [app_component_1.AppComponent]
+    }),
+    __metadata("design:paramtypes", [])
+], AppModule);
 exports.AppModule = AppModule;
 //# sourceMappingURL=app.module.js.map

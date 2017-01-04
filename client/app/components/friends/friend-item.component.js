@@ -34,30 +34,31 @@ var FriendItemComponent = (function () {
     FriendItemComponent.prototype.isLoggedIn = function () {
         return this._authService.isLoggedIn();
     };
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', user_model_1.User)
-    ], FriendItemComponent.prototype, "friend", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Number)
-    ], FriendItemComponent.prototype, "i", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', user_model_1.User)
-    ], FriendItemComponent.prototype, "user", void 0);
-    __decorate([
-        core_1.Output(), 
-        __metadata('design:type', Object)
-    ], FriendItemComponent.prototype, "isRemoved", void 0);
-    FriendItemComponent = __decorate([
-        core_1.Component({
-            selector: 'pe-friend-item',
-            templateUrl: './views/componentViews/friend-item.component.html',
-        }), 
-        __metadata('design:paramtypes', [auth_service_1.AuthService, user_service_1.UserService])
-    ], FriendItemComponent);
     return FriendItemComponent;
 }());
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", user_model_1.User)
+], FriendItemComponent.prototype, "friend", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Number)
+], FriendItemComponent.prototype, "i", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", user_model_1.User)
+], FriendItemComponent.prototype, "user", void 0);
+__decorate([
+    core_1.Output(),
+    __metadata("design:type", Object)
+], FriendItemComponent.prototype, "isRemoved", void 0);
+FriendItemComponent = __decorate([
+    core_1.Component({
+        selector: 'pe-friend-item',
+        templateUrl: './views/componentViews/friend-item.component.html',
+    }),
+    __metadata("design:paramtypes", [auth_service_1.AuthService,
+        user_service_1.UserService])
+], FriendItemComponent);
 exports.FriendItemComponent = FriendItemComponent;
 //# sourceMappingURL=friend-item.component.js.map

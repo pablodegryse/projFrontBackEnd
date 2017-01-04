@@ -19,11 +19,11 @@ var socketMockService = (function () {
     socketMockService.prototype.getSocket = function () {
         return { name: 'testSocket' };
     };
-    socketMockService = __decorate([
-        core_1.Injectable(), 
-        __metadata('design:paramtypes', [])
-    ], socketMockService);
     return socketMockService;
 }());
+socketMockService = __decorate([
+    core_1.Injectable(),
+    __metadata("design:paramtypes", [])
+], socketMockService);
 exports.socketMockService = socketMockService;
 //# sourceMappingURL=socketMock.service.js.map
