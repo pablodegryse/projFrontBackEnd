@@ -165,7 +165,7 @@ let GameManager=(function () {
     //doordraaien van drawer + room vars resetten
     let rotateDrawer=function (room) {
         room.guessCount=0;
-        room.wordRerolls=2;
+        room.wordRerolls=3;
         room.guessers.push(room.drawer);
         room.drawer=room.guessers[0];
         room.guessers.splice(0,1);
