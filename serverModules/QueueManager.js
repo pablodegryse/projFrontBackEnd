@@ -81,7 +81,7 @@ let QueueManager=(function () {
                 "wordLetterBox":[],
                 "checkWordBox":[],
                 "guessCount":0,
-                "wordRerolls":2,
+                "wordRerolls":3,
                 "drawer":drawer,
                 "guessers":guessers
             };
